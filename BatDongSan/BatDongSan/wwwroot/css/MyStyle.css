@@ -1,0 +1,162 @@
+﻿/*Doan code tu them*/
+
+/*-------chinh sua cho _Layout-------*/
+.mystyle-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.mystyle-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(181, 111, 95, 0.42);
+    min-width: 160px;
+    z-index: 1;
+}
+
+.mystyle-dropdown-content li{
+    margin: auto;
+    text-align: center;
+}
+
+.mystyle-dropdown-content li {
+    padding-top:10px;
+    padding-bottom:10px;
+    border-top: 1px dashed #ffffff;
+    margin: auto;
+    text-align: left;
+    width: 100%;
+}
+
+.mystyle-dropdown:hover .mystyle-dropdown-content {
+    display: block;
+}
+
+.mystyle-timkiemnangcao {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 45px;
+    font-size: 15pt;
+}
+
+.mystyle-timkiemnangcao a:hover {
+    text-decoration: underline;
+}
+
+.main-menu li:hover {
+    background-color: rgba(181, 111, 95, 0.42);
+}
+
+.mystyle-dangtin {
+    border-right: 1px dashed #D3D3D3;
+    border-left: 1px dashed #D3D3D3;
+}
+
+.mystyle-container{
+    padding-top:30px;
+}
+
+.mystyle-body {
+    background: rgba(220, 220, 220, 0.20);
+}
+
+
+
+
+
+/*---------------------------------chinh sua cho Trang chủ----------------------------------------*/
+.mystyle-main {
+    display: block;
+    margin-bottom: 15px;
+
+    /*Cái này để clear float*/
+    overflow: auto;
+}
+
+.mystyle-leftmain{
+    width:65%;
+    float: left;
+}
+
+.mystyle-rightmain {
+    width: 33%;
+    float: right;
+}
+/*.mystyle-clearfloat{
+    clear:both;
+}*/
+
+.mystyle-maintin {
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid rgba(181, 111, 95, 0.42);
+    background: #ffffff;
+    margin-bottom: 35px;
+}
+
+.mystyle-tin {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top:15px;
+}
+
+.mystyle-nhamoigioi {
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.mystyle-goitin {
+    margin-bottom: 10px;
+    background: rgba(148, 196, 255, 0.10);
+    padding: 10px;
+    border-radius: 3px;
+}
+
+@keyframes my {
+    0% {
+        color: #F8CD0A;
+    }
+    50% {
+        color: #fff;
+    }
+    100% {
+        color: #F8CD0A;
+    }
+}
+
+.mystyle-tieudeloaitin {
+    padding: 5px;
+    font-size: 15pt;
+    font-style: oblique;
+    text-decoration: underline;
+    background: rgba(255, 0, 0, 0.46);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid rgba(181, 111, 95, 0.42);
+    /*animation: my 100ms infinite;*/
+}
+
+.mystyle-danhsachnhamoigioi {
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid rgba(181, 111, 95, 0.42);
+    background: #ffffff;
+    margin-bottom: 35px;
+}
+
+
+
+
+/*---------------------------------chinh sua cho Form đăng nhập----------------------------------------*/
+.mystyle-formdangnhap {
+    padding: 10px;
+    border: 1px solid rgba(181, 111, 95, 0.42);
+    border-radius: 5px;
+}
+
+.mystyle-formcontainer {
+    margin-top:100px;
+    /*margin: 0 auto;*/
+}
