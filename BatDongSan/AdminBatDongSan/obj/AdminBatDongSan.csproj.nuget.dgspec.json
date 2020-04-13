@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ThaiSon\\Desktop\\BatDongSan\\AdminBatDongSan\\AdminBatDongSan.csproj": {}
+    "C:\\Users\\ThaiSon\\Desktop\\DoAn_BatDongSanWeb\\DoAn\\BatDongSan\\AdminBatDongSan\\AdminBatDongSan.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ThaiSon\\Desktop\\BatDongSan\\AdminBatDongSan\\AdminBatDongSan.csproj": {
+    "C:\\Users\\ThaiSon\\Desktop\\DoAn_BatDongSanWeb\\DoAn\\BatDongSan\\AdminBatDongSan\\AdminBatDongSan.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ThaiSon\\Desktop\\BatDongSan\\AdminBatDongSan\\AdminBatDongSan.csproj",
+        "projectUniqueName": "C:\\Users\\ThaiSon\\Desktop\\DoAn_BatDongSanWeb\\DoAn\\BatDongSan\\AdminBatDongSan\\AdminBatDongSan.csproj",
         "projectName": "AdminBatDongSan",
-        "projectPath": "C:\\Users\\ThaiSon\\Desktop\\BatDongSan\\AdminBatDongSan\\AdminBatDongSan.csproj",
+        "projectPath": "C:\\Users\\ThaiSon\\Desktop\\DoAn_BatDongSanWeb\\DoAn\\BatDongSan\\AdminBatDongSan\\AdminBatDongSan.csproj",
         "packagesPath": "C:\\Users\\ThaiSon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ThaiSon\\Desktop\\BatDongSan\\AdminBatDongSan\\obj\\",
+        "outputPath": "C:\\Users\\ThaiSon\\Desktop\\DoAn_BatDongSanWeb\\DoAn\\BatDongSan\\AdminBatDongSan\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ThaiSon\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,8 +27,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\ThaiSon\\Desktop\\BatDongSan\\BatDongSanService\\BatDongSanService.csproj": {
-                "projectPath": "C:\\Users\\ThaiSon\\Desktop\\BatDongSan\\BatDongSanService\\BatDongSanService.csproj"
+              "C:\\Users\\ThaiSon\\Desktop\\DoAn_BatDongSanWeb\\DoAn\\BatDongSan\\BatDongSanService\\BatDongSanService.csproj": {
+                "projectPath": "C:\\Users\\ThaiSon\\Desktop\\DoAn_BatDongSanWeb\\DoAn\\BatDongSan\\BatDongSanService\\BatDongSanService.csproj"
               }
             }
           }
@@ -51,6 +51,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.2, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.1, )"
             }
           },
           "imports": [
@@ -75,14 +79,14 @@
         }
       }
     },
-    "C:\\Users\\ThaiSon\\Desktop\\BatDongSan\\BatDongSanService\\BatDongSanService.csproj": {
+    "C:\\Users\\ThaiSon\\Desktop\\DoAn_BatDongSanWeb\\DoAn\\BatDongSan\\BatDongSanService\\BatDongSanService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ThaiSon\\Desktop\\BatDongSan\\BatDongSanService\\BatDongSanService.csproj",
+        "projectUniqueName": "C:\\Users\\ThaiSon\\Desktop\\DoAn_BatDongSanWeb\\DoAn\\BatDongSan\\BatDongSanService\\BatDongSanService.csproj",
         "projectName": "BatDongSanService",
-        "projectPath": "C:\\Users\\ThaiSon\\Desktop\\BatDongSan\\BatDongSanService\\BatDongSanService.csproj",
+        "projectPath": "C:\\Users\\ThaiSon\\Desktop\\DoAn_BatDongSanWeb\\DoAn\\BatDongSan\\BatDongSanService\\BatDongSanService.csproj",
         "packagesPath": "C:\\Users\\ThaiSon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ThaiSon\\Desktop\\BatDongSan\\BatDongSanService\\obj\\",
+        "outputPath": "C:\\Users\\ThaiSon\\Desktop\\DoAn_BatDongSanWeb\\DoAn\\BatDongSan\\BatDongSanService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ThaiSon\\AppData\\Roaming\\NuGet\\NuGet.Config",

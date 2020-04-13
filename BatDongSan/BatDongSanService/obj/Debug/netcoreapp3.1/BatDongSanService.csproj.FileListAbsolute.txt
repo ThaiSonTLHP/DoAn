@@ -20,3 +20,14 @@ D:\Document\ThucTap+DoAn\BatDongSan\BatDongSanService\obj\Debug\netcoreapp3.1\Ba
 D:\Document\ThucTap+DoAn\BatDongSan\BatDongSanService\obj\Debug\netcoreapp3.1\BatDongSanService.dll
 D:\Document\ThucTap+DoAn\BatDongSan\BatDongSanService\obj\Debug\netcoreapp3.1\BatDongSanService.pdb
 C:\Users\ThaiSon\Desktop\BatDongSan\BatDongSanService\obj\Debug\netcoreapp3.1\BatDongSanService.csprojAssemblyReference.cache
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\BatDongSanService\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\BatDongSanService\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\BatDongSanService\bin\Debug\netcoreapp3.1\BatDongSanService.deps.json
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\BatDongSanService\bin\Debug\netcoreapp3.1\BatDongSanService.dll
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\BatDongSanService\bin\Debug\netcoreapp3.1\BatDongSanService.pdb
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\BatDongSanService\obj\Debug\netcoreapp3.1\BatDongSanService.csprojAssemblyReference.cache
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\BatDongSanService\obj\Debug\netcoreapp3.1\BatDongSanService.csproj.CoreCompileInputs.cache
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\BatDongSanService\obj\Debug\netcoreapp3.1\BatDongSanService.AssemblyInfoInputs.cache
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\BatDongSanService\obj\Debug\netcoreapp3.1\BatDongSanService.AssemblyInfo.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\BatDongSanService\obj\Debug\netcoreapp3.1\BatDongSanService.dll
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\BatDongSanService\obj\Debug\netcoreapp3.1\BatDongSanService.pdb

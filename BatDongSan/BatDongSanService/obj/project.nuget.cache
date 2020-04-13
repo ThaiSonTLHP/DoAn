@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XhYH21KwxEztAeO8PGlPAGjEou5dX9rKX/c/Brvq3uV9z5z4mW+7CM+3lp9w5pv8zLtH9U+ouFOGgp6egyZGjA==",
+  "dgSpecHash": "zI8D/gI2fX5t3PG3MDglTnlGjKv6QSomx/IhwD97f61Etwl2iTNdUspFOc73fFCq79x5b6kUsyoILjN9w3N+Ow==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ThaiSon\\Desktop\\BatDongSan\\BatDongSanService\\BatDongSanService.csproj",
+  "projectFilePath": "C:\\Users\\ThaiSon\\Desktop\\DoAn_BatDongSanWeb\\DoAn\\BatDongSan\\BatDongSanService\\BatDongSanService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ThaiSon\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\ThaiSon\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

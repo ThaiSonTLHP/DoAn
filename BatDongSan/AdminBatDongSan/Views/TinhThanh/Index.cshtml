@@ -6,7 +6,7 @@
 }
 
 <div class="card">
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>
@@ -29,12 +29,27 @@
                         @Html.DisplayFor(modelItem => item.Ten)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        <a class="edit-link" href="@Url.Action("Edit", new { id = item.Id })"><span @*style="color: red"*@>Sửa</span></a>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+<script type="text/javascript" src="~/js/jquery-3.4.1.min">
+    $('.edit-link').click(function (e) {
+        var a_href = $(this).attr('href'); /* Lấy giá trị của thuộc tính href */
+        e.preventDefault(); /* Không thực hiện action mặc định */
+        $.ajax({ /* Gửi request lên server */
+            url: a_href, /* Nội dung trong Delete.cshtml cụ thể là deleteModal div được server trả về */
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) { /* Sau khi nhận được giá */
+                $('.body-content').prepend(data); /* body-content div (định nghĩa trong _Layout.cshtml) sẽ thêm deleteModal div vào dưới cùng */
+                $('#deleteModal').modal('show'); /* Hiển thị deleteModal div dưới kiểu modal */
+            }
+        });
+    });
+</script>

@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Đăng tin</h1>
+<div class="mystyle-formcontainer">
+    <div class="container">
+        <div class="mystyle-formdangnhap">
+            <h2>Đăng nhập</h2>
+            <form action="/action_page.php">
+                <div class="form-group">
+                    <label for="email">Tài khoản:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Tài khoản" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Mật khẩu:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="pswd">
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="remember"> Ghi nhớ mật khẩu
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Đăng nhập</button>
+            </form>
+        </div>
+    </div>
+</div>
+

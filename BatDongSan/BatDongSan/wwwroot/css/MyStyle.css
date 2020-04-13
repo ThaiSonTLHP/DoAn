@@ -136,7 +136,7 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border: 1px solid rgba(181, 111, 95, 0.42);
-    /*animation: my 100ms infinite;*/
+    animation: my 100ms infinite;
 }
 
 .mystyle-danhsachnhamoigioi {

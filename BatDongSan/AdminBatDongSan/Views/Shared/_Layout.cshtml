@@ -13,6 +13,8 @@
     <!-- Material Design Bootstrap -->
     <link rel="stylesheet" href="~/css/mdb.min.css">
 
+    <link rel="stylesheet" href="~/css/MyStyle.css">
+
     <!-- Your custom styles (optional) -->
     <style>
     </style>
@@ -35,7 +37,7 @@
                 <li>
                     <form class="search-form" role="search">
                         <div class="md-form mt-0 waves-light">
-                            <input type="text" class="form-control py-2" placeholder="Search">
+                            <input type="text" class="form-control py-2" placeholder="Tìm kiếm">
                         </div>
                     </form>
                 </li>
@@ -119,17 +121,17 @@
                                 </ul>
                             </div>
                         </li>
-                        @*<li>
-                            <a class="collapsible-header waves-effect arrow-r"><i class="fas fa-th"></i> Components<i class="fas fa-angle-down rotate-icon"></i></a>
+                        <li>
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fas fa-cog"></i> Cấu hình<i class="fas fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
                                     <li>
-                                        <a href="../components/buttons.html" class="waves-effect">Buttons</a>
+                                        <a href="../components/buttons.html" class="waves-effect">Giới thiệu</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li>
+                        @*<li>
                             <a class="collapsible-header waves-effect arrow-r">
                                 <i class="far fa-check-square"></i> Forms<i class="fas fa-angle-down rotate-icon"></i>
                             </a>
@@ -212,7 +214,7 @@
             </div>
             <!-- Breadcrumb-->
             <div class="breadcrumb-dn mr-auto">
-                <p>Material Design for Bootstrap</p>
+                @*<p>Material Design for Bootstrap</p>*@
             </div>
 
             <!--Navbar links-->
@@ -223,7 +225,7 @@
                     <a class="nav-link dropdown-toggle waves-effect" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         <span class="badge red">3</span> <i class="fas fa-bell"></i>
-                        <span class="d-none d-md-inline-block">Notifications</span>
+                        <span class="d-none d-md-inline-block">Thông báo</span>
                     </a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#">
@@ -244,15 +246,15 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link waves-effect"><i class="fas fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Contact</span></a>
+                    <a class="nav-link waves-effect"><i class="fas fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Liên lạc</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link waves-effect"><i class="far fa-comments"></i> <span class="clearfix d-none d-sm-inline-block">Support</span></a>
+                    <a class="nav-link waves-effect"><i class="far fa-comments"></i> <span class="clearfix d-none d-sm-inline-block">Hỗ trợ</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Profile</span>
+                        <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Người dùng</span>
                     </a>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
@@ -276,18 +278,20 @@
     </main>
     <!-- Main layout -->
     <!-- Footer -->
-    <footer class="page-footer pt-0 mt-5">
+    <div class="mystyle-footer">
+        <footer class="page-footer pt-0 mt-5">
 
-        <!-- Copyright -->
-        <div class="footer-copyright py-3 text-center">
-            <div class="container-fluid">
-                © 2019 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+            <!-- Copyright -->
+            <div class="footer-copyright py-3 text-center">
+                <div class="container-fluid">
+                    © 2020 Bản quyền: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank">  </a>
 
+                </div>
             </div>
-        </div>
-        <!-- Copyright -->
+            <!-- Copyright -->
 
-    </footer>
+        </footer>
+    </div>
     <!-- Footer -->
     <!-- SCRIPTS -->
     <!-- JQuery -->

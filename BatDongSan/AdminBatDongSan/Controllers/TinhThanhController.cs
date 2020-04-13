@@ -23,10 +23,32 @@ namespace AdminBatDongSan.Controllers
                                select new TinhThanh()
                                {
                                    Id = t.Id,
-                                   Ten = t.Ten,
+                                   Ten = t.Ten
                                }).ToList();
             //ViewData["ListTinTuc"] = _tinTucList;
             return View(_tinhThanh);
+        }
+
+        [HttpGet]
+        public PartialViewResult Edit(int id)
+        {
+            var tinhThanh = from t in _dbContext.TinhThanh
+                            where t.Id == id
+                            select new TinhThanh()
+                            {
+                                Id = t.Id,
+                                Ten = t.Ten
+                            };
+            return PartialView(tinhThanh);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(TinhThanh tinhThanh)
+        {
+            var _tinhThanh = _dbContext.TinhThanh.Single(t => t.Id == tinhThanh.Id);
+            _tinhThanh.Ten = tinhThanh.Ten;
+            _dbContext.SaveChanges();
+            return View();
         }
     }
 }
