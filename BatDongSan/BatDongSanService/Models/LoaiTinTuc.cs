@@ -9,9 +9,12 @@ namespace BatDongSanService.Models
     public class LoaiTinTuc
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "Tên loại tin tức")]
         public string Ten { get; set; }
+
+        [Display(Name = "Mô tả")]
+        public string MoTa { get; set; }
     }
 }

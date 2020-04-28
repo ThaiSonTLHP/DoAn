@@ -9,7 +9,7 @@ namespace BatDongSan.Models.ViewModels
     public class TinMuaViewModel
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Ngày đăng")]
@@ -28,7 +28,7 @@ namespace BatDongSan.Models.ViewModels
         public string QuanHuyen { get; set; }
 
         [Display(Name = "Giá")]
-        public double Gia { get; set; }
+        public string Gia { get; set; }
 
         [Display(Name = "Diện tích")]
         public double DienTich { get; set; }

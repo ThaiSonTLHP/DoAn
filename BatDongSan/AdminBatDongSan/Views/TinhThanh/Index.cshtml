@@ -10,7 +10,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Id)
+                    @Html.DisplayNameFor(model => model.ID)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Ten)
@@ -23,15 +23,15 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Id)
+                        @Html.DisplayFor(modelItem => item.ID)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Ten)
                     </td>
                     <td>
-                        <a class="edit-link" href="@Url.Action("Edit", new { id = item.Id })"><span @*style="color: red"*@>Sửa</span></a>
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        <a class="edit-link" href="@Url.Action("Edit", new { id = item.ID })"><span @*style="color: red"*@>Sửa</span></a>
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                     </td>
                 </tr>
             }

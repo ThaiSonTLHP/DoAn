@@ -64,9 +64,8 @@
                 @foreach (var n in Model.NhaMoiGioiViewModels)
                 {
                     <div class="mystyle-goitin">
-                        <div class="mystyle-tennhamoigioi">@Html.Raw(n.TenNhaMoiGioi)</div>
-                        <div class="mystyle-sogiaodich">Số giao dịch: <span>@Html.Raw(n.SoGiaoDich)</span></div>
-                        <div class="mystyle-danhgia">Đánh giá: <span>@Html.Raw(n.DanhGia)</span></div>
+                        <div class="mystyle-tennhamoigioi">@Html.Raw(n.Ten)</div>
+                        <div class="mystyle-sogiaodich">Số giao dịch: <span>@Html.Raw(n.SoBaiDang)</span></div>
                         <div class="mystyle-sodienthoai">Liên hệ: <span>@Html.Raw(n.SoDienThoai)</span></div>
                     </div>
                 }

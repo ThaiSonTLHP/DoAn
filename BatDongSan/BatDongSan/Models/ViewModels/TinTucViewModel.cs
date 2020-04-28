@@ -9,7 +9,7 @@ namespace BatDongSan.Models.ViewModels
     public class TinTucViewModel
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "Tiêu đề")]
         public string TieuDe { get; set; }
@@ -19,7 +19,7 @@ namespace BatDongSan.Models.ViewModels
         public DateTime NgayDang { get; set; }
 
         [Display(Name = "Người đăng")]
-        public string NguoiQuanTri { get; set; }
+        public string NguoiDang { get; set; }
 
         [Display(Name = "Thể loại")]
         public string LoaiTinTuc { get; set; }

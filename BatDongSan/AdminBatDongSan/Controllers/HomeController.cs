@@ -22,11 +22,11 @@ namespace AdminBatDongSan.Controllers
         public IActionResult Index()
         {
             //var _tinTucList = (from t in _dbContext.TinTuc
-            //                   join lt in _dbContext.LoaiTinTuc on t.LoaiTinTucID equals lt.Id
-            //                   join tk in _dbContext.TKQuanTri on t.QuanTriId equals tk.Id
+            //                   join lt in _dbContext.LoaiTinTuc on t.LoaiTinTucID equals lt.ID
+            //                   join tk in _dbContext.TKQuanTri on t.QuanTriId equals tk.ID
             //                   select new TinTucViewModel()
             //                   {
-            //                       Id = t.Id,
+            //                       ID = t.ID,
             //                       TieuDe = t.TieuDe,
             //                   }).ToList();
             //IList<TinTucViewModel> tinTucList = _tinTucList;

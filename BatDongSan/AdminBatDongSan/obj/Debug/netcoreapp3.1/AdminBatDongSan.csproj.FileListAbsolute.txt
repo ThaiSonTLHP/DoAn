@@ -285,3 +285,5 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\AdminBatDongSan\bin\
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\AdminBatDongSan\obj\Debug\netcoreapp3.1\AdminBatDongSan.csproj.CoreCompileInputs.cache
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\AdminBatDongSan\obj\Debug\netcoreapp3.1\AdminBatDongSan.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\AdminBatDongSan\obj\Debug\netcoreapp3.1\Razor\Views\TinhThanh\Edit.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\AdminBatDongSan\obj\Debug\netcoreapp3.1\Razor\Views\Huong\Index.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\BatDongSan\AdminBatDongSan\obj\Debug\netcoreapp3.1\Razor\Views\NguoiDung\Index.cshtml.g.cs

@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace BatDongSanService.Models
 {
-    public class LoaiTinRao
+    public class LoaiTaiKhoan
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
-        [Display(Name = "Loại tin rao")]
+        [Display(Name = "Tên tài khoản")]
         public string Ten { get; set; }
 
-        [Display(Name = "Giá")]
-        public float MucPhi { get; set; }
+        [Display(Name = "Chức năng")]
+        public string ChucNang { get; set; }
     }
 }

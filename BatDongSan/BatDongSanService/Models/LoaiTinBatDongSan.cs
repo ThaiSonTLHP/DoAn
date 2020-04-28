@@ -6,12 +6,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BatDongSanService.Models
 {
-    public class HinhThucGiaoDich
+    public class LoaiTinBatDongSan
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
-        [Display(Name = "Hình thức giao dịch")]
+        [Display(Name = "Loại tin")]
         public string Ten { get; set; }
     }
 }

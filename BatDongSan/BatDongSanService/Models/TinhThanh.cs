@@ -9,7 +9,7 @@ namespace BatDongSanService.Models
     public class TinhThanh
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "Tỉnh thành")]
         public string Ten { get; set; }

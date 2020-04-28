@@ -21,15 +21,15 @@ namespace BatDongSan.Controllers
         public IActionResult Index()
         {
             var _tinTucList = (from t in _dbContext.TinTuc
-                               join lt in _dbContext.LoaiTinTuc on t.LoaiTinTucID equals lt.Id
-                               join tk in _dbContext.TKQuanTri on t.QuanTriId equals tk.Id
+                               join lt in _dbContext.LoaiTinTuc on t.LoaiTinTuc equals lt.ID
+                               join nd in _dbContext.NguoiDung on t.NguoiDang equals nd.ID
                                select new TinTucViewModel()
                                {
-                                   Id = t.Id,
+                                   ID = t.ID,
                                    TieuDe = t.TieuDe,
-                                   NgayDang = t.Ngaydang,
+                                   NgayDang = t.NgayDang,
                                    LoaiTinTuc = lt.Ten,
-                                   NguoiQuanTri = tk.TenNhanVien,
+                                   NguoiDang = nd.Ten,
                                    NoiDung = t.NoiDung
                                }).ToList();
             //ViewData["ListTinTuc"] = _tinTucList;
@@ -43,16 +43,16 @@ namespace BatDongSan.Controllers
                 return NotFound();
             }
             var tinTuc = (from t in _dbContext.TinTuc
-                          join lt in _dbContext.LoaiTinTuc on t.LoaiTinTucID equals lt.Id
-                          join tk in _dbContext.TKQuanTri on t.QuanTriId equals tk.Id
-                          where t.Id == id
+                          join lt in _dbContext.LoaiTinTuc on t.LoaiTinTuc equals lt.ID
+                          join nd in _dbContext.NguoiDung on t.NguoiDang equals nd.ID
+                          where t.ID == id
                           select new TinTucViewModel()
                           {
-                              Id = t.Id,
+                              ID = t.ID,
                               TieuDe = t.TieuDe,
-                              NgayDang = t.Ngaydang,
+                              NgayDang = t.NgayDang,
                               LoaiTinTuc = lt.Ten,
-                              NguoiQuanTri = tk.TenNhanVien,
+                              NguoiDang = nd.Ten,
                               NoiDung = t.NoiDung
                           }).ToList();
             return View(tinTuc);

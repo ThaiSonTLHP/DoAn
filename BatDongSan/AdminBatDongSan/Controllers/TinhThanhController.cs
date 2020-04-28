@@ -22,7 +22,7 @@ namespace AdminBatDongSan.Controllers
             var _tinhThanh = (from t in _dbContext.TinhThanh
                                select new TinhThanh()
                                {
-                                   Id = t.Id,
+                                   ID = t.ID,
                                    Ten = t.Ten
                                }).ToList();
             //ViewData["ListTinTuc"] = _tinTucList;
@@ -33,10 +33,10 @@ namespace AdminBatDongSan.Controllers
         public PartialViewResult Edit(int id)
         {
             var tinhThanh = from t in _dbContext.TinhThanh
-                            where t.Id == id
+                            where t.ID == id
                             select new TinhThanh()
                             {
-                                Id = t.Id,
+                                ID = t.ID,
                                 Ten = t.Ten
                             };
             return PartialView(tinhThanh);
@@ -45,9 +45,22 @@ namespace AdminBatDongSan.Controllers
         [HttpPost]
         public IActionResult Edit(TinhThanh tinhThanh)
         {
-            var _tinhThanh = _dbContext.TinhThanh.Single(t => t.Id == tinhThanh.Id);
+            var _tinhThanh = _dbContext.TinhThanh.Single(t => t.ID == tinhThanh.ID);
             _tinhThanh.Ten = tinhThanh.Ten;
             _dbContext.SaveChanges();
+            return View();
+        }
+
+        public IActionResult Details()
+        {
+            return View();
+        }
+
+        public IActionResult Delete()
+        {
+            //code xử lý để dưới đây
+
+
             return View();
         }
     }

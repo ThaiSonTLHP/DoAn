@@ -43,7 +43,7 @@
         <div class="search-type">
             <p>Loại tin</p>
             <select class="filter-property" name="HinhThucOption">
-                @foreach (var item in Model.HinhThucGiaoDiches)
+                @foreach (var item in Model.LoaiTinBatDongSans)
                 {
                     <option value="@item.Ten">@Html.Raw(item.Ten)</option>
                 }

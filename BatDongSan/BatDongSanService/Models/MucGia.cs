@@ -9,21 +9,15 @@ namespace BatDongSanService.Models
     public class MucGia
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "Mức giá")]
         public string Ten { get; set; }
 
         [Display(Name = "Giá thấp nhất")]
-        public double GiaThapNhat { get; set; }
+        public double Min { get; set; }
 
         [Display(Name = "Giá cao nhất")]
-        public double GiaCaoNhat { get; set; }
-
-        [Display(Name = "Loại giá")]
-        public string LoaiGia { get; set; }
-
-        [Display(Name = "Đơn vị tính")]
-        public string DonViTinh { get; set; }
+        public double Max { get; set; }
     }
 }

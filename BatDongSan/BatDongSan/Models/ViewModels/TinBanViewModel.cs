@@ -9,7 +9,7 @@ namespace BatDongSan.Models.ViewModels
     public class TinBanViewModel
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "Loại tin")]
         public string LoaiTinRao { get; set; }
@@ -31,7 +31,7 @@ namespace BatDongSan.Models.ViewModels
         public string QuanHuyen { get; set; }
 
         [Display(Name = "Giá")]
-        public double Gia { get; set; }
+        public string Gia { get; set; }
 
         [Display(Name = "Diện tích")]
         public double DienTich { get; set; }
