@@ -7,6 +7,7 @@ using AdminBatDongSan.Models.ViewModel;
 using BatDongSanService;
 using BatDongSanService.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdminBatDongSan.Controllers
@@ -66,6 +67,8 @@ namespace AdminBatDongSan.Controllers
         //-------------Tạo mới-------------
         public IActionResult Create()
         {
+            List<LoaiTaiKhoan> LoaiTaiKhoanList = _dbContext.LoaiTaiKhoan.ToList();
+            ViewBag.LoaiTaiKhoanList = new SelectList(LoaiTaiKhoanList, "ID", "Ten");
             return View();
         }
 
@@ -83,7 +86,6 @@ namespace AdminBatDongSan.Controllers
                                        ChucNang = l.ChucNang
                                    }).FirstOrDefault();
                 var taiKhoan = new TaiKhoan();
-                //taiKhoan.ID = taiKhoanViewModel.ID;
                 taiKhoan.MatKhau = taiKhoanViewModel.MatKhau;
                 taiKhoan.Ten = taiKhoanViewModel.Ten;
                 taiKhoan.GioiTinh = (taiKhoanViewModel.GioiTinh == "Nam") ? true : false;
