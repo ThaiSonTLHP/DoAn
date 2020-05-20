@@ -1,56 +1,42 @@
-﻿@model AdminBatDongSan.Models.ViewModel.TaiKhoanViewModel
+﻿@model BatDongSanService.ViewModels.TaiKhoanViewModel
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>TaiKhoanViewModel</h4>
+<h4>Tạo tài khoản mới</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ID" class="control-label"></label>
-                <input asp-for="ID" class="form-control" />
-                <span asp-validation-for="ID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MatKhau" class="control-label"></label>
-                <input asp-for="MatKhau" class="form-control" />
+                <input asp-for="MatKhau" class="form-control" placeholder="Nhập mật khẩu"/>
                 <span asp-validation-for="MatKhau" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Ten" class="control-label"></label>
-                <input asp-for="Ten" class="form-control" />
+                <input asp-for="Ten" class="form-control" placeholder="Nhập tên"/>
                 <span asp-validation-for="Ten" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GioiTinh" class="control-label"></label>
-                <input asp-for="GioiTinh" class="form-control" />
+                <input asp-for="GioiTinh" class="form-control" placeholder="Giới tính"/>
                 <span asp-validation-for="GioiTinh" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control" placeholder="Nhập email"/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SoDienThoai" class="control-label"></label>
-                <input asp-for="SoDienThoai" class="form-control" />
+                <input asp-for="SoDienThoai" class="form-control" placeholder="Nhập số điện thoại"/>
                 <span asp-validation-for="SoDienThoai" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DiaChi" class="control-label"></label>
-                <input asp-for="DiaChi" class="form-control" />
+                <input asp-for="DiaChi" class="form-control" placeholder="Nhập địa chỉ"/>
                 <span asp-validation-for="DiaChi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SoDuVi" class="control-label"></label>
-                <input asp-for="SoDuVi" class="form-control" />
+                <input asp-for="SoDuVi" class="form-control" placeholder="Nhập số dư ví"/>
                 <span asp-validation-for="SoDuVi" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -58,18 +44,15 @@
                 {
                     @Html.DropDownListFor(model => model.LoaiTaiKhoan, ViewBag.LoaiTaiKhoanList as SelectList, "Chọn loại tài khoản", new { @class = "form-control"})
                 }
-                @*<label asp-for="LoaiTaiKhoan" class="control-label"></label>
-                <input asp-for="LoaiTaiKhoan" class="form-control" />
-                <span asp-validation-for="LoaiTaiKhoan" class="text-danger"></span>*@
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Tạo" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Danh sách tài khoản</a>
 </div>
 

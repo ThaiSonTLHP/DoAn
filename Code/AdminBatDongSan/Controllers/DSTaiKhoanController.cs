@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
-using AdminBatDongSan.Models.ViewModel;
 using BatDongSanService;
 using BatDongSanService.Models;
+using BatDongSanService.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -77,14 +77,6 @@ namespace AdminBatDongSan.Controllers
         {
             if (ModelState.IsValid)
             {
-                var loaiTaiKhoan = (from l in _dbContext.LoaiTaiKhoan
-                                   where l.Ten == taiKhoanViewModel.LoaiTaiKhoan
-                                   select new LoaiTaiKhoan()
-                                   {
-                                       ID = l.ID,
-                                       Ten = l.Ten,
-                                       ChucNang = l.ChucNang
-                                   }).FirstOrDefault();
                 var taiKhoan = new TaiKhoan();
                 taiKhoan.MatKhau = taiKhoanViewModel.MatKhau;
                 taiKhoan.Ten = taiKhoanViewModel.Ten;
@@ -93,7 +85,7 @@ namespace AdminBatDongSan.Controllers
                 taiKhoan.SoDienThoai = taiKhoanViewModel.SoDienThoai;
                 taiKhoan.DiaChi = taiKhoanViewModel.DiaChi;
                 taiKhoan.SoDuVi = taiKhoanViewModel.SoDuVi;
-                taiKhoan.LoaiTaiKhoan = loaiTaiKhoan.ID;
+                taiKhoan.LoaiTaiKhoan = int.Parse(taiKhoanViewModel.LoaiTaiKhoan);
                 _dbContext.TaiKhoan.Add(taiKhoan);
                 _dbContext.SaveChanges();
                 return RedirectToAction(nameof(Index));

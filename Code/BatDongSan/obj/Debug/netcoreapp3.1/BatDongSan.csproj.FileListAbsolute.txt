@@ -561,8 +561,6 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\bin\Debug\netco
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\bin\Debug\netcoreapp3.1\BatDongSanService.dll
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\bin\Debug\netcoreapp3.1\BatDongSanService.pdb
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.csprojAssemblyReference.cache
-C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.csproj.CoreCompileInputs.cache
-C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.RazorAssemblyInfo.cache
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.RazorAssemblyInfo.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.AssemblyInfoInputs.cache
@@ -570,7 +568,6 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netco
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.TagHelpers.input.cache
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.TagHelpers.output.cache
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.RazorCoreGenerate.cache
-C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Views\DangNhap\Index.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Views\DangTin\Index.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Views\DangTin\Them.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Views\Dm\Index.cshtml.g.cs
@@ -594,3 +591,9 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netco
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.dll
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.pdb
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.genruntimeconfig.cache
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Views\DangNhap\Login.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Views\DangNhap\Register.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.csproj.CoreCompileInputs.cache
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\BatDongSan.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Views\DangTin\DangTinThanhCong.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Views\DangTin\ChoPheDuyet.cshtml.g.cs

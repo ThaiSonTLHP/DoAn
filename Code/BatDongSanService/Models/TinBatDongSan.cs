@@ -44,7 +44,7 @@ namespace BatDongSanService.Models
         public string QuanHuyen { get; set; }
 
         [Display(Name = "Giá")]
-        public string Gia { get; set; }
+        public double Gia { get; set; }
 
         [Display(Name = "Mức giá")]
         public int MucGia { get; set; }

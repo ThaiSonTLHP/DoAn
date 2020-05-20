@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace BatDongSanService.Models
 {
@@ -17,7 +16,7 @@ namespace BatDongSanService.Models
         [Display(Name = "Tên người dùng")]
         public string Ten { get; set; }
 
-        [Display(Name = "Người dùng")]
+        [Display(Name = "Giới tính")]
         public Boolean GioiTinh { get; set; }
 
         [Display(Name = "Email")]
@@ -29,10 +28,13 @@ namespace BatDongSanService.Models
         [Display(Name = "Địa chỉ")]
         public string DiaChi { get; set; }
 
+        [Display(Name = "Loại tài khoản")]
+        public int LoaiTaiKhoan { get; set; }
+
         [Display(Name = "Số dư ví")]
         public double SoDuVi { get; set; }
 
-        [Display(Name = "Loại tài khoản")]
-        public int LoaiTaiKhoan { get; set; }
+        [Display(Name = "Trạng thái xác thực")]
+        public Boolean XacThuc { get; set; }
     }
 }

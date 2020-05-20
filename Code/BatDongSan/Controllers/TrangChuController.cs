@@ -40,7 +40,6 @@ namespace BatDongSan.Controllers
                                         LoaiBatDongSan = lbds.Ten,
                                         TinhThanh = tt.Ten,
                                         QuanHuyen = qh.Ten,
-                                        Gia = t.Gia,
                                         DienTich = t.DienTich,
                                         Huong = h.Ten,
                                         MoTa = t.MoTa
@@ -62,7 +61,6 @@ namespace BatDongSan.Controllers
                                         LoaiBatDongSan = lbds.Ten,
                                         TinhThanh = tt.Ten,
                                         QuanHuyen = qh.Ten,
-                                        Gia = t.Gia,
                                         DienTich = t.DienTich,
                                         Huong = h.Ten,
                                         MoTa = t.MoTa
@@ -85,7 +83,6 @@ namespace BatDongSan.Controllers
                                         LoaiBatDongSan = lbds.Ten,
                                         TinhThanh = tt.Ten,
                                         QuanHuyen = qh.Ten,
-                                        Gia = t.Gia,
                                         DienTich = t.DienTich,
                                         Huong = h.Ten,
                                         MoTa = t.MoTa

@@ -29,6 +29,8 @@ namespace BatDongSan
             var ConnectionString = Configuration.GetConnectionString("BatDongSan");
 
             services.AddDbContext<BatDongSanContext>(options => options.UseSqlServer(ConnectionString));
+
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +57,7 @@ namespace BatDongSan
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=TrangChu}/{action=Index}/{id?}");
+                    pattern: "{controller=DangTin}/{action=Index}/{id?}");
             });
         }
     }
