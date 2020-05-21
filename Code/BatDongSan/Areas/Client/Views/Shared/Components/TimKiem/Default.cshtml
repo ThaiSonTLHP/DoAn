@@ -1,0 +1,76 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homes Template">
+    <meta name="keywords" content="Homes, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>@ViewData["Title"] - BatDongSan</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
+          rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+    <link rel="stylesheet" href="~/css/MyStyle.css" type="text/css">
+</head>
+<body>
+    @model BatDongSan.Models.ListViewModels.TimKiemListViewModel
+
+    @{
+        ViewData["Title"] = "Default";
+    }
+    <form class="filter-form" asp-controller="Dm" asp-action="Search" method="post">
+        <div class="location">
+            <p>Tỉnh/ Thành phố</p>
+            <select class="form-control" name="TinhThanhOption">
+                @foreach (var item in Model.TinhThanhs)
+                {
+                    <option value="@item.ID">@Html.Raw(item.Ten)</option>
+                }
+            </select>
+        </div>
+        <div class="search-type">
+            <p>Loại tin</p>
+            <select class="form-control" name="LoaiTinOption">
+                @foreach (var item in Model.LoaiTinBatDongSans)
+                {
+                    <option value="@item.ID">@Html.Raw(item.Ten)</option>
+                }
+            </select>
+        </div>
+        <div class="search-type">
+            <p>Khoảng giá</p>
+            <select class="form-control" name="MucGiaOption">
+                @foreach (var item in Model.MucGias)
+                {
+                    <option value="@item.ID">@Html.Raw(item.Ten)</option>
+                }
+            </select>
+        </div>
+        <div class="search-type">
+            <p>Loại hình</p>
+            <select class="form-control" name="LoaiBDSOption">
+                @foreach (var item in Model.LoaiBatDongSans)
+                {
+                    <option value="@item.ID">@Html.Raw(item.Ten)</option>
+                }
+            </select>
+        </div>
+        <div class="search-btn">
+            <button type="submit" name="SearchString"><i class="flaticon-search"></i>Tìm kiếm</button>
+        </div>
+    </form>
+</body>
+</html>
+

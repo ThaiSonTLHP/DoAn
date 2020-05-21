@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewData["Title"] = "Trang chu";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+
+@model BatDongSan.Models.ListViewModels.TrangChuListViewModel
+
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div class="mystyle-main">
+    <div class="mystyle-leftmain">
+        <div class="mystyle-maintin">
+            <div class="mystyle-tieudeloaitin">VIP</div>
+            <div class="mystyle-tin">
+                @foreach (var tin in Model.TinVIPViewModels)
+                {
+                    <div class="mystyle-goitin">
+                        <div class="mystyle-ngaydangtin">@Html.Raw(tin.NgayDang)</div>
+                        <div class="mystyle-tieudetin">@Html.Raw(tin.MoTa)</div>
+                        <div class="mystyle-diadiemtin">@Html.Raw(tin.QuanHuyen)<span> - </span>@Html.Raw(tin.TinhThanh)</div>
+                        <div class="mystyle-giatin">Giá: <span>@Html.Raw(tin.Gia)</span>VNĐ | Diện tích: <span>@Html.Raw(tin.DienTich)</span>m2 | <span>Hướng: </span>@Html.Raw(tin.Huong)</div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="mystyle-maintin">
+            <div class="mystyle-tieudeloaitin">Tin bán</div>
+            <div class="mystyle-tin">
+                @foreach (var tin in Model.TinBanViewModels)
+                {
+                    <div class="mystyle-goitin">
+                        <div class="mystyle-ngaydangtin">@Html.Raw(tin.NgayDang)</div>
+                        <div class="mystyle-tieudetin">@Html.Raw(tin.MoTa)</div>
+                        <div class="mystyle-diadiemtin">@Html.Raw(tin.QuanHuyen)<span> - </span>@Html.Raw(tin.TinhThanh)</div>
+                        <div class="mystyle-giatin">Giá: <span>@Html.Raw(tin.Gia)</span>VNĐ | Diện tích: <span>@Html.Raw(tin.DienTich)</span>m2 | <span>Hướng: </span>@Html.Raw(tin.Huong)</div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="mystyle-maintin">
+            <div class="mystyle-tieudeloaitin">Tin mua</div>
+            <div class="mystyle-tin">
+                @foreach (var tin in Model.TinMuaViewModels)
+                {
+                    <div class="mystyle-goitin">
+                        <div class="mystyle-ngaydangtin">@Html.Raw(tin.NgayDang)</div>
+                        <div class="mystyle-tieudetin">@Html.Raw(tin.MoTa)</div>
+                        <div class="mystyle-diadiemtin">@Html.Raw(tin.QuanHuyen)<span> - </span>@Html.Raw(tin.TinhThanh)</div>
+                        <div class="mystyle-giatin">Giá: <span>@Html.Raw(tin.Gia)</span>VNĐ | Diện tích: <span>@Html.Raw(tin.DienTich)</span>m2 | <span>Hướng: </span>@Html.Raw(tin.Huong)</div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="mystyle-rightmain">
+        <div class="mystyle-danhsachnhamoigioi">
+            <div class="mystyle-tieudeloaitin">Danh sách nhà môi giới</div>
+            <div class="mystyle-nhamoigioi">
+                @foreach (var n in Model.NhaMoiGioiViewModels)
+                {
+                    <div class="mystyle-goitin">
+                        <div class="mystyle-tennhamoigioi">@Html.Raw(n.Ten)</div>
+                        <div class="mystyle-sogiaodich">Số giao dịch: <span>@Html.Raw(n.SoBaiDang)</span></div>
+                        <div class="mystyle-sodienthoai">Liên hệ: <span>@Html.Raw(n.SoDienThoai)</span></div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

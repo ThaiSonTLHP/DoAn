@@ -44,13 +44,13 @@ namespace BatDongSanService.Models
         public string QuanHuyen { get; set; }
 
         [Display(Name = "Giá")]
-        public double Gia { get; set; }
+        public string Gia { get; set; }
 
         [Display(Name = "Mức giá")]
         public int MucGia { get; set; }
 
         [Display(Name = "Diện tích")]
-        public double DienTich { get; set; }
+        public string DienTich { get; set; }
 
         [Display(Name = "Mức diện tích")]
         public int MucDienTich { get; set; }

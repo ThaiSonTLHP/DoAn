@@ -1,0 +1,116 @@
+﻿@model BatDongSan.Models.ViewModels.TinBDSViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<h4>TinBDSViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                    <label asp-for="ID" class="control-label"></label>
+                    <input asp-for="ID" class="form-control" />
+                    <span asp-validation-for="ID" class="text-danger"></span>
+                </div>*@
+            <div class="form-group">
+                @if (ViewBag.LoaiTinBatDongSan != null)
+                {
+                    @Html.DropDownListFor(model => model.LoaiTin, ViewBag.LoaiTinBatDongSan as SelectList, "Chọn loại tin", new { @class = "form-control" })
+                }
+            </div>
+            @*<div class="form-group">
+                    <label asp-for="NgayDang" class="control-label"></label>
+                    <input asp-for="NgayDang" class="form-control" />
+                    <span asp-validation-for="NgayDang" class="text-danger"></span>
+                </div>*@
+            <div class="form-group">
+                <input asp-for="NguoiDang" class="form-control" placeholder="Người đăng" />
+                <span asp-validation-for="NguoiDang" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                    <label asp-for="LienHe" class="control-label"></label>
+                    <input asp-for="LienHe" class="form-control" />
+                    <span asp-validation-for="LienHe" class="text-danger"></span>
+                </div>*@
+            <div class="form-group">
+                @if (ViewBag.GoiTin != null)
+                {
+                    @Html.DropDownListFor(model => model.GoiTin, ViewBag.GoiTin as SelectList, "Chọn gói tin", new { @class = "form-control" })
+                }
+            </div>
+            <div class="form-group">
+                @if (ViewBag.LoaiBatDongSan != null)
+                {
+                    @Html.DropDownListFor(model => model.LoaiBatDongSan, ViewBag.LoaiBatDongSan as SelectList, "Chọn loại hình bất động sản", new { @class = "form-control" })
+                }
+            </div>
+            <div class="form-group">
+                @*<select asp-for="TinhThanh" class="form-control" asp-items="@(new SelectList(ViewBag.TinhThanh), "ID", "Ten")"></select>*@
+                @if (ViewBag.TinhThanh != null)
+                {
+                    @Html.DropDownListFor(model => model.TinhThanh, ViewBag.TinhThanh as SelectList, "Chọn tỉnh thành", new { @class = "form-control", @id = "TinhThanhID" })
+                }
+            </div>
+            <div class="form-group">
+                @*@if (ViewBag.QuanHuyen != null)
+                    {
+                        @Html.DropDownListFor(model => model.QuanHuyen, ViewBag.QuanHuyen as SelectList, "Chọn quận huyện", new { @class = "form-control", @id = "QuanHuyenID" })
+                    }*@
+                @Html.DropDownListFor(model => model.QuanHuyen, new SelectList(string.Empty), "Chọn quận huyện", new { @class = "form-control", @id = "QuanHuyenID" })
+            </div>
+            <div class="form-group">
+                <input asp-for="Gia" class="form-control" placeholder="Giá (VNĐ)" />
+                <span asp-validation-for="Gia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="DienTich" class="form-control" placeholder="Diện tích (m2)" />
+                <span asp-validation-for="DienTich" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @if (ViewBag.Huong != null)
+                {
+                    @Html.DropDownListFor(model => model.Huong, ViewBag.Huong as SelectList, "Chọn hướng", new { @class = "form-control" })
+                }
+            </div>
+            <div class="form-group">
+                <input asp-for="MoTa" class="form-control" placeholder="Viết mô tả" />
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+    <a asp-area="Admin" asp-controller="Home" asp-action="Index">Xem trang admin</a>
+</div>
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#TinhThanhID").change(function () {
+            var SelecedVal = $(this).val();
+            $("#QuanHuyenID").html('');
+            $("#QuanHuyenID").append($("<option></option>").attr("value", '').text('Select State'));
+            if (SelecedVal != '') {
+                $.get('/DangTin/GetQuanHuyenList/', { "_tinhThanh": SelecedVal.toString() }).success(function (data) {
+                    $.each(data, function (index, item) {
+                        $("#QuanHuyenID").append($("<option></option>").attr("value", item.ID)
+                            .text(item.Ten));
+                    });
+                })
+            }
+            alert("hello");
+        });
+    })
+</script>
+

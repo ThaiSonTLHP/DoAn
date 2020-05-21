@@ -93,7 +93,7 @@ create table TinBatDongSan(
 	LoaiBatDongSan int references LoaiBatDongSan(ID) not null,
 	TinhThanh nvarchar(5) references TinhThanh(ID) not null,
 	QuanHuyen nvarchar(5) references QuanHuyen(ID) not null,
-	Gia nvarchar(30) not null,
+	Gia float not null,
 	MucGia int references MucGia(ID),
 	DienTich float not null,
 	MucDienTich int references MucDienTich(ID) not null,

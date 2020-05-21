@@ -1,8 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BatDongSanService;
+using BatDongSanService.Methods;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,7 @@ namespace BatDongSan
 
             services.AddDbContext<BatDongSanContext>(options => options.UseSqlServer(ConnectionString));
 
+            services.AddMvc();
             services.AddSession();
         }
 
@@ -46,6 +48,9 @@ namespace BatDongSan
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSession();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -57,7 +62,8 @@ namespace BatDongSan
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=DangTin}/{action=Index}/{id?}");
+                    pattern: "{area=Client}/{controller=DangTin}/{action=Index}/{id?}");
+                //pattern: "{controller=DangTin}/{action=Index}/{id?}");
             });
         }
     }

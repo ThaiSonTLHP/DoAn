@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatDongSan", "BatDongSan\BatDongSan.csproj", "{BBE9C4ED-064F-4B85-8120-B22499D7305E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatDongSan", "BatDongSan\BatDongSan.csproj", "{BBE9C4ED-064F-4B85-8120-B22499D7305E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminBatDongSan", "AdminBatDongSan\AdminBatDongSan.csproj", "{F7ABE11A-3949-4943-B484-A5AC9B1E1F03}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatDongSanService", "BatDongSanService\BatDongSanService.csproj", "{9EA67BE7-D739-41B6-BA7C-1B5C82412F08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatDongSanService", "BatDongSanService\BatDongSanService.csproj", "{9EA67BE7-D739-41B6-BA7C-1B5C82412F08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{BBE9C4ED-064F-4B85-8120-B22499D7305E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBE9C4ED-064F-4B85-8120-B22499D7305E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBE9C4ED-064F-4B85-8120-B22499D7305E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F7ABE11A-3949-4943-B484-A5AC9B1E1F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7ABE11A-3949-4943-B484-A5AC9B1E1F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7ABE11A-3949-4943-B484-A5AC9B1E1F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7ABE11A-3949-4943-B484-A5AC9B1E1F03}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9EA67BE7-D739-41B6-BA7C-1B5C82412F08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9EA67BE7-D739-41B6-BA7C-1B5C82412F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EA67BE7-D739-41B6-BA7C-1B5C82412F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
