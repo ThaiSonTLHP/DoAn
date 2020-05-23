@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BatDongSan.Models.ViewModels;
 using BatDongSanService;
 using BatDongSanService.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Design;
@@ -27,14 +28,12 @@ namespace BatDongSan.Areas.Client.Controllers
             List<GoiTin> GoiTin = _dbContext.GoiTin.ToList();
             List<LoaiBatDongSan> LoaiBatDongSan = _dbContext.LoaiBatDongSan.ToList();
             List<TinhThanh> TinhThanh = _dbContext.TinhThanh.ToList();
-            //List<QuanHuyen> QuanHuyen = _dbContext.QuanHuyen.ToList();
             List<Huong> Huong = _dbContext.Huong.ToList();
 
             ViewBag.LoaiTinBatDongSan = new SelectList(LoaiTinBatDongSan, "ID", "Ten");
             ViewBag.GoiTin = new SelectList(GoiTin, "ID", "Ten");
             ViewBag.LoaiBatDongSan = new SelectList(LoaiBatDongSan, "ID", "Ten");
             ViewBag.TinhThanh = new SelectList(TinhThanh, "ID", "Ten");
-            //ViewBag.QuanHuyen = new SelectList(QuanHuyen, "ID", "Ten");
             ViewBag.Huong = new SelectList(Huong, "ID", "Ten");
 
             return View();
@@ -44,22 +43,23 @@ namespace BatDongSan.Areas.Client.Controllers
         {
             List<QuanHuyen> QuanHuyenList = _dbContext.QuanHuyen.Where(x => x.TinhThanh == _tinhThanh).ToList();
 
-            //QuanHuyenList.Insert(0, new QuanHuyen { ID = "0", Ten = "Chọn quận huyện" });
-
-            //return Json(new SelectList(QuanHuyenList, "QuanHuyenID", "TenQuanHuyen"));
-
             return Json(QuanHuyenList);
         }
 
         [HttpPost]
         public IActionResult Index(TinBDSViewModel tinBDSViewModel)
         {
+            if(HttpContext.Session.GetInt32("userID") == null)
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
+
             if (ModelState.IsValid)
             {
                 var tinBatDongSan = new TinBatDongSan();
 
                 var _goiTin = _dbContext.GoiTin.FirstOrDefault(x => x.ID == int.Parse(tinBDSViewModel.GoiTin));
-                var _nguoiDang = _dbContext.TaiKhoan.FirstOrDefault(x => x.Email == tinBDSViewModel.NguoiDang);
+                var _nguoiDang = _dbContext.TaiKhoan.FirstOrDefault(x => x.ID == HttpContext.Session.GetInt32("userID"));
                 var _mucGia = _dbContext.MucGia.FirstOrDefault(x => (x.Min <= double.Parse(tinBDSViewModel.Gia) && x.Max >= double.Parse(tinBDSViewModel.Gia)));
                 var _mucDienTich = _dbContext.MucDienTich.FirstOrDefault(x => (x.Min <= double.Parse(tinBDSViewModel.DienTich) && x.Max >= double.Parse(tinBDSViewModel.DienTich)));
 
@@ -83,8 +83,7 @@ namespace BatDongSan.Areas.Client.Controllers
                 tinBatDongSan.GoiTin = _goiTin.ID;
                 tinBatDongSan.LoaiBatDongSan = int.Parse(tinBDSViewModel.LoaiBatDongSan);
                 tinBatDongSan.TinhThanh = tinBDSViewModel.TinhThanh;
-                //tinBatDongSan.QuanHuyen = tinBDSViewModel.QuanHuyen;
-                tinBatDongSan.QuanHuyen = "001";
+                tinBatDongSan.QuanHuyen = tinBDSViewModel.QuanHuyen;
                 tinBatDongSan.Gia = tinBDSViewModel.Gia;
                 tinBatDongSan.MucGia = _mucGia.ID;
                 tinBatDongSan.DienTich = tinBDSViewModel.DienTich;
@@ -100,7 +99,8 @@ namespace BatDongSan.Areas.Client.Controllers
                 else
                     return RedirectToAction("ChoPheDuyet");
             }
-            return View();
+            else
+                return View();
         }
 
         public IActionResult DangNhap()

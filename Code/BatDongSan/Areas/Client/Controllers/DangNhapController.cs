@@ -34,12 +34,20 @@ namespace BatDongSan.Areas.Client.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            var data = _dbContext.TaiKhoan.FirstOrDefault(s => s.Email.Equals(username) && s.MatKhau.Equals(password));
-            if(data != null)
+            var _taiKhoan = _dbContext.TaiKhoan.FirstOrDefault(s => s.Email.Equals(username) && s.MatKhau.Equals(password));
+            if(_taiKhoan != null && _taiKhoan.XacThuc != false)
             {
-                HttpContext.Session.SetString("username", data.Ten);
-                HttpContext.Session.SetInt32("userID", data.ID);
-                return RedirectToAction("Successed", "DangNhap");
+                var _loaiTK = _dbContext.LoaiTaiKhoan.FirstOrDefault(l => l.ID.Equals(_taiKhoan.LoaiTaiKhoan));
+                HttpContext.Session.SetString("username", _taiKhoan.Ten);
+                HttpContext.Session.SetInt32("userID", _taiKhoan.ID);
+                if (_loaiTK.Ten == "Nhà môi giới")
+                {
+                    return RedirectToAction("Successed", "DangNhap");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                }
             }
             else
             {
