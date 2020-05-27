@@ -82,7 +82,14 @@
                         <li><a asp-controller="LienHe" asp-action="Index">Liên hệ</a></li>
                         <li class="mystyle-dangtin"><a asp-controller="DangTin" asp-action="Index">Đăng tin</a></li>
                         <li>
-                            <a asp-controller="DangNhap" asp-action="Login">Đăng nhập@*@Context.Session.GetString("username")*@</a>
+                            @if (Context.Session.GetString("username") == null)
+                            {
+                                <a asp-controller="DangNhap" asp-action="Login">Đăng nhập</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="DangNhap" asp-action="Login">@Context.Session.GetString("username")</a>
+                            }
                         </li>
                     </ul>
                     <div id="mobile-menu-wrap"></div>

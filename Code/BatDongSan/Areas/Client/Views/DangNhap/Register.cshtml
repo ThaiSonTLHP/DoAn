@@ -1,9 +1,7 @@
 ﻿@model BatDongSanService.ViewModels.TaiKhoanViewModel
 
-@{
-    ViewBag.Title = "Login";
-    Layout = null;
-}
+@{ ViewBag.Title = "Login";
+                Layout = null; }
 
 <!DOCTYPE html>
 
@@ -59,11 +57,16 @@
                 <div class="form-group">
                     @if (ViewBag.LoaiTaiKhoanList != null)
                     {
-                        @Html.DropDownListFor(model => model.LoaiTaiKhoan, ViewBag.LoaiTaiKhoanList as SelectList, "Chọn loại tài khoản", new { @class = "form-control" })
+        @Html.DropDownListFor(model => model.LoaiTaiKhoan, ViewBag.LoaiTaiKhoanList as SelectList, "Chọn loại tài khoản", new { @class = "form-control" })}
+                </div>
+                <div class="form-group">
+                    @if (ViewBag.SendMail != null)
+                    {
+                        @Html.TextBox("txtRandom", "Nhập mã xác nhận", new { @class = "form-control", @id = "randomID" });
                     }
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Tạo" class="btn btn-primary" />
+                    <input type="submit" value="Tạo" class="btn btn-primary" id="submitID"/>
                 </div>
             </form>
         </div>
@@ -74,3 +77,15 @@
     </div>
 </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#submitID").click(function () {
+            if ("input" == "") {
+                alert("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
+            alert("Mã xác nhận vừa được gửi đến email của bạn!");
+        });
+    })
+</script>
