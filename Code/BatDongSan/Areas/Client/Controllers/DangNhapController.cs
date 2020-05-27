@@ -22,7 +22,6 @@ namespace BatDongSan.Areas.Client.Controllers
     public class DangNhapController : Controller
     {
         private readonly BatDongSanContext _dbContext;
-        private string _random = null;
 
         public DangNhapController(BatDongSanContext dbContext)
         {
@@ -66,8 +65,6 @@ namespace BatDongSan.Areas.Client.Controllers
             HttpContext.Session.Remove("username");
             HttpContext.Session.Remove("userID");
             return RedirectToAction("Index");
-
-            //return RedirectToAction("action", "controller", new { area = "area" });
         }
 
         public IActionResult Successed()
@@ -89,49 +86,38 @@ namespace BatDongSan.Areas.Client.Controllers
         {
             List<LoaiTaiKhoan> LoaiTaiKhoanList = _dbContext.LoaiTaiKhoan.ToList();
             ViewBag.LoaiTaiKhoanList = new SelectList(LoaiTaiKhoanList, "ID", "Ten");
-            if (_random != null)
-                ViewBag.SendMail = "";
-            else
-                ViewBag.SendMail = null;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Register(TaiKhoanViewModel taiKhoanViewModel, string txtRandom)
+        public IActionResult Register(TaiKhoanViewModel taiKhoanViewModel)
         {
             if (ModelState.IsValid)
             {
-                if (txtRandom != _random || txtRandom == null || txtRandom == "")
-                {
-                    SendCode(taiKhoanViewModel.Email);
-                    return RedirectToAction(nameof(Register));
-                }
-                else
-                {
-                    var taiKhoan = new TaiKhoan();
-                    taiKhoan.MatKhau = taiKhoanViewModel.MatKhau;
-                    taiKhoan.Ten = taiKhoanViewModel.Ten;
-                    taiKhoan.GioiTinh = (taiKhoanViewModel.GioiTinh == "Nam") ? true : false;
-                    taiKhoan.Email = taiKhoanViewModel.Email;
-                    taiKhoan.SoDienThoai = taiKhoanViewModel.SoDienThoai;
-                    taiKhoan.DiaChi = taiKhoanViewModel.DiaChi;
-                    taiKhoan.SoDuVi = 0;
-                    taiKhoan.LoaiTaiKhoan = int.Parse(taiKhoanViewModel.LoaiTaiKhoan);
-                    _dbContext.TaiKhoan.Add(taiKhoan);
-                    _dbContext.SaveChanges();
-                    return RedirectToAction(nameof(Register));
-                }
+                var taiKhoan = new TaiKhoan();
+                taiKhoan.MatKhau = taiKhoanViewModel.MatKhau;
+                taiKhoan.Ten = taiKhoanViewModel.Ten;
+                taiKhoan.GioiTinh = (taiKhoanViewModel.GioiTinh == "Nam") ? true : false;
+                taiKhoan.Email = taiKhoanViewModel.Email;
+                taiKhoan.SoDienThoai = taiKhoanViewModel.SoDienThoai;
+                taiKhoan.DiaChi = taiKhoanViewModel.DiaChi;
+                taiKhoan.SoDuVi = 0;
+                taiKhoan.LoaiTaiKhoan = int.Parse(taiKhoanViewModel.LoaiTaiKhoan);
+                _dbContext.TaiKhoan.Add(taiKhoan);
+                _dbContext.SaveChanges();
+                return RedirectToAction(nameof(Successed));
             }
             return View();
         }
 
-        public void SendCode(string add)
+        public string SendCode(string add)
         {
             Random random = new Random();
-            _random = random.Next(100000, 999999).ToString();
+            string _random = random.Next(100000, 999999).ToString();
             string subject = "Xác thực đăng ký tài khoản";
             string body = _random + " là mã xác nhận của bạn.";
             Mail.SendMail(add, subject, body);
+            return _random;
         }
 
         //create a string MD5

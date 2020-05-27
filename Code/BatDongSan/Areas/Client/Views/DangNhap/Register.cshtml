@@ -43,7 +43,7 @@
                     <span asp-validation-for="GioiTinh" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input asp-for="Email" class="form-control" placeholder="Nhập email" />
+                    <input asp-for="Email" class="form-control" placeholder="Nhập email" id="emailID"/>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -57,16 +57,14 @@
                 <div class="form-group">
                     @if (ViewBag.LoaiTaiKhoanList != null)
                     {
-        @Html.DropDownListFor(model => model.LoaiTaiKhoan, ViewBag.LoaiTaiKhoanList as SelectList, "Chọn loại tài khoản", new { @class = "form-control" })}
-                </div>
-                <div class="form-group">
-                    @if (ViewBag.SendMail != null)
-                    {
-                        @Html.TextBox("txtRandom", "Nhập mã xác nhận", new { @class = "form-control", @id = "randomID" });
+                        @Html.DropDownListFor(model => model.LoaiTaiKhoan, ViewBag.LoaiTaiKhoanList as SelectList, "Chọn loại tài khoản", new { @class = "form-control" })
                     }
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Tạo" class="btn btn-primary" id="submitID"/>
+                    @Html.TextBox("txtRandom", "", new { @class = "form-control", @id = "randomID", @placeholder = "Nhập mã xác nhận"})
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Đăng ký" class="btn btn-primary" id="submitID"/>
                 </div>
             </form>
         </div>
@@ -80,12 +78,34 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#randomID").hide();
+        var _result = null;
         $("#submitID").click(function () {
-            if ("input" == "") {
+            if ($("input").val() == "") {
                 alert("Vui lòng nhập đầy đủ thông tin!");
-                return;
+                return false;
             }
-            alert("Mã xác nhận vừa được gửi đến email của bạn!");
+            else {
+                if ($("#randomID").is(':hidden')) {
+                    var val = $("#emailID").val();
+                    $.ajax({
+                        url: '@Url.Action("SendCode", "DangNhap")',
+                        data: { 'add': val },
+                        type: "post",
+                        success: function (result) {
+                            _result = result;
+                            alert(_result);
+                            alert("Mã xác nhận vừa được gửi đến email của bạn!");
+                            $("#randomID").show("slow");
+                        }
+                    });
+                    return false;
+                }
+                if ($("#randomID").val() != _result) {
+                    alert("Mã xác nhận không đúng!");
+                    return false;
+                }
+            }
         });
     })
 </script>
