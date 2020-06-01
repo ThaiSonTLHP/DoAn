@@ -18,7 +18,7 @@ namespace BatDongSanService
         public DbSet<TaiKhoan> TaiKhoan { get; set; }
         public DbSet<LoaiTaiKhoan> LoaiTaiKhoan { get; set; }
         public DbSet<TinBatDongSan> TinBatDongSan { get; set; }
-        //public DbSet<HinhAnh> HinhAnh { get; set; }
+        public DbSet<HinhAnh> HinhAnh { get; set; }
         public DbSet<Huong> Huong { get; set; }
         public DbSet<TinhThanh> TinhThanh { get; set; }
         public DbSet<QuanHuyen> QuanHuyen { get; set; }

@@ -603,7 +603,6 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netco
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\DangNhap\Successed.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\DangTin\ChoPheDuyet.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\DangTin\DangTinThanhCong.cshtml.g.cs
-C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\DangTin\Index.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\DangTin\Them.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\Dm\ChiTietTinBDS.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\Dm\Index.cshtml.g.cs
@@ -618,3 +617,6 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netco
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\TrangChu\Index.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\_ViewImports.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\_ViewStart.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\DangNhap\UpImage.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\DangNhap\Details.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSan\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\DangTin\DangTin.cshtml.g.cs

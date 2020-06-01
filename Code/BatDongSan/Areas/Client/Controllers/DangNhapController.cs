@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net.Mail;
 using System.Net;
 using System.Timers;
+using System.IO;
 
 namespace BatDongSan.Areas.Client.Controllers
 {
@@ -50,7 +51,7 @@ namespace BatDongSan.Areas.Client.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    return RedirectToAction("DangTin", "Home", new { area = "Admin" });
                 }
             }
             else
@@ -64,7 +65,7 @@ namespace BatDongSan.Areas.Client.Controllers
         {
             HttpContext.Session.Remove("username");
             HttpContext.Session.Remove("userID");
-            return RedirectToAction("Index");
+            return RedirectToAction("DangTin");
         }
 
         public IActionResult Successed()
@@ -72,9 +73,13 @@ namespace BatDongSan.Areas.Client.Controllers
             return View();
         }
 
-        public IActionResult Verify()
+        private byte[] GetByteArrayFromImage(IFormFile file)
         {
-            return View();
+            using (var target = new MemoryStream())
+            {
+                file.CopyTo(target);
+                return target.ToArray();
+            }
         }
 
         public IActionResult Details()

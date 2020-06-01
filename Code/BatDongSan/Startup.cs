@@ -62,7 +62,7 @@ namespace BatDongSan
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{area=Client}/{controller=DangNhap}/{action=Register}/{id?}");
+                    pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

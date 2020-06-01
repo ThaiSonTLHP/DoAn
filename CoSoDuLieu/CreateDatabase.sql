@@ -1,6 +1,9 @@
 
 use QuanLyBatDongSan
 
+--ALTER TABLE HinhAnh
+-- ALTER COLUMN Anh varbinary(max) not null;
+
 create table LoaiTinTuc(
 	ID int primary key identity not null,
 	Ten nvarchar(30) not null,

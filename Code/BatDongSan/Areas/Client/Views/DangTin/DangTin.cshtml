@@ -1,17 +1,17 @@
 ﻿@model BatDongSan.Models.ViewModels.TinBDSViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "DangTin";
     Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Dang tin</h1>
 
 <h4>TinBDSViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Index">
+        <form asp-action="DangTin" method="post" enctype="multipart/form-data" id="form1" runat="server">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
                     <label asp-for="ID" class="control-label"></label>
@@ -82,15 +82,29 @@
                 <input asp-for="MoTa" class="form-control" placeholder="Viết mô tả" />
                 <span asp-validation-for="MoTa" class="text-danger"></span>
             </div>
+
+            <div>
+                <input type="file" id="imgInp" name="file1" multiple="multiple" onchange="readURL(this);"/>
+            </div>
+            <div>
+                <img id="blah" src="#" alt="your image" />
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+
+            @*<form asp-action="RetrieveImage"
+                  asp-controller="DangNhap"
+                  method="post">
+                <button type="submit">Show Latest Image</button>
+            </form>*@
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="DangTin">Back to List</a>
     <a asp-area="Admin" asp-controller="Home" asp-action="Index">Xem trang admin</a>
 </div>
 
@@ -118,12 +132,21 @@
         });
     })
 
-    $(document).ready(function () {
-        $("#QuanHuyenID").change(function () {
-            var SelecedVal = $(this).val();
-            alert(SelecedVal);
-        });
-    })
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+
     //$(document).ready(function () {
     //    $("#TinhThanhID").change(function () {
     //        var SelecedVal = $(this).val();

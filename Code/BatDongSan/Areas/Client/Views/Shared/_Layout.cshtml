@@ -27,6 +27,8 @@
 
     <link rel="stylesheet" href="~/Client/css/MyStyle.css" type="text/css">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
     @using Microsoft.AspNetCore.Http;
 </head>
 <body class="mystyle-body">
@@ -81,10 +83,18 @@
                         <li><a asp-controller="TinTuc" asp-action="Index">Tin tức</a></li>
                         <li><a asp-controller="LienHe" asp-action="Index">Liên hệ</a></li>
                         <li class="mystyle-dangtin"><a asp-controller="DangTin" asp-action="Index">Đăng tin</a></li>
-                        <li>
+                        <li class="nav-item dropdown">
                             @if (Context.Session.GetString("username") == null)
                             {
-                                <a asp-controller="DangNhap" asp-action="Login">Đăng nhập</a>
+                                @*<a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Người dùng</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">Đăng xuất</a>
+                                    <a class="dropdown-item" href="#">Tài khoản</a>
+                                </div>*@
+                                <a asp-controller="DangNhap" asp-action="Login">Đăng nhập</a> 
                             }
                             else
                             {
