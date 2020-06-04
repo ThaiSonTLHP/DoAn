@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatDongSan", "BatDongSan\Ba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatDongSanService", "BatDongSanService\BatDongSanService.csproj", "{9EA67BE7-D739-41B6-BA7C-1B5C82412F08}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatDongSanId", "BatDongSanId\BatDongSanId.csproj", "{949EA01D-E5F8-41BF-8D95-83116F0FEA7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9EA67BE7-D739-41B6-BA7C-1B5C82412F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EA67BE7-D739-41B6-BA7C-1B5C82412F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EA67BE7-D739-41B6-BA7C-1B5C82412F08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{949EA01D-E5F8-41BF-8D95-83116F0FEA7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{949EA01D-E5F8-41BF-8D95-83116F0FEA7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{949EA01D-E5F8-41BF-8D95-83116F0FEA7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{949EA01D-E5F8-41BF-8D95-83116F0FEA7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Tin tuc";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<BatDongSanId.Areas.Client.Models.ViewModels.TinTucViewModel>
+
+@{
+    ViewData["Title"] = "Tin tức";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TieuDe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayDang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoaiTinTuc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NguoiDang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoiDung)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TieuDe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiTinTuc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NguoiDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoiDung)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

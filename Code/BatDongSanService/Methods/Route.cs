@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Routing;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Routing;
 
 namespace BatDongSanService.Methods
 {

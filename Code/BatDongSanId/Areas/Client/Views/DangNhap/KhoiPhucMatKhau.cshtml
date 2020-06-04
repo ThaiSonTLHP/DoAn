@@ -1,0 +1,150 @@
+﻿@model BatDongSanId.Areas.Client.Models.ViewModels.QuenMKViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    https://localhost:44378
+    <meta name="viewport" content="width=device-width" />
+    <title>KhoiPhucMatKhau</title>
+
+    <link rel="stylesheet" href="~/Client/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Client/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Client/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/Client/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Client/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Client/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Client/css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="~/Client/css/style.css" type="text/css">
+
+    <link rel="stylesheet" href="~/Client/css/MyStyle.css" type="text/css">
+</head>
+<body>
+    <div class="row h-75 justify-content-center align-items-center">
+        <div class="col-md-4">
+            <form asp-action="KhoiPhucMatKhau">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input asp-for="TaiKhoan" class="form-control" id="accountID" placeholder="Nhập email" />
+                    <span asp-validation-for="TaiKhoan" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="SoDienThoai" class="form-control" id="phoneID" placeholder="Nhập số điện thoại" />
+                    <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="MaXacNhan" class="form-control" id="codeID" placeholder="Mã xác nhận" />
+                    <span asp-validation-for="MaXacNhan" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="MatKhauMoi" class="form-control" id="mkMoiID" placeholder="Mật khẩu mới" />
+                    <span asp-validation-for="MatKhauMoi" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group">
+                        <input type="submit" value="Lấy mã xác nhận" class="btn btn-primary" id="sendCode" />
+                    </div>
+                    <div class="btn-group">
+                        <input type="submit" value="Xác nhận" class="btn btn-primary" id="xacNhan" />
+                    </div>
+                    <div class="btn-group">
+                        <input type="submit" value="test" class="btn btn-primary" id="test" />
+                    </div>
+                </div>
+            </form>
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v7.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat"
+         attribution=setup_tool
+         page_id="102091188206264"
+         logged_in_greeting="Xin chào, tôi có thể giúp gì cho bạn?"
+         logged_out_greeting="Xin chào, tôi có thể giúp gì cho bạn?">
+    </div>
+    @*@section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }*@
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var code = null;
+        $("#sendCode").click(function () {
+            if ($("#phoneID").val() == "") {
+                alert("Vui lòng nhập số điện thoại!");
+                return false;
+            }
+            if ($("#accountID").val() == "") {
+                alert("Vui lòng nhập tên tài khoản!");
+                return false;
+            }
+            var account = $("#accountID").val();
+            var phone = $("#phoneID").val();;
+            $.ajax({
+                url: '@Url.Action("CheckAccount", "DangNhap")',
+                data: { '_account': account, '_phone': phone },
+                type: "post",
+                async: false,
+                success: function (result) {
+                    if (result == true) {
+                        $.ajax({
+                            url: '@Url.Action("SendCode", "DangNhap")',
+                            data: { 'add': account },
+                            type: "post",
+                            async: false,
+                            success: function (result) {
+                                code = result;
+                                //$("#codeID").prop('disabled', false);
+                                alert("Mã xác nhận vừa được gửi đến email của bạn!" + code);
+                            }
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+        $("#xacNhan").click(function () {
+            if ($("#codeID").val() == "") {
+                alert("Nhập mã xác nhận");
+                return false;
+            }
+
+            if ($("#mkMoiID").val() == "") {
+                alert("Nhập mật khẩu mới");
+                return false;
+            }
+
+            if ($("#codeID").val() != code) {
+                alert("Mã xác nhận không đúng!" + code);
+                return false;
+            }
+        });
+    })
+</script>

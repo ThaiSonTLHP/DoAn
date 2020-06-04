@@ -1,0 +1,30 @@
+﻿
+@{ ViewData["Title"] = "Trang chủ";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml"; }
+
+@{ ViewData["Title"] = "Tin bán"; }
+@model X.PagedList.IPagedList<BatDongSanId.Areas.Client.Models.ViewModels.TinBDSViewModel>
+@using X.PagedList.Mvc.Core;
+
+
+<div class="mystyle-maintin">
+    <div class="mystyle-tin">
+        @foreach (var tin in Model)
+        {
+<div class="mystyle-goitin">
+    <div></div>
+    <div class="mystyle-ngaydangtin">@Html.DisplayFor(modelItem => tin.NgayDang)</div>
+    <div class="mystyle-tieudetin">@Html.DisplayFor(modelItem => tin.MoTa)</div>
+    <div class="mystyle-diadiemtin">@Html.DisplayFor(modelItem => tin.QuanHuyen)<span> - </span>@Html.DisplayFor(modelItem => tin.TinhThanh)</div>
+    <div class="mystyle-giatin">Giá: <span>@Html.DisplayFor(modelItem => tin.Gia)</span>VNĐ | Diện tích: <span>@Html.DisplayFor(modelItem => tin.DienTich)</span>m2 | <span>Hướng: </span>@Html.Raw(tin.Huong)</div>
+    <a asp-action="ChiTietTinBDS" asp-route-id="@tin.ID">Xem chi tiết</a>
+</div>}
+    </div>
+</div>
+
+<!-- Thêm mã phân trang -->
+<br />
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("TinBan", new { page }))
+<!-- Kết thúc -->
