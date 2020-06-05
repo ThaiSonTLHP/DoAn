@@ -28,9 +28,9 @@
         </div>
 
         <div class="mystyle-maintin">
-            <div class="mystyle-tieudeloaitin">Tin bán</div>
+            <div class="mystyle-tieudeloaitin">HOT</div>
             <div class="mystyle-tin">
-                @foreach (var tin in Model.TinBanViewModels)
+                @foreach (var tin in Model.TinHOTViewModels)
                 {
                     <div class="mystyle-goitin">
                         <div class="mystyle-ngaydangtin">@Html.Raw(tin.NgayDang)</div>
@@ -43,9 +43,9 @@
         </div>
 
         <div class="mystyle-maintin">
-            <div class="mystyle-tieudeloaitin">Tin mua</div>
+            <div class="mystyle-tieudeloaitin">Tin bất động sản</div>
             <div class="mystyle-tin">
-                @foreach (var tin in Model.TinMuaViewModels)
+                @foreach (var tin in Model.TinThuongViewModels)
                 {
                     <div class="mystyle-goitin">
                         <div class="mystyle-ngaydangtin">@Html.Raw(tin.NgayDang)</div>

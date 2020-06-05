@@ -31,5 +31,31 @@ namespace BatDongSanId.Areas.Client.Controllers
             var taiKhoan = _dbContext.TaiKhoan.FirstOrDefault(t => t.ID == HttpContext.Session.GetInt32("userID"));
             return View();
         }
+
+
+        public IActionResult TinDaDang()
+        {
+            return View();
+        }
+
+        public IActionResult TinDaLuu()
+        {
+            return View();
+        }
+
+        public IActionResult QuanLyVi()
+        {
+            return View();
+        }
+
+        public IActionResult XacNhan()
+        {
+            return View();
+        }
+
+        public IActionResult LuuTin()
+        {
+            return View();
+        }
     }
 }

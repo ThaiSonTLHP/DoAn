@@ -36,5 +36,7 @@ namespace BatDongSanService.Models
 
         [Display(Name = "Trạng thái xác thực")]
         public Boolean XacThuc { get; set; }
+
+        public byte[] AnhDaiDien { get; set; }
     }
 }

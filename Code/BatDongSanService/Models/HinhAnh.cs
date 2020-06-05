@@ -22,7 +22,10 @@ namespace BatDongSanService.Models
         public Boolean AnhChinh { get; set; }
 
         [Display(Name = "Id tin bất động sản")]
-        public int TinBatDongSan { get; set; }
+        public Nullable<int> TinBatDongSan { get; set; }
+
+        [Display(Name = "Id tin tức")]
+        public Nullable<int> TinTuc { get; set; }
 
         //[NotMapped]
         //[Display(Name = "Tải file")]

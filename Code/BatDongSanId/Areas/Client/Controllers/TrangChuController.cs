@@ -11,6 +11,7 @@ using BatDongSanId.Data;
 using BatDongSanId.Areas.Client.Models.ListViewModels;
 using BatDongSanId.Areas.Client.Models.ViewModels;
 using Microsoft.Extensions.Configuration;
+using BatDongSanService.Models;
 
 namespace BatDongSanId.Areas.Client.Controllers
 {
@@ -31,84 +32,121 @@ namespace BatDongSanId.Areas.Client.Controllers
             //// 4.1 Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
             //// nếu page = null thì lấy giá trị 1 cho biến pageNumber.
             //int pageNumber = (page ?? 1);
+
+
             TrangChuListViewModel _trangChu = new TrangChuListViewModel();
-            var tinBanViewModels = (from t in _dbContext.TinBatDongSan
-                                    join lt in _dbContext.LoaiTinBatDongSan on t.LoaiBatDongSan equals lt.ID
-                                    join nd in _dbContext.TaiKhoan on t.NguoiDang equals nd.ID
-                                    join lbds in _dbContext.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
-                                    join tt in _dbContext.TinhThanh on t.TinhThanh equals tt.ID
-                                    join qh in _dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
-                                    join mg in _dbContext.MucGia on t.MucGia equals mg.ID
-                                    join mdt in _dbContext.MucDienTich on t.MucDienTich equals mdt.ID
-                                    join h in _dbContext.Huong on t.Huong equals h.ID
-                                    where lt.Ten == "Bán"
-                                    select new TinBanViewModel()
-                                    {
-                                        LienHe = nd.SoDienThoai,
-                                        NgayDang = t.NgayDang,
-                                        LoaiBatDongSan = lbds.Ten,
-                                        TinhThanh = tt.Ten,
-                                        QuanHuyen = qh.Ten,
-                                        Huong = h.Ten,
-                                        MoTa = t.MoTa
-                                    }).OrderBy(x=>x.ID).ToList();
-            var tinMuaViewModels = (from t in _dbContext.TinBatDongSan
-                                    join lt in _dbContext.LoaiTinBatDongSan on t.LoaiBatDongSan equals lt.ID
-                                    join nd in _dbContext.TaiKhoan on t.NguoiDang equals nd.ID
-                                    join lbds in _dbContext.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
-                                    join tt in _dbContext.TinhThanh on t.TinhThanh equals tt.ID
-                                    join qh in _dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
-                                    join mg in _dbContext.MucGia on t.MucGia equals mg.ID
-                                    join mdt in _dbContext.MucDienTich on t.MucDienTich equals mdt.ID
-                                    join h in _dbContext.Huong on t.Huong equals h.ID
-                                    where lt.Ten == "Mua"
-                                    select new TinMuaViewModel()
-                                    {
-                                        LienHe = nd.SoDienThoai,
-                                        NgayDang = t.NgayDang,
-                                        LoaiBatDongSan = lbds.Ten,
-                                        TinhThanh = tt.Ten,
-                                        QuanHuyen = qh.Ten,
-                                        Huong = h.Ten,
-                                        MoTa = t.MoTa
-                                    }).ToList();
-            var tinVIPViewModels = (from t in _dbContext.TinBatDongSan
-                                    join lt in _dbContext.LoaiTinBatDongSan on t.LoaiBatDongSan equals lt.ID
-                                    join nd in _dbContext.TaiKhoan on t.NguoiDang equals nd.ID
-                                    join gt in _dbContext.GoiTin on t.GoiTin equals gt.ID
-                                    join lbds in _dbContext.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
-                                    join tt in _dbContext.TinhThanh on t.TinhThanh equals tt.ID
-                                    join qh in _dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
-                                    join mg in _dbContext.MucGia on t.MucGia equals mg.ID
-                                    join mdt in _dbContext.MucDienTich on t.MucDienTich equals mdt.ID
-                                    join h in _dbContext.Huong on t.Huong equals h.ID
-                                    where gt.Ten == "Tin VIP"
-                                    select new TinVIPViewModel()
-                                    {
-                                        LienHe = nd.SoDienThoai,
-                                        NgayDang = t.NgayDang,
-                                        LoaiBatDongSan = lbds.Ten,
-                                        TinhThanh = tt.Ten,
-                                        QuanHuyen = qh.Ten,
-                                        Huong = h.Ten,
-                                        MoTa = t.MoTa
-                                    }).ToList();
-            var nhaMoiGioiViewModels = (from t in _dbContext.TaiKhoan
-                                        join ltk in _dbContext.LoaiTaiKhoan on t.LoaiTaiKhoan equals ltk.ID
-                                        where ltk.Ten == "Nhà môi giới"
-                                        select new NhaMoiGioiViewModel()
-                                        {
-                                            Ten = t.Ten,
-                                            Email = t.Email,
-                                            SoDienThoai = t.SoDienThoai,
-                                            DiaChi = t.DiaChi
-                                        }).ToList();
-            _trangChu.TinBanViewModels = tinBanViewModels;
-            _trangChu.TinMuaViewModels = tinMuaViewModels;
+            var tinThuongViewModels = LayTinBDS(10, "Tin thường");
+            var tinHOTViewModels = LayTinBDS(10, "Tin HOT");
+            var tinVIPViewModels = LayTinBDS(10, "Tin VIP");
+            var nhaMoiGioiViewModels = LayNhaMoiGioi(10);
+            var tinTucViewModels = LayTinTuc(10);
+
+
+            _trangChu.TinThuongViewModels = tinThuongViewModels;
+            _trangChu.TinHOTViewModels = tinHOTViewModels;
             _trangChu.TinVIPViewModels = tinVIPViewModels;
             _trangChu.NhaMoiGioiViewModels = nhaMoiGioiViewModels;
+            _trangChu.TinTucViewModels = tinTucViewModels;
+
+
             //var testKey = configuration["AppSetting:TinBatDongSanTime"];
             return View(_trangChu);
+        }
+
+        List<TinBDSViewModel> LayTinBDS(int soLuong, string goiTin)
+        {
+            var listTinBDS = (from t in _dbContext.TinBatDongSan
+                                join lt in _dbContext.LoaiTinBatDongSan on t.LoaiBatDongSan equals lt.ID
+                                join tk in _dbContext.TaiKhoan on t.NguoiDang equals tk.ID
+                                join gt in _dbContext.GoiTin on t.GoiTin equals gt.ID
+                                join lbds in _dbContext.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
+                                join tt in _dbContext.TinhThanh on t.TinhThanh equals tt.ID
+                                join qh in _dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
+                                join h in _dbContext.Huong on t.Huong equals h.ID
+                                where gt.Ten == goiTin
+                                select new TinBDSViewModel()
+                                {
+                                    LienHe = tk.SoDienThoai,
+                                    NgayDang = t.NgayDang,
+                                    LoaiBatDongSan = lbds.Ten,
+                                    TinhThanh = tt.Ten,
+                                    QuanHuyen = qh.Ten,
+                                    Huong = h.Ten,
+                                    MoTa = t.MoTa
+                                }).ToList();
+            foreach(TinBDSViewModel tin in listTinBDS)
+            {
+                tin.HinhAnh = LayHinhAnh(tin.ID, "Tin bất động sản");
+            }
+            return listTinBDS;
+        }
+
+        List<NhaMoiGioiViewModel> LayNhaMoiGioi(int soLuong)
+        {
+            var listNhaMoiGioi = (from t in _dbContext.TaiKhoan
+                                  join ltk in _dbContext.LoaiTaiKhoan on t.LoaiTaiKhoan equals ltk.ID
+                                  where ltk.Ten == "Nhà môi giới"
+                                  select new NhaMoiGioiViewModel()
+                                  {
+                                      Ten = t.Ten,
+                                      Email = t.Email,
+                                      SoDienThoai = t.SoDienThoai,
+                                      DiaChi = t.DiaChi
+                                  }).ToList();
+            return listNhaMoiGioi;
+        }
+
+        List<TinTucViewModel> LayTinTuc(int soLuong)
+        {
+            var listTinTuc = (from t in _dbContext.TinTuc
+                              join lt in _dbContext.LoaiTinTuc on t.LoaiTinTuc equals lt.ID
+                              join tk in _dbContext.TaiKhoan on t.NguoiDang equals tk.ID
+                              select new TinTucViewModel()
+                              {
+                                  ID = t.ID,
+                                  TieuDe = t.TieuDe,
+                                  NgayDang = t.NgayDang,
+                                  NguoiDang = tk.Ten,
+                                  LoaiTinTuc = lt.Ten,
+                                  NoiDung = t.NoiDung
+                              }).ToList();
+            foreach (TinTucViewModel tin in listTinTuc)
+            {
+                tin.HinhAnh = LayHinhAnh(tin.ID, "Tin tức");
+            }
+            return listTinTuc;
+        }
+
+        HinhAnh LayHinhAnh(int id, string loaiTin)
+        {
+            var hinhAnh = new HinhAnh();
+            if (loaiTin == "Tin bất động sản")
+            {
+                hinhAnh = (from ha in _dbContext.HinhAnh
+                               where ha.TinBatDongSan == id
+                               && ha.AnhChinh == true
+                               select new HinhAnh
+                               {
+                                   ID = ha.ID,
+                                   Ten = ha.Ten,
+                                   Anh = ha.Anh,
+                                   AnhChinh = ha.AnhChinh
+                               }).FirstOrDefault();
+            }
+            else if(loaiTin == "Tin tức")
+            {
+                hinhAnh = (from ha in _dbContext.HinhAnh
+                               where ha.TinTuc == id
+                               && ha.AnhChinh == true
+                               select new HinhAnh
+                               {
+                                   ID = ha.ID,
+                                   Ten = ha.Ten,
+                                   Anh = ha.Anh,
+                                   AnhChinh = ha.AnhChinh
+                               }).FirstOrDefault();
+            }
+            return hinhAnh;
         }
     }
 }

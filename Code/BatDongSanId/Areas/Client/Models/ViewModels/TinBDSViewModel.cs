@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BatDongSanService.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -47,5 +48,7 @@ namespace BatDongSanId.Areas.Client.Models.ViewModels
 
         [Display(Name = "Mô tả")]
         public string MoTa { get; set; }
+
+        public HinhAnh HinhAnh { get; set; }
     }
 }

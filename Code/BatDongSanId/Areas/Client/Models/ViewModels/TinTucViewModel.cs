@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using BatDongSanService.Models;
 
 namespace BatDongSanId.Areas.Client.Models.ViewModels
 {
@@ -26,5 +27,7 @@ namespace BatDongSanId.Areas.Client.Models.ViewModels
 
         [Display(Name = "Nội dung")]
         public string NoiDung { get; set; }
+
+        public HinhAnh HinhAnh { get; set; }
     }
 }
