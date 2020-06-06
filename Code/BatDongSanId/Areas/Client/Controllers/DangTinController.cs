@@ -5,8 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BatDongSanId.Areas.Client.Models.ViewModels;
 using BatDongSanId.Data;
-using BatDongSanService;
-using BatDongSanService.Models;
+using BatDongSanId.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -102,6 +101,7 @@ namespace BatDongSanId.Areas.Client.Controllers
 
                 var _tinVuaThem = _dbContext.TinBatDongSan.FirstOrDefault(t => t.NgayDang == _time);
 
+                int i = 0;
                 foreach (var file in Request.Form.Files)
                 {
                     HinhAnh img = new HinhAnh();
@@ -114,7 +114,8 @@ namespace BatDongSanId.Areas.Client.Controllers
                     ms.Close();
                     ms.Dispose();
 
-                    img.AnhChinh = true;
+                    img.AnhChinh = i == 0 ? true : false; i++;
+
                     img.TinBatDongSan = _tinVuaThem.ID;
 
                     _dbContext.HinhAnh.Add(img);

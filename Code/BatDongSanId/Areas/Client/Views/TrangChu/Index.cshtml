@@ -9,118 +9,191 @@
 @{
     ViewData["Title"] = "Trang chủ";
 }
-
-<div class="mystyle-main">
-    <div class="mystyle-leftmain">
-        <div class="mystyle-maintin">
-            <div class="mystyle-tieudeloaitin">VIP</div>
-            <div class="mystyle-tin">
-                @foreach (var tin in Model.TinVIPViewModels)
-                {
-                    <div class="mystyle-goitin">
-                        <div class="mystyle-ngaydangtin">@Html.Raw(tin.NgayDang)</div>
-                        <div class="mystyle-tieudetin">@Html.Raw(tin.MoTa)</div>
-                        <div class="mystyle-diadiemtin">@Html.Raw(tin.QuanHuyen)<span> - </span>@Html.Raw(tin.TinhThanh)</div>
-                        <div class="mystyle-giatin">Giá: <span>@Html.Raw(tin.Gia)</span>VNĐ | Diện tích: <span>@Html.Raw(tin.DienTich)</span>m2 | <span>Hướng: </span>@Html.Raw(tin.Huong)</div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="room-items">
-                            <div class="room-img set-bg" data-setbg="~/Client/img/rooms/4.jpg">
-                                <a href="#" class="room-content">
-                                    <i class="flaticon-heart"></i>
-                                </a>
+<section class="hotel-rooms spad">
+    <div class="container">
+        <div class="mystyle-tieudeloaitin">VIP</div>
+        <hr />
+        <div class="row">
+            @foreach (var tin in Model.TinVIPViewModels)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="room-items">
+                        <div class="room-img set-bg" data-setbg="@Html.Raw(tin.HinhAnh)">
+                            <a asp-controller="QuanLyTaiKhoan" asp-action="LuuTin" class="room-content">
+                                <i class="flaticon-heart"></i>
+                            </a>
+                        </div>
+                        <div class="room-text">
+                            <div class="room-details">
+                                <div class="room-title">
+                                    <h5>@Html.Raw(tin.MoTa)</h5>
+                                    <a href="#">
+                                        <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
+                                    </a>
+                                    <br />
+                                    <a href="#" class="large-width">
+                                        <i class="flaticon-timer"></i><span>@Html.Raw(tin.NgayDang)</span>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="room-text">
-                                <div class="room-details">
-                                    <div class="room-title">
-                                        <h5>Country Style House with beautiful garden and terrace</h5>
-                                        <a href="#"><i class="flaticon-placeholder"></i> <span>Location</span></a>
-                                        <a href="#" class="large-width"><i class="flaticon-cursor"></i> <span>Show on
-                                                Map</span></a>
+                            <div class="room-features">
+                                <div class="room-info">
+                                    <div class="baths">
+                                        <p>Người đăng</p>
+                                        @*<img src="~/Client/img/rooms/bath.png" alt="">*@
+                                        <span>@Html.Raw(tin.NguoiDang)</span>
+                                    </div>
+                                    <div class="size">
+                                        <p>Diện tích</p>
+                                        @*<img src="~/Client/img/rooms/size.png" alt="">*@
+                                        <i class="flaticon-bath"></i>
+                                        <span>@Html.Raw(tin.DienTich) m2</span>
+                                    </div>
+                                    <div class="beds">
+                                        <p>Hướng</p>
+                                        @*<img src="~/Client/img/rooms/bed.png" alt="">*@
+                                        <span>@Html.Raw(tin.Huong)</span>
+                                    </div>
+                                    <div class="garage">
+                                        <p>Xác thực</p>
+                                        @*<img src="~/Client/img/rooms/garage.png" alt="">*@
+                                        <span>1</span>
                                     </div>
                                 </div>
-                                <div class="room-features">
-                                    <div class="room-info">
-                                        <div class="size">
-                                            <p>Lot Size</p>
-                                            <img src="~/Client/img/rooms/size.png" alt="">
-                                            <i class="flaticon-bath"></i>
-                                            <span>2561 sqft</span>
-                                        </div>
-                                        <div class="beds">
-                                            <p>Beds</p>
-                                            <img src="~/Client/img/rooms/bed.png" alt="">
-                                            <span>9</span>
-                                        </div>
-                                        <div class="baths">
-                                            <p>Baths</p>
-                                            <img src="~/Client/img/rooms/bath.png" alt="">
-                                            <span>2</span>
-                                        </div>
-                                        <div class="garage">
-                                            <p>Garage</p>
-                                            <img src="~/Client/img/rooms/garage.png" alt="">
-                                            <span>1</span>
-                                        </div>
-                                    </div>
-                                </div>
-							    git rm -r --cached AdminBatDongSan
-                                <div class="room-price">
-                                    <p>For Sale</p>
-                                    <span>$345,000</span>
-                                </div>
-                                <a href="#" class="site-btn btn-line">View Property</a>
                             </div>
+                            <div class="room-price">
+                                <p>@Html.Raw(tin.LoaiTin)</p>
+                                <span>@Html.Raw(tin.Gia)</span> VNĐ
+                            </div>
+                            <a href="#" class="site-btn btn-line">Xem chi tiết</a>
                         </div>
                     </div>
-                }
-            </div>
-        </div>
-
-        <div class="mystyle-maintin">
-            <div class="mystyle-tieudeloaitin">HOT</div>
-            <div class="mystyle-tin">
-                @foreach (var tin in Model.TinHOTViewModels)
-                {
-                    <div class="mystyle-goitin">
-                        <div class="mystyle-ngaydangtin">@Html.Raw(tin.NgayDang)</div>
-                        <div class="mystyle-tieudetin">@Html.Raw(tin.MoTa)</div>
-                        <div class="mystyle-diadiemtin">@Html.Raw(tin.QuanHuyen)<span> - </span>@Html.Raw(tin.TinhThanh)</div>
-                        <div class="mystyle-giatin">Giá: <span>@Html.Raw(tin.Gia)</span>VNĐ | Diện tích: <span>@Html.Raw(tin.DienTich)</span>m2 | <span>Hướng: </span>@Html.Raw(tin.Huong)</div>
-                    </div>
-                }
-            </div>
-        </div>
-
-        <div class="mystyle-maintin">
-            <div class="mystyle-tieudeloaitin">Tin bất động sản</div>
-            <div class="mystyle-tin">
-                @foreach (var tin in Model.TinThuongViewModels)
-                {
-                    <div class="mystyle-goitin">
-                        <div class="mystyle-ngaydangtin">@Html.Raw(tin.NgayDang)</div>
-                        <div class="mystyle-tieudetin">@Html.Raw(tin.MoTa)</div>
-                        <div class="mystyle-diadiemtin">@Html.Raw(tin.QuanHuyen)<span> - </span>@Html.Raw(tin.TinhThanh)</div>
-                        <div class="mystyle-giatin">Giá: <span>@Html.Raw(tin.Gia)</span>VNĐ | Diện tích: <span>@Html.Raw(tin.DienTich)</span>m2 | <span>Hướng: </span>@Html.Raw(tin.Huong)</div>
-                    </div>
-                }
-            </div>
+                </div>
+            }
         </div>
     </div>
-    <div class="mystyle-rightmain">
-        <div class="mystyle-danhsachnhamoigioi">
-            <div class="mystyle-tieudeloaitin">Danh sách nhà môi giới</div>
-            <div class="mystyle-nhamoigioi">
-                @foreach (var n in Model.NhaMoiGioiViewModels)
-                {
-                    <div class="mystyle-goitin">
-                        <div class="mystyle-tennhamoigioi">@Html.Raw(n.Ten)</div>
-                        <div class="mystyle-sogiaodich">Số giao dịch: <span>@Html.Raw(n.SoBaiDang)</span></div>
-                        <div class="mystyle-sodienthoai">Liên hệ: <span>@Html.Raw(n.SoDienThoai)</span></div>
-                    </div>
-                }
-            </div>
-        </div>
 
+    <div class="container">
+        <div class="mystyle-tieudeloaitin">HOT</div>
+        <hr />
+        <div class="row">
+            @foreach (var tin in Model.TinHOTViewModels)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="room-items">
+                        <div class="room-img set-bg" data-setbg="@Html.Raw(tin.HinhAnh)">
+                            <a asp-controller="QuanLyTaiKhoan" asp-action="LuuTin" class="room-content">
+                                <i class="flaticon-heart"></i>
+                            </a>
+                        </div>
+                        <div class="room-text">
+                            <div class="room-details">
+                                <div class="room-title">
+                                    <h5>@Html.Raw(tin.MoTa)</h5>
+                                    <a href="#">
+                                        <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
+                                    </a>
+                                    <a href="#" class="large-width">
+                                        <i class="flaticon-timer"></i><span>@Html.Raw(tin.NgayDang)</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="room-features">
+                                <div class="room-info">
+                                    <div class="size">
+                                        <p>Diện tích</p>
+                                        <img src="~/Client/img/rooms/size.png" alt="">
+                                        <i class="flaticon-bath"></i>
+                                        <span>@Html.Raw(tin.DienTich) m2</span>
+                                    </div>
+                                    <div class="beds">
+                                        <p>Beds</p>
+                                        <img src="~/Client/img/rooms/bed.png" alt="">
+                                        <span>9</span>
+                                    </div>
+                                    <div class="baths">
+                                        <p>Baths</p>
+                                        <img src="~/Client/img/rooms/bath.png" alt="">
+                                        <span>2</span>
+                                    </div>
+                                    <div class="garage">
+                                        <p>Garage</p>
+                                        <img src="~/Client/img/rooms/garage.png" alt="">
+                                        <span>1</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="room-price">
+                                <p>@Html.Raw(tin.LoaiTin)</p>
+                                <span>@Html.Raw(tin.Gia)</span> VNĐ
+                            </div>
+                            <a href="#" class="site-btn btn-line">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
-</div>
+
+    <div class="container">
+        <div class="mystyle-tieudeloaitin">Tin khác</div>
+        <hr />
+        <div class="row">
+            @foreach (var tin in Model.TinThuongViewModels)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="room-items">
+                        <div class="room-img set-bg" data-setbg="@Html.Raw(tin.HinhAnh)">
+                            <a asp-controller="QuanLyTaiKhoan" asp-action="LuuTin" class="room-content">
+                                <i class="flaticon-heart"></i>
+                            </a>
+                        </div>
+                        <div class="room-text">
+                            <div class="room-details">
+                                <div class="room-title">
+                                    <h5>@Html.Raw(tin.MoTa)</h5>
+                                    <a href="#">
+                                        <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
+                                    </a>
+                                    <a href="#" class="large-width">
+                                        <i class="flaticon-timer"></i><span>@Html.Raw(tin.NgayDang)</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="room-features">
+                                <div class="room-info">
+                                    <div class="size">
+                                        <p>Diện tích</p>
+                                        <img src="~/Client/img/rooms/size.png" alt="">
+                                        <i class="flaticon-bath"></i>
+                                        <span>@Html.Raw(tin.DienTich) m2</span>
+                                    </div>
+                                    <div class="beds">
+                                        <p>Beds</p>
+                                        <img src="~/Client/img/rooms/bed.png" alt="">
+                                        <span>9</span>
+                                    </div>
+                                    <div class="baths">
+                                        <p>Baths</p>
+                                        <img src="~/Client/img/rooms/bath.png" alt="">
+                                        <span>2</span>
+                                    </div>
+                                    <div class="garage">
+                                        <p>Garage</p>
+                                        <img src="~/Client/img/rooms/garage.png" alt="">
+                                        <span>1</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="room-price">
+                                <p>@Html.Raw(tin.LoaiTin)</p>
+                                <span>@Html.Raw(tin.Gia)</span> VNĐ
+                            </div>
+                            <a href="#" class="site-btn btn-line">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>            
+            }
+        </div>
+    </div>
+</section>

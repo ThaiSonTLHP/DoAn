@@ -5,20 +5,67 @@
 @{ ViewData["Title"] = "Tin bán"; }
 @model X.PagedList.IPagedList<BatDongSanId.Areas.Client.Models.ViewModels.TinBDSViewModel>
 @using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Core.Common;
 
 
-<div class="mystyle-maintin">
-    <div class="mystyle-tin">
+<div class="container">
+    <div class="row">
         @foreach (var tin in Model)
         {
-<div class="mystyle-goitin">
-    <div></div>
-    <div class="mystyle-ngaydangtin">@Html.DisplayFor(modelItem => tin.NgayDang)</div>
-    <div class="mystyle-tieudetin">@Html.DisplayFor(modelItem => tin.MoTa)</div>
-    <div class="mystyle-diadiemtin">@Html.DisplayFor(modelItem => tin.QuanHuyen)<span> - </span>@Html.DisplayFor(modelItem => tin.TinhThanh)</div>
-    <div class="mystyle-giatin">Giá: <span>@Html.DisplayFor(modelItem => tin.Gia)</span>VNĐ | Diện tích: <span>@Html.DisplayFor(modelItem => tin.DienTich)</span>m2 | <span>Hướng: </span>@Html.Raw(tin.Huong)</div>
-    <a asp-action="ChiTietTinBDS" asp-route-id="@tin.ID">Xem chi tiết</a>
-</div>}
+            <div class="col-lg-4 col-md-6">
+                <div class="room-items">
+                    <div class="room-img set-bg" data-setbg="@Html.Raw(tin.HinhAnh)">
+                        <a asp-controller="QuanLyTaiKhoan" asp-action="LuuTin" class="room-content">
+                            <i class="flaticon-heart"></i>
+                        </a>
+                    </div>
+                    <div class="room-text">
+                        <div class="room-details">
+                            <div class="room-title">
+                                <h5>@Html.Raw(tin.MoTa)</h5>
+                                <a href="#">
+                                    <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
+                                </a>
+                                <br />
+                                <a href="#" class="large-width">
+                                    <i class="flaticon-timer"></i><span>@Html.Raw(tin.NgayDang)</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="room-features">
+                            <div class="room-info">
+                                <div class="baths">
+                                    <p>Người đăng</p>
+                                    @*<img src="~/Client/img/rooms/bath.png" alt="">*@
+                                    <span>@Html.Raw(tin.NguoiDang)</span>
+                                </div>
+                                <div class="size">
+                                    <p>Diện tích</p>
+                                    @*<img src="~/Client/img/rooms/size.png" alt="">*@
+                                    <i class="flaticon-bath"></i>
+                                    <span>@Html.Raw(tin.DienTich) m2</span>
+                                </div>
+                                <div class="beds">
+                                    <p>Hướng</p>
+                                    @*<img src="~/Client/img/rooms/bed.png" alt="">*@
+                                    <span>@Html.Raw(tin.Huong)</span>
+                                </div>
+                                <div class="garage">
+                                    <p>Xác thực</p>
+                                    @*<img src="~/Client/img/rooms/garage.png" alt="">*@
+                                    <span>1</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="room-price">
+                            <p>@Html.Raw(tin.LoaiTin)</p>
+                            <span>@Html.Raw(tin.Gia)</span> VNĐ
+                        </div>
+                        <a href="#" class="site-btn btn-line">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>
 
@@ -26,5 +73,10 @@
 <br />
 Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("TinBan", new { page }))
+@Html.PagedListPager(Model, page => Url.Action("TinBan", new { page, @class = "page-item" }),
+    new PagedListRenderOptions
+    {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }
+    })
 <!-- Kết thúc -->

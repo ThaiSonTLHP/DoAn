@@ -20,8 +20,4 @@
     <Folder Include="Areas\Client\Data\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BatDongSanService\BatDongSanService.csproj" />
-  </ItemGroup>
-
 </Project>

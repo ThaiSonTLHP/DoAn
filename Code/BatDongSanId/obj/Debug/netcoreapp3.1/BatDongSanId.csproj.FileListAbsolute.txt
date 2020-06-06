@@ -155,8 +155,6 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\net
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\BatDongSanId.dll
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\BatDongSanId.pdb
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\BatDongSanId.genruntimeconfig.cache
-C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\bin\Debug\netcoreapp3.1\BatDongSanService.dll
-C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\bin\Debug\netcoreapp3.1\BatDongSanService.pdb
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\DSTaiKhoan\Create.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\DSTaiKhoan\Index.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Home\Index.cshtml.g.cs
@@ -192,8 +190,6 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\net
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\Shared\Error.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\TinTuc\Details.cshtml.g.cs
-C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\TinTuc\Index.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\TrangChu\Index.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\_ViewImports.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\_ViewStart.cshtml.g.cs
@@ -210,3 +206,4 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\bin\Debug\net
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\BatDongSanId.csproj.CoreCompileInputs.cache
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\BatDongSanId.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\BatDongSanId.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\QuanLyTaiKhoan\TaiKhoan.cshtml.g.cs

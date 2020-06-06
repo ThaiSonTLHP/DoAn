@@ -1,8 +1,8 @@
-﻿using System;
+﻿using BatDongSanId.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BatDongSanService.Models;
 
 namespace BatDongSanId.Areas.Client.Models.ListViewModels
 {

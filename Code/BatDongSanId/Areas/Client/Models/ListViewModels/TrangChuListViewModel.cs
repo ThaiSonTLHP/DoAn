@@ -1,5 +1,4 @@
 ﻿using BatDongSanId.Areas.Client.Models.ViewModels;
-using BatDongSanService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

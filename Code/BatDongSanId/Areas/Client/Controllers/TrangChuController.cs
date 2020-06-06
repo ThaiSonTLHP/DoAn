@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BatDongSan.Models;
-using BatDongSanService;
 using BatDongSanId.Data;
 using BatDongSanId.Areas.Client.Models.ListViewModels;
 using BatDongSanId.Areas.Client.Models.ViewModels;
 using Microsoft.Extensions.Configuration;
-using BatDongSanService.Models;
+using System.Security.Principal;
+using BatDongSanId.Models;
 
 namespace BatDongSanId.Areas.Client.Controllers
 {
@@ -35,11 +35,11 @@ namespace BatDongSanId.Areas.Client.Controllers
 
 
             TrangChuListViewModel _trangChu = new TrangChuListViewModel();
-            var tinThuongViewModels = LayTinBDS(10, "Tin thường");
-            var tinHOTViewModels = LayTinBDS(10, "Tin HOT");
-            var tinVIPViewModels = LayTinBDS(10, "Tin VIP");
+            var tinThuongViewModels = LayTinBDS(3, "Tin thường");
+            var tinHOTViewModels = LayTinBDS(6, "Tin HOT");
+            var tinVIPViewModels = LayTinBDS(12, "Tin VIP");
             var nhaMoiGioiViewModels = LayNhaMoiGioi(10);
-            var tinTucViewModels = LayTinTuc(10);
+            var tinTucViewModels = LayTinTuc(6);
 
 
             _trangChu.TinThuongViewModels = tinThuongViewModels;
@@ -56,7 +56,7 @@ namespace BatDongSanId.Areas.Client.Controllers
         List<TinBDSViewModel> LayTinBDS(int soLuong, string goiTin)
         {
             var listTinBDS = (from t in _dbContext.TinBatDongSan
-                                join lt in _dbContext.LoaiTinBatDongSan on t.LoaiBatDongSan equals lt.ID
+                                join lt in _dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
                                 join tk in _dbContext.TaiKhoan on t.NguoiDang equals tk.ID
                                 join gt in _dbContext.GoiTin on t.GoiTin equals gt.ID
                                 join lbds in _dbContext.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
@@ -66,19 +66,25 @@ namespace BatDongSanId.Areas.Client.Controllers
                                 where gt.Ten == goiTin
                                 select new TinBDSViewModel()
                                 {
+                                    ID = t.ID,
                                     LienHe = tk.SoDienThoai,
                                     NgayDang = t.NgayDang,
+                                    LoaiTin = lt.Ten,
+                                    NguoiDang = tk.Ten,
                                     LoaiBatDongSan = lbds.Ten,
                                     TinhThanh = tt.Ten,
                                     QuanHuyen = qh.Ten,
                                     Huong = h.Ten,
+                                    DienTich = t.DienTich,
+                                    Gia = t.Gia,
                                     MoTa = t.MoTa
                                 }).ToList();
             foreach(TinBDSViewModel tin in listTinBDS)
             {
                 tin.HinhAnh = LayHinhAnh(tin.ID, "Tin bất động sản");
             }
-            return listTinBDS;
+            List<TinBDSViewModel> listSoLuongTin = listTinBDS.GetRange(0, soLuong>listTinBDS.Count() ? listTinBDS.Count() : soLuong);
+            return listSoLuongTin;
         }
 
         List<NhaMoiGioiViewModel> LayNhaMoiGioi(int soLuong)
@@ -114,10 +120,11 @@ namespace BatDongSanId.Areas.Client.Controllers
             {
                 tin.HinhAnh = LayHinhAnh(tin.ID, "Tin tức");
             }
-            return listTinTuc;
+            List<TinTucViewModel> listSoLuongTin = listTinTuc.GetRange(0, soLuong > listTinTuc.Count() ? listTinTuc.Count() : soLuong);
+            return listSoLuongTin;
         }
 
-        HinhAnh LayHinhAnh(int id, string loaiTin)
+        string LayHinhAnh(int id, string loaiTin)
         {
             var hinhAnh = new HinhAnh();
             if (loaiTin == "Tin bất động sản")
@@ -146,7 +153,17 @@ namespace BatDongSanId.Areas.Client.Controllers
                                    AnhChinh = ha.AnhChinh
                                }).FirstOrDefault();
             }
-            return hinhAnh;
+            string anhDataURL;
+            if (hinhAnh != null)
+            {
+                string anhBase64Data = Convert.ToBase64String(hinhAnh.Anh);
+                anhDataURL = string.Format("data:image/jpg;base64,{0}", anhBase64Data);
+            }
+            else
+            {
+                anhDataURL = "~/Client/img/rooms/1.jpg";
+            }
+            return anhDataURL;
         }
     }
 }

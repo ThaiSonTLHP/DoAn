@@ -4,10 +4,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using BatDongSanService.ViewModels;
-using BatDongSanService;
-using BatDongSanService.Models;
-using BatDongSanService.Methods;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,6 +13,9 @@ using System.Timers;
 using System.IO;
 using BatDongSanId.Data;
 using BatDongSanId.Areas.Client.Models.ViewModels;
+using BatDongSanId.ViewModels;
+using BatDongSanId.Models;
+using BatDongSanId.Methods;
 
 namespace BatDongSanId.Areas.Client.Controllers
 {

@@ -5,7 +5,6 @@ using System.Net.WebSockets;
 using System.Threading.Tasks;
 using BatDongSanId.Areas.Client.Models.ViewModels;
 using BatDongSanId.Data;
-using BatDongSanService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using X.PagedList.Mvc.Core;

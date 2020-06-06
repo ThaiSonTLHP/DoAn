@@ -4,8 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BatDongSanId.Areas.Admin.Models.ViewModel;
 using BatDongSanId.Data;
-using BatDongSanService;
-using BatDongSanService.Models;
+using BatDongSanId.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

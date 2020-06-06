@@ -69,18 +69,17 @@
                     </div>
                     <ul class="main-menu">
                         <li><a asp-controller="TrangChu" asp-action="Index">Trang chủ</a></li>
-                        @*<li><a asp-controller="" asp-action="">Giới thiệu</a></li>*@
                         <li class="mystyle-dropdown">
-                            <a a asp-controller="Dm" asp-action="Index">Danh mục</a>
+                            <a a asp-controller="Dm" asp-action="TinBan">Danh mục</a>
                             <ul class="mystyle-dropdown-content">
                                 <li><a asp-controller="Dm" asp-action="TinBan">Tin bán</a></li>
                                 <li><a asp-controller="Dm" asp-action="TinChoThue">Tin cho thuê</a></li>
                                 <li><a asp-controller="Dm" asp-action="TinMua">Tin mua</a></li>
                                 <li><a asp-controller="Dm" asp-action="TinThue">Tin thuê</a></li>
                                 <li><a asp-controller="Dm" asp-action="NhaMoiGioi">Nhà môi giới</a></li>
+                                <li><a asp-controller="Dm" asp-action="TinTuc">Tin tức</a></li>
                             </ul>
                         </li>
-                        <li><a asp-controller="TinTuc" asp-action="Index">Tin tức</a></li>
                         <li><a asp-controller="LienHe" asp-action="Index">Liên hệ</a></li>
                         <li class="mystyle-dangtin"><a asp-controller="DangTin" asp-action="DangTin">Đăng tin</a></li>
                         <li class="nav-item dropdown">
@@ -190,7 +189,7 @@
 
                             <div class="single-blog">
                                 <div class="lt-side">
-                                    <img src="img/footer-blog-1.jpg" alt="">
+                                    <img src="~/Client/img/footer-blog-1.jpg" alt="">
                                 </div>
                                 <div class="rt-side">
                                     <h6>How to find the perfect area for<br> your next house.</h6>
@@ -206,7 +205,7 @@
                             </div>
                             <div class="single-blog">
                                 <div class="lt-side">
-                                    <img src="img/footer-blog-2.jpg" alt="">
+                                    <img src="~/Client/img/footer-blog-2.jpg" alt="">
                                 </div>
                                 <div class="rt-side">
                                     <h6>How to find the perfect area for<br> your next house.</h6>

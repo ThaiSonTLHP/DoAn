@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BatDongSanId.Data;
-using BatDongSanService;
-using BatDongSanService.Models;
+using BatDongSanId.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BatDongSanId.Areas.Admin.Controllers
