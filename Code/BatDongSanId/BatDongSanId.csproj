@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\ViewComponent\" />
     <Folder Include="Areas\Client\Data\" />
   </ItemGroup>
 

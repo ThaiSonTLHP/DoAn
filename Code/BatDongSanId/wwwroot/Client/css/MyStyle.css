@@ -161,3 +161,27 @@
     margin-top:100px;
     /*margin: 0 auto;*/
 }
+
+
+
+
+
+
+
+.mystyle-leftmenu {
+    list-style-type: none;
+}
+
+.mystyle-leftmenu li {
+    border-bottom: dashed 1px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+.mystyle-leftmenu li a {
+    text-decoration: none;
+}
+
+.mystyle-leftmenu li a i{
+    margin-right: 10px;
+}

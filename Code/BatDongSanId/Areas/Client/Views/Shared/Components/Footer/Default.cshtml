@@ -1,0 +1,87 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homes Template">
+    <meta name="keywords" content="Homes, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>@ViewData["Title"] - BatDongSan</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
+          rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+    <link rel="stylesheet" href="~/css/MyStyle.css" type="text/css">
+</head>
+<body>
+    @model BatDongSanId.Areas.Client.Models.ListViewModels.FooterListViewModel
+    @{ ViewData["Title"] = "Default"; }
+    <div class="row p-37">
+        <div class="col-lg-4">
+            <div class="about-footer">
+                <h5>About Homes</h5>
+                <p>
+                    @*@Html.Raw(Model.GioiThieuViewModel.GioiThieu)*@
+                </p>
+                <div class="footer-social">
+                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-behance"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="footer-blog">
+                <h5>Tin nổi bật</h5>
+                @foreach (var tin in Model.TinBDSViewModel){
+                <div class="single-blog">
+                    <div class="lt-side">
+                        @*<img src="@Html.Raw(tin.HinhAnh)" alt="">*@
+                    </div>
+                    <div class="rt-side">
+                        <h6>@Html.Raw(tin.MoTa)<br> your next house.</h6>
+                        <div class="blog-time">
+                            <i class="flaticon-clock"></i>
+                            <span>5 min</span>
+                        </div>
+                        <a href="#" class="read-more">
+                            <i class="flaticon-right-arrow-1"></i>
+                            <span>Chi tiết</span>
+                        </a>
+                    </div>
+                </div>}
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="footer-address">
+                <h5>Liên hệ</h5>
+                <ul>
+                    @*<li>
+                        <i class="flaticon-placeholder"></i><span>@Html.Raw(Model.GioiThieuViewModel.DiaChi)</span>
+                    </li>
+                    <li><i class="flaticon-envelope"></i><span>@Html.Raw(Model.GioiThieuViewModel.Email)</span></li>
+                    <li><i class="flaticon-smartphone"></i><span>@Html.Raw(Model.GioiThieuViewModel.SoDienThoai)</span></li>*@
+                </ul>
+                <p>Monday – Friday: 9 am – 5 pm</p>
+                <p>Saturday: 9 am – 1pm</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

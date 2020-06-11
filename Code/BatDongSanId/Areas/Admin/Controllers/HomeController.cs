@@ -20,9 +20,9 @@ namespace BatDongSanId.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            //var _tinTucList = (from t in _dbContext.TinTuc
-            //                   join lt in _dbContext.LoaiTinTuc on t.LoaiTinTucID equals lt.ID
-            //                   join tk in _dbContext.TKQuanTri on t.QuanTriId equals tk.ID
+            //var _tinTucList = (from t in dbContext.TinTuc
+            //                   join lt in dbContext.LoaiTinTuc on t.LoaiTinTucID equals lt.ID
+            //                   join tk in dbContext.TKQuanTri on t.QuanTriId equals tk.ID
             //                   select new TinTucViewModel()
             //                   {
             //                       ID = t.ID,

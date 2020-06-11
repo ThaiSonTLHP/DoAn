@@ -82,22 +82,18 @@
                         </li>
                         <li><a asp-controller="LienHe" asp-action="Index">Liên hệ</a></li>
                         <li class="mystyle-dangtin"><a asp-controller="DangTin" asp-action="DangTin">Đăng tin</a></li>
-                        <li class="nav-item dropdown">
+                        <li class="mystyle-dropdown">
                             @if (Context.Session.GetString("username") == null)
                             {
-                                @*<a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Người dùng</span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">Đăng xuất</a>
-                                    <a class="dropdown-item" href="#">Tài khoản</a>
-                                </div>*@
                                 <a asp-controller="DangNhap" asp-action="Login">Đăng nhập</a> 
                             }
                             else
                             {
-                                <a asp-controller="DangNhap" asp-action="Login">@Context.Session.GetString("username")</a>
+                                <a href="@Url.Action("TaiKhoan","QuanLyTaiKhoan")">@Context.Session.GetString("username")</a>
+                                    <ul class="mystyle-dropdown-content">
+                                        <li><a asp-controller="QuanLyTaiKhoan" asp-action="TaiKhoan">Tài khoản</a></li>
+                                        <li><a asp-controller="DangNhap" asp-action="Logout">Đăng xuất</a></li>
+                                    </ul>
                             }
                         </li>
                     </ul>
@@ -166,77 +162,7 @@
         <!-- Rooms Pic Section End -->
         <div class="mystyle-container">
             <div class="container">
-                <div class="row p-37">
-                    <div class="col-lg-4">
-                        <div class="about-footer">
-                            <h5>About Homes</h5>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend tristique venenatis.
-                                Maecenas a rutrum tellus nam vel semper nibh.
-                            </p>
-                            <div class="footer-social">
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-dribbble"></i></a>
-                                <a href="#"><i class="fa fa-behance"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="footer-blog">
-                            <h5>Bài đăng mới nhất</h5>
-
-                            <div class="single-blog">
-                                <div class="lt-side">
-                                    <img src="~/Client/img/footer-blog-1.jpg" alt="">
-                                </div>
-                                <div class="rt-side">
-                                    <h6>How to find the perfect area for<br> your next house.</h6>
-                                    <div class="blog-time">
-                                        <i class="flaticon-clock"></i>
-                                        <span>5 min</span>
-                                    </div>
-                                    <a href="#" class="read-more">
-                                        <i class="flaticon-right-arrow-1"></i>
-                                        <span>Read More</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="single-blog">
-                                <div class="lt-side">
-                                    <img src="~/Client/img/footer-blog-2.jpg" alt="">
-                                </div>
-                                <div class="rt-side">
-                                    <h6>How to find the perfect area for<br> your next house.</h6>
-                                    <div class="blog-time">
-                                        <i class="flaticon-clock"></i>
-                                        <span>5 min</span>
-                                    </div>
-                                    <a href="#" class="read-more">
-                                        <i class="flaticon-right-arrow-1"></i>
-                                        <span>Read More</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="footer-address">
-                            <h5>Liên hệ</h5>
-                            <ul>
-                                <li>
-                                    <i class="flaticon-placeholder"></i><span>132 Liberty Streetelit, Plano, Texas</span>
-                                </li>
-                                <li><i class="flaticon-envelope"></i><span>hello@home.com</span></li>
-                                <li><i class="flaticon-smartphone"></i><span>214-805-4428</span></li>
-                            </ul>
-                            <p>Monday – Friday: 9 am – 5 pm</p>
-                            <p>Saturday: 9 am – 1pm</p>
-                        </div>
-                    </div>
-                </div>
-
+                @await Component.InvokeAsync("Footer")
                 <div class="row p-20">
                     <div class="col-lg-12 text-center">
                         <div class="copyright">

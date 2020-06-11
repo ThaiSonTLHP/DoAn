@@ -42,7 +42,8 @@ namespace BatDongSanId
             services.AddDistributedMemoryCache();
             services.AddSession(options => 
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                //options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromHours(2);
             });
         }
 
@@ -75,7 +76,7 @@ namespace BatDongSanId
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{area=Client}/{controller=Dm}/{action=TinBan}/{id?}");
+                    pattern: "{area=Client}/{controller=TrangChu}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

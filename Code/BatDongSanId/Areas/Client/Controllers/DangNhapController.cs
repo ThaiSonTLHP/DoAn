@@ -45,11 +45,11 @@ namespace BatDongSanId.Areas.Client.Controllers
 
                 if (_loaiTK.Ten == "Nhà môi giới")
                 {
-                    return RedirectToAction("Successed", "DangNhap");
+                    return RedirectToAction("TaiKhoan", "QuanLyTaiKhoan");
                 }
                 else
                 {
-                    return RedirectToAction("DangTin", "Home", new { area = "Admin" });
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
                 }
             }
             else
@@ -64,7 +64,7 @@ namespace BatDongSanId.Areas.Client.Controllers
         {
             HttpContext.Session.Remove("username");
             HttpContext.Session.Remove("userID");
-            return RedirectToAction("DangTin");
+            return RedirectToAction("Index","TrangChu");
         }
 
 
@@ -91,6 +91,11 @@ namespace BatDongSanId.Areas.Client.Controllers
         {
             List<LoaiTaiKhoan> LoaiTaiKhoanList = _dbContext.LoaiTaiKhoan.ToList();
             ViewBag.LoaiTaiKhoanList = new SelectList(LoaiTaiKhoanList, "ID", "Ten");
+            List<string> gioiTinh = new List<string>
+            {
+                "Nam", "Nữ"
+            };
+            ViewBag.GioiTinh = new SelectList(gioiTinh);
             return View();
         }
 
@@ -106,11 +111,22 @@ namespace BatDongSanId.Areas.Client.Controllers
                 taiKhoan.Email = taiKhoanViewModel.Email;
                 taiKhoan.SoDienThoai = taiKhoanViewModel.SoDienThoai;
                 taiKhoan.DiaChi = taiKhoanViewModel.DiaChi;
+                taiKhoan.XacThuc = true;
                 taiKhoan.SoDuVi = 0;
                 taiKhoan.LoaiTaiKhoan = int.Parse(taiKhoanViewModel.LoaiTaiKhoan);
+
+                foreach (var file in Request.Form.Files)
+                {
+                    MemoryStream ms = new MemoryStream();
+                    file.CopyTo(ms);
+                    taiKhoan.AnhDaiDien = ms.ToArray();
+                    ms.Close();
+                    ms.Dispose();
+                }
+
                 _dbContext.TaiKhoan.Add(taiKhoan);
                 _dbContext.SaveChanges();
-                return RedirectToAction(nameof(Successed));
+                return RedirectToAction("Index","TrangChu");
             }
             return View();
         }

@@ -19,7 +19,7 @@ namespace BatDongSanId.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BatDongSanService.Models.GoiTin", b =>
+            modelBuilder.Entity("BatDongSanId.Models.GoiTin", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -37,7 +37,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("GoiTin");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.HinhAnh", b =>
+            modelBuilder.Entity("BatDongSanId.Models.HinhAnh", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -64,7 +64,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("HinhAnh");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.Huong", b =>
+            modelBuilder.Entity("BatDongSanId.Models.Huong", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -79,7 +79,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("Huong");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.LoaiBatDongSan", b =>
+            modelBuilder.Entity("BatDongSanId.Models.LoaiBatDongSan", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -94,7 +94,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("LoaiBatDongSan");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.LoaiTaiKhoan", b =>
+            modelBuilder.Entity("BatDongSanId.Models.LoaiTaiKhoan", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -112,7 +112,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("LoaiTaiKhoan");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.LoaiTinBatDongSan", b =>
+            modelBuilder.Entity("BatDongSanId.Models.LoaiTinBatDongSan", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -127,7 +127,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("LoaiTinBatDongSan");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.LoaiTinTuc", b =>
+            modelBuilder.Entity("BatDongSanId.Models.LoaiTinTuc", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -145,7 +145,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("LoaiTinTuc");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.LuuTinBatDongSan", b =>
+            modelBuilder.Entity("BatDongSanId.Models.LuuTinBatDongSan", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -163,7 +163,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("LuuTinBatDongSan");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.MucDienTich", b =>
+            modelBuilder.Entity("BatDongSanId.Models.MucDienTich", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -184,7 +184,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("MucDienTich");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.MucGia", b =>
+            modelBuilder.Entity("BatDongSanId.Models.MucGia", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -205,7 +205,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("MucGia");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.QuanHuyen", b =>
+            modelBuilder.Entity("BatDongSanId.Models.QuanHuyen", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -224,7 +224,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("QuanHuyen");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.TaiKhoan", b =>
+            modelBuilder.Entity("BatDongSanId.Models.TaiKhoan", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -266,7 +266,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("TaiKhoan");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.TinBatDongSan", b =>
+            modelBuilder.Entity("BatDongSanId.Models.TinBatDongSan", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -310,6 +310,9 @@ namespace BatDongSanId.Data.Migrations
                     b.Property<string>("QuanHuyen")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TieuDe")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TinhThanh")
                         .HasColumnType("nvarchar(max)");
 
@@ -327,7 +330,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("TinBatDongSan");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.TinTuc", b =>
+            modelBuilder.Entity("BatDongSanId.Models.TinTuc", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -354,7 +357,7 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("TinTuc");
                 });
 
-            modelBuilder.Entity("BatDongSanService.Models.TinhThanh", b =>
+            modelBuilder.Entity("BatDongSanId.Models.TinhThanh", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");

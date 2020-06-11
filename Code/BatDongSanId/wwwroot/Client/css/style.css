@@ -129,7 +129,7 @@ ol {
 .set-bg {
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-position: top center;
+	background-position: center center;
 }
 
 .spad {
@@ -1417,7 +1417,7 @@ html .ui-button.ui-state-disabled:active {
 
 .room-items .room-img {
 	border-radius: 4px 4px 0 0;
-	height: 290px;
+	height: 100px;
 	position: relative;
 	width: 100%;
 }

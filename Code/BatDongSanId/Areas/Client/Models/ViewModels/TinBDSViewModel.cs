@@ -45,9 +45,16 @@ namespace BatDongSanId.Areas.Client.Models.ViewModels
         [Display(Name = "Hướng")]
         public string Huong { get; set; }
 
+        [Display(Name = "Tiêu đề")]
+        public string TieuDe { get; set; }
+
         [Display(Name = "Mô tả")]
         public string MoTa { get; set; }
 
         public string HinhAnh { get; set; }
+
+        public string XacThuc { get; set; }
+
+        public Boolean PheDuyet { get; set; }
     }
 }

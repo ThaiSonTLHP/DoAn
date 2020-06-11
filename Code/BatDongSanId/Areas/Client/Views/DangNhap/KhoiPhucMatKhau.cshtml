@@ -25,66 +25,47 @@
 </head>
 <body>
     <div class="row h-75 justify-content-center align-items-center">
-        <div class="col-md-4">
-            <form asp-action="KhoiPhucMatKhau">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <input asp-for="TaiKhoan" class="form-control" id="accountID" placeholder="Nhập email" />
-                    <span asp-validation-for="TaiKhoan" class="text-danger"></span>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    Đổi mật khẩu
                 </div>
-                <div class="form-group">
-                    <input asp-for="SoDienThoai" class="form-control" id="phoneID" placeholder="Nhập số điện thoại" />
-                    <span asp-validation-for="SoDienThoai" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="MaXacNhan" class="form-control" id="codeID" placeholder="Mã xác nhận" />
-                    <span asp-validation-for="MaXacNhan" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="MatKhauMoi" class="form-control" id="mkMoiID" placeholder="Mật khẩu mới" />
-                    <span asp-validation-for="MatKhauMoi" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="btn-group">
-                        <input type="submit" value="Lấy mã xác nhận" class="btn btn-primary" id="sendCode" />
+                <div class="card-body">
+                    <form asp-action="KhoiPhucMatKhau">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="TaiKhoan" class="form-control" id="accountID" placeholder="Nhập email" />
+                            <span asp-validation-for="TaiKhoan" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="SoDienThoai" class="form-control" id="phoneID" placeholder="Nhập số điện thoại" />
+                            <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="MaXacNhan" class="form-control" id="codeID" placeholder="Mã xác nhận" />
+                            <span asp-validation-for="MaXacNhan" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="MatKhauMoi" class="form-control" id="mkMoiID" placeholder="Mật khẩu mới" />
+                            <span asp-validation-for="MatKhauMoi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="btn-group float-left">
+                                <input type="submit" value="Lấy mã xác nhận" class="btn btn-primary" id="sendCode" />
+                            </div>
+                            <div class="btn-group float-right">
+                                <input type="submit" value="Xác nhận" class="btn btn-primary" id="xacNhan" />
+                            </div>
+                        </div>
+                    </form>
+                    <br />
+                    <br />
+                    <div>
+                        <a asp-action="Login">Trở lại</a>
                     </div>
-                    <div class="btn-group">
-                        <input type="submit" value="Xác nhận" class="btn btn-primary" id="xacNhan" />
-                    </div>
-                    <div class="btn-group">
-                        <input type="submit" value="test" class="btn btn-primary" id="test" />
-                    </div>
                 </div>
-            </form>
-            <div>
-                <a asp-action="Index">Back to List</a>
             </div>
         </div>
-    </div>
-    <!-- Load Facebook SDK for JavaScript -->
-    <div id="fb-root"></div>
-    <script>
-        window.fbAsyncInit = function () {
-            FB.init({
-                xfbml: true,
-                version: 'v7.0'
-            });
-        };
-
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-
-    <!-- Your Chat Plugin code -->
-    <div class="fb-customerchat"
-         attribution=setup_tool
-         page_id="102091188206264"
-         logged_in_greeting="Xin chào, tôi có thể giúp gì cho bạn?"
-         logged_out_greeting="Xin chào, tôi có thể giúp gì cho bạn?">
     </div>
     @*@section Scripts {
             @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

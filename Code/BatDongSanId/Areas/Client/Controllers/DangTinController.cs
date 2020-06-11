@@ -94,6 +94,7 @@ namespace BatDongSanId.Areas.Client.Controllers
                 tinBatDongSan.DienTich = tinBDSViewModel.DienTich;
                 tinBatDongSan.MucDienTich = _mucDienTich.ID;
                 tinBatDongSan.Huong = int.Parse(tinBDSViewModel.Huong);
+                tinBatDongSan.TieuDe = tinBDSViewModel.TieuDe;
                 tinBatDongSan.MoTa = tinBDSViewModel.MoTa;
 
                 _dbContext.TinBatDongSan.Add(tinBatDongSan);
@@ -124,9 +125,14 @@ namespace BatDongSanId.Areas.Client.Controllers
 
 
                 if (tinBatDongSan.TrangThaiDuyet == true)
-                    return RedirectToAction("DangTinThanhCong");
+                {
+                    ViewBag.Message = "Đăng tin thành công!";
+                }
                 else
-                    return RedirectToAction("ChoPheDuyet");
+                {
+                    ViewBag.Message = "Chờ phê duyệt! Vui lòng thanh toán và sử dụng mã số " + tinBatDongSan.ID.ToString() + " để duyệt tin! (Liên hệ)";
+                }
+                return RedirectToAction("DangTin");
             }
             else
                 return View();

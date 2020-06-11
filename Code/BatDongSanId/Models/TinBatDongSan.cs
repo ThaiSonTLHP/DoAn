@@ -58,6 +58,9 @@ namespace BatDongSanId.Models
         [Display(Name = "Hướng")]
         public int Huong { get; set; }
 
+        [Display(Name = "Tiêu đề")]
+        public string TieuDe { get; set; }
+
         [Display(Name = "Mô tả")]
         [Required]
         public string MoTa { get; set; }

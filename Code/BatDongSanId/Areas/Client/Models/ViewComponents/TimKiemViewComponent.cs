@@ -21,8 +21,8 @@ namespace BatDongSanId.Areas.Client.Models.ViewComponents
             TimKiemListViewModel listTimKiem = new TimKiemListViewModel();
             listTimKiem.TinhThanhs = await db.TinhThanh.OrderBy(m => m.Ten).ToListAsync();
             listTimKiem.LoaiTinBatDongSans = await db.LoaiTinBatDongSan.OrderBy(m => m.Ten).ToListAsync();
-            listTimKiem.MucGias = await db.MucGia.OrderBy(m => m.Ten).ToListAsync();
-            listTimKiem.LoaiBatDongSans = await db.LoaiBatDongSan.OrderBy(m => m.Ten).ToListAsync();
+            listTimKiem.MucGias = await db.MucGia.OrderBy(m => m.ID).ToListAsync();
+            listTimKiem.LoaiBatDongSans = await db.LoaiBatDongSan.OrderBy(m => m.ID).ToListAsync();
             return View(listTimKiem);
         }
     }

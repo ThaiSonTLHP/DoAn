@@ -34,5 +34,7 @@ namespace BatDongSanId.ViewModels
 
         [Display(Name = "Loại tài khoản")]
         public string LoaiTaiKhoan { get; set; }
+
+        public byte[] AnhDaiDien { get; set; }
     }
 }
