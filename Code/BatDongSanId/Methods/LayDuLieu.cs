@@ -2,6 +2,7 @@
 using BatDongSanId.Areas.Client.Models.ViewModels;
 using BatDongSanId.Data;
 using BatDongSanId.Models;
+using BatDongSanId.ViewModels;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,93 @@ namespace BatDongSanId.Methods
         public List<TinBDSViewModel> LayTinBDS(int soLuong, string goiTin, string loaiTinBDS)
         {
             List<TinBDSViewModel> listTinBDS = new List<TinBDSViewModel>();
+            var tinThuong = dbContext.GoiTin.FirstOrDefault(g => g.Ten == "Tin thường");
             if (goiTin != "All" && loaiTinBDS == "All")
             {
+                // cập nhật lại trạng thái gói tin hết hạn và tin chưa lên bảng tin
+                if(goiTin == "Tin VIP")
+                {
+                    //cập nhật tin hết hạn
+                    var list = (from t in dbContext.TinBatDongSan
+                                join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
+                                where DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(configuration["AppSetting:TinVIPTime"])),DateTime.Now) > 0
+                                && gt.Ten == goiTin
+                                && t.TrangThaiDuyet == true
+                                select new TinBatDongSan()
+                                {
+                                    ID = t.ID,
+                                    GoiTin = gt.ID
+                                }).ToList();
+                    foreach(var tin in list)
+                    {
+                        tin.GoiTin = tinThuong.ID;
+                        dbContext.Update(tin);
+                        dbContext.SaveChanges();
+                    }
+
+                    //cập nhật tin chưa được lên
+                    var listUpdate = (from t in dbContext.TinBatDongSan
+                                      join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
+                                      where  gt.Ten == goiTin
+                                      && t.TrangThaiDuyet == true
+                                      select new TinBatDongSan()
+                                      {
+                                          ID = t.ID,
+                                          NgayLenBangTin = t.NgayLenBangTin
+                                      }).ToList();
+                    listUpdate = listUpdate.GetRange(0, listUpdate.Count() < soLuong ? listUpdate.Count : soLuong);
+                    foreach (var tin in listUpdate)
+                    {
+                        if(tin.NgayLenBangTin == null)
+                        {
+                            tin.NgayLenBangTin = DateTime.Now;
+                            dbContext.Update(tin);
+                            dbContext.SaveChanges();
+                        }
+                    }
+                }
+                if (goiTin == "Tin HOT")
+                {
+                    //cập nhật tin hết hạn
+                    var list = (from t in dbContext.TinBatDongSan
+                                join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
+                                where DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(configuration["AppSetting:TinHOTTime"])), DateTime.Now) > 0
+                                && gt.Ten == goiTin
+                                && t.TrangThaiDuyet == true
+                                select new TinBatDongSan()
+                                {
+                                    ID = t.ID,
+                                    GoiTin = gt.ID
+                                }).ToList();
+                    foreach (var tin in list)
+                    {
+                        tin.GoiTin = tinThuong.ID;
+                        dbContext.Update(tin);
+                        dbContext.SaveChanges();
+                    }
+
+                    //cập nhật tin chưa được lên
+                    var listUpdate = (from t in dbContext.TinBatDongSan
+                                      join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
+                                      where gt.Ten == goiTin
+                                      && t.TrangThaiDuyet == true
+                                      select new TinBatDongSan()
+                                      {
+                                          ID = t.ID,
+                                          NgayLenBangTin = t.NgayLenBangTin
+                                      }).ToList();
+                    listUpdate = listUpdate.GetRange(0, listUpdate.Count() < soLuong ? listUpdate.Count : soLuong);
+                    foreach (var tin in listUpdate)
+                    {
+                        if (tin.NgayLenBangTin == null)
+                        {
+                            tin.NgayLenBangTin = DateTime.Now;
+                            dbContext.Update(tin);
+                            dbContext.SaveChanges();
+                        }
+                    }
+                }
+
                 listTinBDS = (from t in dbContext.TinBatDongSan
                             join lt in dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
                             join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
@@ -34,7 +120,8 @@ namespace BatDongSanId.Methods
                             join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
                             join h in dbContext.Huong on t.Huong equals h.ID
                             where gt.Ten == goiTin
-                            select new TinBDSViewModel()
+                            && t.TrangThaiDuyet == true
+                              select new TinBDSViewModel()
                             {
                                 ID = t.ID,
                                 LienHe = tk.SoDienThoai,
@@ -48,6 +135,7 @@ namespace BatDongSanId.Methods
                                 DienTich = t.DienTich,
                                 Gia = t.Gia,
                                 XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
+                                TieuDe = t.MoTa.Substring(0, 40) + "...",
                                 MoTa = t.MoTa
                             }).ToList();
             }
@@ -62,6 +150,7 @@ namespace BatDongSanId.Methods
                               join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
                               join h in dbContext.Huong on t.Huong equals h.ID
                               where lt.Ten == loaiTinBDS
+                              && t.TrangThaiDuyet == true
                               select new TinBDSViewModel()
                               {
                                   ID = t.ID,
@@ -76,6 +165,7 @@ namespace BatDongSanId.Methods
                                   DienTich = t.DienTich,
                                   Gia = t.Gia,
                                   XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
+                                  TieuDe = t.MoTa.Substring(0, 40) + "...",
                                   MoTa = t.MoTa
                               }).ToList();
             }
@@ -125,6 +215,7 @@ namespace BatDongSanId.Methods
                                   DienTich = t.DienTich,
                                   Gia = t.Gia,
                                   XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
+                                  TieuDe = t.MoTa.Substring(0, 40) + "...",
                                   MoTa = t.MoTa
                               }).ToList();
             }
@@ -154,6 +245,7 @@ namespace BatDongSanId.Methods
                                   DienTich = t.DienTich,
                                   Gia = t.Gia,
                                   XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
+                                  TieuDe = t.MoTa.Substring(0, 40) + "...",
                                   MoTa = t.MoTa
                               }).ToList();
             }
@@ -190,25 +282,27 @@ namespace BatDongSanId.Methods
                                   DienTich = t.DienTich,
                                   Gia = t.Gia,
                                   XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
-                                  MoTa = t.MoTa
+                                  MoTa = t.MoTa,
+                                  NguoiDangID = t.NguoiDang
                               }).FirstOrDefault();
             tinBDS.Gia = GiaTien(tinBDS.Gia);
             var listHinhAnh = LayListHinhAnh(id, "Tin bất động sản");
             ChiTietBDSListViewModel chiTietBDSListViewModel = new ChiTietBDSListViewModel();
             chiTietBDSListViewModel.tinBDSViewModel = tinBDS;
             chiTietBDSListViewModel.hinhAnhs = listHinhAnh;
+            chiTietBDSListViewModel.taiKhoanViewModel = ChiTietTaiKhoan(chiTietBDSListViewModel.tinBDSViewModel.NguoiDangID);
             return chiTietBDSListViewModel;
         }
 
         public string GiaTien(string gia)
         {
-            if (int.Parse(gia) < 999999999)
+            if (Int64.Parse(gia) < 999999999)
             {
-                return (int.Parse(gia) / 1000000).ToString() + " triệu";
+                return (Int64.Parse(gia) / 1000000).ToString() + " triệu";
             }
             else
             {
-                return (int.Parse(gia) / 1000000000).ToString() + " tỷ";
+                return (Int64.Parse(gia) / 1000000000).ToString() + " tỷ";
             }
         }
 
@@ -261,7 +355,7 @@ namespace BatDongSanId.Methods
             {
                 hinhAnh = (from ha in dbContext.HinhAnh
                            where ha.TinBatDongSan == id
-                           && ha.AnhChinh == true
+                           //&& ha.AnhChinh == true
                            select new HinhAnh
                            {
                                ID = ha.ID,
@@ -274,7 +368,7 @@ namespace BatDongSanId.Methods
             {
                 hinhAnh = (from ha in dbContext.HinhAnh
                            where ha.TinTuc == id
-                           && ha.AnhChinh == true
+                           //&& ha.AnhChinh == true
                            select new HinhAnh
                            {
                                ID = ha.ID,
@@ -302,19 +396,83 @@ namespace BatDongSanId.Methods
             return anhDataURL;
         }
 
-        public List<NhaMoiGioiViewModel> LayNhaMoiGioi(int soLuong)
+        string LayUrlHinhAnh(byte[] hinhAnh)
         {
-            var listNhaMoiGioi = (from t in dbContext.TaiKhoan
-                                  join ltk in dbContext.LoaiTaiKhoan on t.LoaiTaiKhoan equals ltk.ID
-                                  where ltk.Ten == "Nhà môi giới"
-                                  select new NhaMoiGioiViewModel()
-                                  {
-                                      Ten = t.Ten,
-                                      Email = t.Email,
-                                      SoDienThoai = t.SoDienThoai,
-                                      DiaChi = t.DiaChi
-                                  }).ToList();
-            return listNhaMoiGioi;
+            string anhDataURL;
+            if (hinhAnh != null)
+            {
+                string anhBase64Data = Convert.ToBase64String(hinhAnh);
+                anhDataURL = string.Format("data:image/jpg;base64,{0}", anhBase64Data);
+            }
+            else
+            {
+                anhDataURL = "~/Client/img/rooms/1.jpg";
+            }
+            return anhDataURL;
+        }
+
+        public List<TaiKhoanViewModel> LayTaiKhoan(int soLuong, string loaiTaiKhoan)
+        {
+            var listTaiKhoan = new List<TaiKhoanViewModel>();
+            if (soLuong == 0)
+            {
+                listTaiKhoan = (from t in dbContext.TaiKhoan
+                                join ltk in dbContext.LoaiTaiKhoan on t.LoaiTaiKhoan equals ltk.ID
+                                where ltk.Ten == loaiTaiKhoan
+                                select new TaiKhoanViewModel()
+                                {
+                                    ID = t.ID,
+                                    MatKhau = t.MatKhau,
+                                    Ten = t.Ten,
+                                    GioiTinh = (t.GioiTinh == true) ? "Nam" : "Nữ",
+                                    Email = t.Email,
+                                    SoDienThoai = t.SoDienThoai,
+                                    DiaChi = t.DiaChi,
+                                    SoDuVi = t.SoDuVi,
+                                    LoaiTaiKhoan = ltk.Ten
+                                }).ToList();
+            }
+            else
+            {
+                listTaiKhoan = (from t in dbContext.TaiKhoan
+                                join ltk in dbContext.LoaiTaiKhoan on t.LoaiTaiKhoan equals ltk.ID
+                                where ltk.Ten == loaiTaiKhoan
+                                select new TaiKhoanViewModel()
+                                {
+                                    ID = t.ID,
+                                    MatKhau = t.MatKhau,
+                                    Ten = t.Ten,
+                                    GioiTinh = (t.GioiTinh == true) ? "Nam" : "Nữ",
+                                    Email = t.Email,
+                                    SoDienThoai = t.SoDienThoai,
+                                    DiaChi = t.DiaChi,
+                                    SoDuVi = t.SoDuVi,
+                                    LoaiTaiKhoan = ltk.Ten
+                                }).ToList().GetRange(0, soLuong);
+            }
+            return listTaiKhoan;
+        }
+
+        public TaiKhoanViewModel ChiTietTaiKhoan(int id)
+        {
+            var taiKhoan = (from t in dbContext.TaiKhoan
+                            join ltk in dbContext.LoaiTaiKhoan on t.LoaiTaiKhoan equals ltk.ID
+                            where (ltk.Ten == "Nhà môi giới" || ltk.Ten == "Khách hàng")
+                            && t.ID == id
+                            select new TaiKhoanViewModel()
+                            {
+                                MatKhau = t.MatKhau,
+                                Ten = t.Ten,
+                                GioiTinh = (t.GioiTinh == true) ? "Nam" : "Nữ",
+                                Email = t.Email,
+                                SoDienThoai = t.SoDienThoai,
+                                DiaChi = t.DiaChi,
+                                SoDuVi = t.SoDuVi,
+                                AnhDaiDienData = t.AnhDaiDien,
+                                LoaiTaiKhoan = ltk.Ten
+                            }).FirstOrDefault();
+            taiKhoan.AnhDaiDienUrl = LayUrlHinhAnh(taiKhoan.AnhDaiDienData);
+            return taiKhoan;
         }
 
         public List<TinTucViewModel> LayTinTuc(int soLuong)

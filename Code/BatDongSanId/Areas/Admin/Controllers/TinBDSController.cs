@@ -43,15 +43,41 @@ namespace BatDongSanId.Areas.Admin.Controllers
             return View(listTin);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult ChoPheDuyet(int? id)
+        public void DuyetTin(int idTin)
         {
-            var tin = _dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == id);
+            var tin = _dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == idTin);
             tin.TrangThaiDuyet = true;
             _dbContext.TinBatDongSan.Update(tin);
             _dbContext.SaveChanges();
-            return View();
+        }
+
+        public IActionResult ChoXacThuc()
+        {
+            var listTin = (from t in _dbContext.TinBatDongSan
+                           join lt in _dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
+                           join gt in _dbContext.GoiTin on t.GoiTin equals gt.ID
+                           join tk in _dbContext.TaiKhoan on t.NguoiDang equals tk.ID
+                           where t.TrangThaiXacNhan == false
+                           select new TinBDSViewModel
+                           {
+                               ID = t.ID,
+                               LoaiTin = lt.Ten,
+                               GoiTin = gt.Ten,
+                               NgayDang = t.NgayDang,
+                               NguoiDang = tk.Ten,
+                               TieuDe = t.TieuDe,
+                               LienHe = tk.SoDienThoai,
+                               XacThuc ="Chưa xác thực"
+                           }).ToList();
+            return View(listTin);
+        }
+
+        public void XacThuc(int idTin)
+        {
+            var tin = _dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == idTin);
+            tin.TrangThaiDuyet = true;
+            _dbContext.TinBatDongSan.Update(tin);
+            _dbContext.SaveChanges();
         }
     }
 }

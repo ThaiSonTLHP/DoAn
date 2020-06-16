@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BatDongSanId.Areas.Client.Models.ListViewModels;
@@ -37,11 +38,11 @@ namespace BatDongSanId.Areas.Client.Controllers
                                                         Email = t.Email,
                                                         SoDienThoai = t.SoDienThoai,
                                                         DiaChi = t.DiaChi,
-                                                        AnhDaiDien = t.AnhDaiDien,
+                                                        AnhDaiDienData = t.AnhDaiDien,
                                                         SoDuVi = t.SoDuVi,
                                                         LoaiTaiKhoan = ltk.Ten
                                                     }).FirstOrDefault();
-            ViewBag.HinhAnh = LayHinhAnh(qLTKListViewModel.taiKhoanViewModel.AnhDaiDien);
+            qLTKListViewModel.taiKhoanViewModel.AnhDaiDienUrl = LayUrlHinhAnh(qLTKListViewModel.taiKhoanViewModel.AnhDaiDienData);
             qLTKListViewModel.soTinDang = (from tin in dbContext.TinBatDongSan
                                           join tk in dbContext.TaiKhoan on tin.NguoiDang equals tk.ID
                                           where tk.ID == HttpContext.Session.GetInt32("userID")
@@ -55,12 +56,58 @@ namespace BatDongSanId.Areas.Client.Controllers
             return View(qLTKListViewModel);
         }
 
-        public IActionResult ChiTietTaiKhoan(int id)
+        public IActionResult CapNhatTaiKhoan()
         {
-            var taiKhoan = dbContext.TaiKhoan.FirstOrDefault(t => t.ID == HttpContext.Session.GetInt32("userID"));
             return View();
         }
 
+        [HttpPost]
+        public IActionResult CapNhatTaiKhoan(TaiKhoanViewModel taiKhoanViewModel)
+        {
+            var taiKhoan = dbContext.TaiKhoan.FirstOrDefault(t => t.ID == taiKhoanViewModel.ID);
+            foreach (var file in Request.Form.Files)
+            {
+                MemoryStream ms = new MemoryStream();
+                file.CopyTo(ms);
+                taiKhoan.AnhDaiDien = ms.ToArray();
+                ms.Close();
+                ms.Dispose();
+            }
+            dbContext.Update(taiKhoan);
+            dbContext.SaveChanges();
+            return View();
+        }
+
+        public IActionResult CapNhatTin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CapNhatTin(TinBatDongSan tinBatDongSan)
+        {
+            int i = 0;
+            foreach (var file in Request.Form.Files)
+            {
+                HinhAnh img = new HinhAnh();
+                img.Ten = file.FileName;
+
+                MemoryStream ms = new MemoryStream();
+                file.CopyTo(ms);
+                img.Anh = ms.ToArray();
+
+                ms.Close();
+                ms.Dispose();
+
+                img.AnhChinh = i == 0 ? true : false; i++;
+
+                img.TinBatDongSan = tinBatDongSan.ID;
+
+                dbContext.HinhAnh.Add(img);
+                dbContext.SaveChanges();
+            }
+            return View();
+        }
 
         public IActionResult TinDaDang()
         {
@@ -98,7 +145,7 @@ namespace BatDongSanId.Areas.Client.Controllers
             }
         }
 
-        string LayHinhAnh(byte[] hinhAnh)
+        string LayUrlHinhAnh(byte[] hinhAnh)
         {
             string anhDataURL;
             if (hinhAnh != null)

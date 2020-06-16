@@ -1,0 +1,50 @@
+﻿@model BatDongSanId.ViewModels.TaiKhoanViewModel
+
+@{
+    ViewData["Title"] = "ChiTietTaiKhoan";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ChiTietTaiKhoan</h1>
+
+<div>
+    <h4>TaiKhoan</h4>
+    <hr />
+    <form asp-action="CapNhatTaiKhoan" method="post" enctype="multipart/form-data" id="form1" runat="server">
+        <div class="form-group">
+            <input type="submit" value="Xác nhận" class="btn btn-primary" />
+        </div>
+        <div class="col-sm-10">
+            <input type="text" asp-for="@Model.ID" class="form-control" />
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="imgInp" name="file1" onchange="readURL(this);" />
+            <label class="custom-file-label">Chọn ảnh</label>
+        </div>
+        <div style="margin-top:10px;margin-bottom:10px;">
+            <img id="blah" src="#" alt="&emsp;Ảnh của bạn" />
+        </div>
+    </form>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+</script>

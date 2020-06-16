@@ -6,7 +6,7 @@
 @using Microsoft.AspNetCore.Http;
 @{ ViewData["Title"] = "Trang chủ"; }
 <section class="hotel-rooms spad" style="padding-top:0px;">
-    <div class="container card">
+    <div class="container card" style="margin-bottom: 30px;">
         <div class="row card-header">Tin VIP</div>
         <div class="row card-body">
             @foreach (var tin in Model.TinVIPViewModels)
@@ -24,7 +24,7 @@
                             <div class="room-text col-md-9" style="padding-top:0px;padding-bottom:0px;">
                                 <div class="room-details" style="padding-bottom:0px;">
                                     <div class="room-title">
-                                        <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.MoTa)</a>
+                                        <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
                                         <br />
                                         <a href="#">
                                             <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
@@ -65,7 +65,7 @@
         </div>
     </div>
 
-    <div class="container card">
+    <div class="container card" style="margin-bottom: 30px;">
         <div class="row card-header">Tin HOT</div>
         <div class="row card-body">
             @foreach (var tin in Model.TinHOTViewModels)
@@ -83,7 +83,7 @@
                             <div class="room-text col-md-9" style="padding-top:0px;padding-bottom:0px;">
                                 <div class="room-details" style="padding-bottom:0px;">
                                     <div class="room-title">
-                                        <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.MoTa)</a>
+                                        <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
                                         <br />
                                         <a href="#">
                                             <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
@@ -124,7 +124,7 @@
         </div>
     </div>
 
-    <div class="container card">
+    <div class="container card" style="margin-bottom: 30px;">
         <div class="row card-header">Tin khác</div>
         <div class="row card-body">
             @foreach (var tin in Model.TinThuongViewModels)
@@ -142,7 +142,7 @@
                             <div class="room-text col-md-9" style="padding-top:0px;padding-bottom:0px;">
                                 <div class="room-details" style="padding-bottom:0px;">
                                     <div class="room-title">
-                                        <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.MoTa)</a>
+                                        <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
                                         <br />
                                         <a href="#">
                                             <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
@@ -198,8 +198,8 @@
                 return false;
             }
             //console.log(this);
-            alert(tin);
-            alert(user);
+            //alert(tin);
+            //alert(user);
             $.ajax({
                 url: '@Url.Action("LuuTin", "QuanLyTaiKhoan")',
                 data: { 'idUser': user, 'idTin': tin },

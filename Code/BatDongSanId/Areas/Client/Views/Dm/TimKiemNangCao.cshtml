@@ -1,0 +1,108 @@
+﻿@model BatDongSanId.Areas.Client.Models.ListViewModels.TimKiemListViewModel
+@{
+    ViewData["Title"] = "TimKiemNangCao";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <form class="form-group" asp-controller="Dm" asp-action="TimKiemNangCao" method="post">
+            <div class="">
+                <select class="form-control" name="TinhThanhOption">
+                    @foreach (var item in Model.TinhThanhs)
+                    {
+                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
+                    }
+                </select>
+                <select class="form-control" name="QuanHuyenOption">
+                    @foreach (var item in Model.QuanHuyens)
+                    {
+                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
+                    }
+                </select>
+            </div>
+            <div class="">
+                <select class="form-control" name="LoaiTinOption">
+                    @foreach (var item in Model.LoaiTinBatDongSans)
+                    {
+                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
+                    }
+                </select>
+            </div>
+            <div class="">
+                <select class="form-control" name="MucGiaOption">
+                    @foreach (var item in Model.MucGias)
+                    {
+                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
+                    }
+                </select>
+            </div>
+            <div class="">
+                <select class="form-control" name="LoaiBDSOption">
+                    @foreach (var item in Model.LoaiBatDongSans)
+                    {
+                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
+                    }
+                </select>
+            </div>
+            <div class="">
+                <select class="form-control" name="HuongOption">
+                    @foreach (var item in Model.Huongs)
+                    {
+                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
+                    }
+                </select>
+            </div>
+            <div class="">
+                <select class="form-control" name="MucDienTichOption">
+                    @foreach (var item in Model.MucDienTiches)
+                    {
+                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
+                    }
+                </select>
+            </div>
+            <div class="">
+                <select class="form-control" name="XacThucOption">
+                    @foreach (var item in Model.XacThucs)
+                    {
+                        <option value="@item.value">@Html.Raw(item.text)</option>
+                    }
+                </select>
+            </div>
+            <div class="">
+                <select class="form-control" name="ThoiGianOption">
+                    @foreach (var item in Model.ThoiGians)
+                    {
+                        <option value="@item.value">@Html.Raw(item.text)</option>
+                    }
+                </select>
+            </div>
+            <div class="">
+                <button type="submit" name="SearchString"><i class="flaticon-search"></i>Tìm kiếm</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#TinhThanhID").change(function () {
+            var SelecedVal = $(this).val();
+            $("#QuanHuyenID").html('');
+            $("#QuanHuyenID").append($("<option></option>").attr("value", '').text('Chọn quận huyện'));
+            if (SelecedVal != '') {
+                $.ajax({
+                    url: '@Url.Action("GetQuanHuyenList", "DangTin")',
+                    data: { '_tinhThanh': SelecedVal },
+                    type: "post",
+                    success: function (result) {
+                        $("#QuanHuyenID").empty();
+                        $.each(result, function (index, item) {
+                            $("#QuanHuyenID").append($("<option></option>").attr("value", item.id).text(item.ten));
+                        });
+                    }
+                });
+            }
+        });
+    })
+</script>

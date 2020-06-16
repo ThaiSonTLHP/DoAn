@@ -1,6 +1,7 @@
 ﻿using BatDongSanId.Areas.Client.Models.ListViewModels;
 using BatDongSanId.Areas.Client.Models.ViewModels;
 using BatDongSanId.Data;
+using BatDongSanId.Methods;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,26 +14,27 @@ namespace BatDongSanId.Areas.Client.Models.ViewComponents
 {
     public class FooterViewComponent : ViewComponent
     {
-        private readonly ApplicationDbContext db;
+        private readonly ApplicationDbContext dbContext;
         private readonly IConfiguration configuration;
 
-        public FooterViewComponent(ApplicationDbContext db, IConfiguration configuration)
+        public FooterViewComponent(ApplicationDbContext dbContext, IConfiguration configuration)
         {
-            this.db = db;
+            this.dbContext = dbContext;
             this.configuration = configuration;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
             FooterListViewModel footer = new FooterListViewModel();
-            var listTin = await (from t in db.TinBatDongSan
-                                            join lt in db.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
-                                            join tk in db.TaiKhoan on t.NguoiDang equals tk.ID
-                                            join gt in db.GoiTin on t.GoiTin equals gt.ID
-                                            join lbds in db.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
-                                            join tt in db.TinhThanh on t.TinhThanh equals tt.ID
-                                            join qh in db.QuanHuyen on t.QuanHuyen equals qh.ID
-                                            join h in db.Huong on t.Huong equals h.ID
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            var listTin = await (from t in dbContext.TinBatDongSan
+                                            join lt in dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
+                                            join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
+                                            join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
+                                            join lbds in dbContext.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
+                                            join tt in dbContext.TinhThanh on t.TinhThanh equals tt.ID
+                                            join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
+                                            join h in dbContext.Huong on t.Huong equals h.ID
                                             where gt.Ten == "Tin VIP"
                                             select new TinBDSViewModel()
                                             {
@@ -48,10 +50,14 @@ namespace BatDongSanId.Areas.Client.Models.ViewComponents
                                                 DienTich = t.DienTich,
                                                 Gia = t.Gia,
                                                 XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
+                                                TieuDe = t.MoTa.Substring(0, 80) + "...",
                                                 MoTa = t.MoTa
                                             }).OrderBy(m => m.NgayDang).ToListAsync();
             footer.TinBDSViewModel = listTin.GetRange(0, 2);
-
+            foreach(var tin in listTin)
+            {
+                tin.HinhAnh = layDuLieu.LayHinhAnh(tin.ID, "Tin bất động sản");
+            }
             return View(footer);
         }
     }

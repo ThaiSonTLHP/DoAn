@@ -304,6 +304,9 @@ namespace BatDongSanId.Data.Migrations
                     b.Property<DateTime>("NgayDang")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("NgayLenBangTin")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("NguoiDang")
                         .HasColumnType("int");
 
@@ -348,6 +351,9 @@ namespace BatDongSanId.Data.Migrations
 
                     b.Property<string>("NoiDung")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TestDB")
+                        .HasColumnType("int");
 
                     b.Property<string>("TieuDe")
                         .HasColumnType("nvarchar(max)");

@@ -38,36 +38,59 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoaiTin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayDang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NguoiDang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LienHe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GoiTin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TieuDe)
-            </td>
-            <td>
-                @Html.ActionLink("Sửa", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Chi tiết", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Xóa", "Delete", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Duyệt", "ChoPheDuyet", new { id=item.ID })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiTin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NguoiDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LienHe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GoiTin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TieuDe)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Chi tiết", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Xóa", "Delete", new { /* id=item.PrimaryKey */ }) |
+                    <button class = "duyetTinClass border-0" style="background-color: transparent" data="@item.ID">Duyệt</button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("button.duyetTinClass").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            //var btn = $("button.room-content");
+            var tin = $(this).attr("data");
+            $.ajax({
+                url: '@Url.Action("DuyetTin", "TinBDS")',
+                data: { 'idTin': tin },
+                type: "post",
+                async: false,
+                success: function (result) {
+                    alert("Đã duyệt tin!");
+                }
+            });
+            return;
+        });
+    })
+</script>

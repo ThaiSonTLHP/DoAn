@@ -1,4 +1,5 @@
 ﻿using BatDongSanId.Areas.Client.Models.ViewModels;
+using BatDongSanId.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace BatDongSanId.Areas.Client.Models.ListViewModels
         public List<TinBDSViewModel> TinVIPViewModels { get; set; }
         public List<TinBDSViewModel> TinHOTViewModels { get; set; }
         public List<TinBDSViewModel> TinThuongViewModels { get; set; }
-        public List<NhaMoiGioiViewModel> NhaMoiGioiViewModels { get; set; }
+        public List<TaiKhoanViewModel> TaiKhoanViewModels { get; set; }
         public List<TinTucViewModel> TinTucViewModels { get; set; }
     }
 }

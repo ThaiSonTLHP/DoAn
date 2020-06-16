@@ -9,7 +9,7 @@ namespace BatDongSanId.Areas.Client.Controllers
     [Area("Client")]
     public class LienHeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult GioiThieu()
         {
             return View();
         }

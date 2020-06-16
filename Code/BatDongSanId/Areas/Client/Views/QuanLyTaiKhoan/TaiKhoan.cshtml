@@ -6,30 +6,38 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div>
-                <img src="@ViewBag.HinhAnh" />
+                <img src="@Html.Raw(Model.taiKhoanViewModel.AnhDaiDienUrl)" />
             </div>
             <div>
 
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-8">
             <div class="row">
                 <div class="col-sm-6">
                     <p>Số tin đã đăng: @Html.Raw(Model.soTinDang)</p>
                 </div>
                 <div class="col-sm-6">
-                    <a asp-action="">Xem chi tiết</a>
+                    <a asp-action="TinDaDang">Xem chi tiết</a>
                 </div>
             </div>
             <div class="row">
-                <p>Số tin đã luu: @Html.Raw(Model.soTinLuu)</p>
-                <a asp-action="">Xem chi tiết</a>
+                <div class="col-sm-6">
+                    <p>Số tin đã luu: @Html.Raw(Model.soTinLuu)</p>
+                </div>
+                <div class="col-sm-6">
+                    <a asp-action="TinDaLuu">Xem chi tiết</a>
+                </div>
             </div>
             <div class="row">
-                <p>Số dư ví: @Html.Raw(Model.taiKhoanViewModel.SoDuVi)</p>
-                <a asp-action="">Xem chi tiết</a>
+                <div class="col-sm-6">
+                    <p>Số dư ví: @Html.Raw(Model.taiKhoanViewModel.SoDuVi)</p>
+                </div>
+                <div class="col-sm-6">
+                    <a asp-action="SoDuVi">Xem chi tiết</a>
+                </div>
             </div>
         </div>
     </div>

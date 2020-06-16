@@ -19,6 +19,10 @@ namespace BatDongSanId.Models
         [Display(Name = "Ngày đăng")]
         public DateTime NgayDang { get; set; }
 
+        [DataType(DataType.Date)]
+        [Display(Name = "Ngày lên bảng tin")]
+        public DateTime NgayLenBangTin { get; set; }
+
         [Display(Name = "Trạng thái giao dịch")]
         public Boolean TrangThaiGiaoDich { get; set; }
 

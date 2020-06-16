@@ -31,6 +31,15 @@ namespace BatDongSanId.Areas.Client.Controllers
 
         public IActionResult Login()
         {
+            if (HttpContext.Session.GetString("LoginMessage") != null && HttpContext.Session.GetString("LoginMessage") != "")
+            {
+                ViewBag.LoginMessage = "Vui lòng đăng nhập trước khi đăng tin!";
+                HttpContext.Session.Remove("LoginMessage");
+            }
+            else
+            {
+                ViewBag.LoginMessage = "";
+            }
             return View(); 
         }
         [HttpPost]

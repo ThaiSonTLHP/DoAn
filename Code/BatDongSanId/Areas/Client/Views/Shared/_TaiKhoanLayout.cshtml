@@ -5,9 +5,10 @@
 }
 @using Microsoft.AspNetCore.Http;
 
+<hr />
 <div class="container">
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <ul class="mystyle-leftmenu">
                 <li><a asp-controller="QuanLyTaiKhoan" asp-action="TaiKhoan"><i class="fas fa-user"></i>@Context.Session.GetString("username")</a></li>
                 <li><a asp-controller="QuanLyTaiKhoan" asp-action="TinDaDang"><i class="fas fa-edit"></i>Tin đã đăng</a></li>
@@ -15,7 +16,7 @@
                 <li><a asp-controller="QuanLyTaiKhoan" asp-action="QuanLyVi"><i class="fas fa-money"></i>Quản lý ví</a></li>
             </ul>
         </div>
-        <div class="col-sm-10" style="border-left:solid 1px;">
+        <div class="col-sm-9" style="border-left:solid 1px;">
             @RenderBody()
         </div>
     </div>

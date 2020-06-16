@@ -4,46 +4,59 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using BatDongSanId.Data;
+using BatDongSanId.Methods;
 using BatDongSanId.Models;
 using BatDongSanId.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace BatDongSanId.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class TaiKhoanController : Controller
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext dbContext;
+        private readonly IConfiguration configuration;
 
-        public TaiKhoanController(ApplicationDbContext dbContext)
+        public TaiKhoanController(ApplicationDbContext dbContext, IConfiguration configuration)
         {
-            _dbContext = dbContext;
+            this.dbContext = dbContext;
+            this.configuration = configuration;
         }
 
 
         //-------------Danh sách-------------
-        public IActionResult Index()
+        public IActionResult All(int? flag)
         {
-            var _taiKhoan = (from t in _dbContext.TaiKhoan
-                              join l in _dbContext.LoaiTaiKhoan on t.LoaiTaiKhoan equals l.ID
-                              select new TaiKhoanViewModel()
-                              {
-                                  ID = t.ID,
-                                  MatKhau = t.MatKhau,
-                                  Ten = t.Ten,
-                                  GioiTinh = (t.GioiTinh == true) ? "Nam" : "Nữ",
-                                  Email = t.Email,
-                                  SoDienThoai = t.SoDienThoai,
-                                  DiaChi = t.DiaChi,
-                                  SoDuVi = t.SoDuVi,
-                                  LoaiTaiKhoan = l.Ten
-                              }).ToList();
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            var _taiKhoan = new List<TaiKhoanViewModel>();
+            if (flag != null)
+            {
+                if(flag == 1)
+                {
+                    _taiKhoan = layDuLieu.LayTaiKhoan(0, "Quản trị");
+                }
+                if (flag == 2)
+                {
+                    _taiKhoan = layDuLieu.LayTaiKhoan(0, "Nhân viên");
+                }
+                if (flag == 3)
+                {
+                    _taiKhoan = layDuLieu.LayTaiKhoan(0, "Nhà môi giới");
+                }
+                if (flag == 4)
+                {
+                    _taiKhoan = layDuLieu.LayTaiKhoan(0, "Khách hàng");
+                }
+            }
+            else
+            {
+                ViewBag.Error = "Xảy ra lỗi!";
+            }
             return View(_taiKhoan);
         }
-
-
 
         //-------------Xem chi tiết-------------
         public IActionResult Details(int? id)
@@ -53,7 +66,7 @@ namespace BatDongSanId.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var city = _dbContext.TinhThanh.FirstOrDefault(m => m.ID == id.ToString());
+            var city = dbContext.TinhThanh.FirstOrDefault(m => m.ID == id.ToString());
 
             if (city == null)
             {
@@ -68,7 +81,7 @@ namespace BatDongSanId.Areas.Admin.Controllers
         //-------------Tạo mới-------------
         public IActionResult Create()
         {
-            List<LoaiTaiKhoan> LoaiTaiKhoanList = _dbContext.LoaiTaiKhoan.ToList();
+            List<LoaiTaiKhoan> LoaiTaiKhoanList = dbContext.LoaiTaiKhoan.ToList();
             ViewBag.LoaiTaiKhoanList = new SelectList(LoaiTaiKhoanList, "ID", "Ten");
             return View();
         }
@@ -87,8 +100,8 @@ namespace BatDongSanId.Areas.Admin.Controllers
                 taiKhoan.DiaChi = taiKhoanViewModel.DiaChi;
                 taiKhoan.SoDuVi = taiKhoanViewModel.SoDuVi;
                 taiKhoan.LoaiTaiKhoan = int.Parse(taiKhoanViewModel.LoaiTaiKhoan);
-                _dbContext.TaiKhoan.Add(taiKhoan);
-                _dbContext.SaveChanges();
+                dbContext.TaiKhoan.Add(taiKhoan);
+                dbContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View();
@@ -103,7 +116,7 @@ namespace BatDongSanId.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            var city = _dbContext.TinhThanh.Find(id);
+            var city = dbContext.TinhThanh.Find(id);
             if (city == null)
             {
                 return NotFound();
@@ -124,8 +137,8 @@ namespace BatDongSanId.Areas.Admin.Controllers
             {
                 try
                 {
-                    _dbContext.Update(tinhThanh);
-                    _dbContext.SaveChanges();
+                    dbContext.Update(tinhThanh);
+                    dbContext.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -153,7 +166,7 @@ namespace BatDongSanId.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var city = _dbContext.TinhThanh.FirstOrDefault(m => m.ID == id.ToString());
+            var city = dbContext.TinhThanh.FirstOrDefault(m => m.ID == id.ToString());
             if (city == null)
             {
                 return NotFound();
@@ -166,15 +179,15 @@ namespace BatDongSanId.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var city = _dbContext.TinhThanh.Find(id);
-            _dbContext.TinhThanh.Remove(city);
-            _dbContext.SaveChanges();
+            var city = dbContext.TinhThanh.Find(id);
+            dbContext.TinhThanh.Remove(city);
+            dbContext.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CityExists(string id)
         {
-            return _dbContext.TinhThanh.Any(e => e.ID == id);
+            return dbContext.TinhThanh.Any(e => e.ID == id);
         }
     }
 }

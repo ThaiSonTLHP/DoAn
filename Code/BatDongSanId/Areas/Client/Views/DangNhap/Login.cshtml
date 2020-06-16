@@ -1,7 +1,8 @@
 ﻿@model BatDongSanId.Areas.Client.Models.ViewModels.DangNhapViewModel
+@using Microsoft.AspNetCore.Http;
 
 @{ ViewBag.Title = "Login";
-                Layout = null; }
+    Layout = null; }
 
 <!DOCTYPE html>
 
@@ -44,27 +45,20 @@
                     </form>
                     <a class="float-left" asp-controller="DangNhap" asp-action="Register">Đăng ký</a>
                     <a class="float-right" asp-controller="DangNhap" asp-action="KhoiPhucMatKhau">Quên mật khẩu</a>
-
+                    <div id="LoginMessage" style="display:none;">@ViewBag.LoginMessage</div>
                 </div>
             </div>
         </div>
     </div>
 </body>
 </html>
-@*@using (Html.BeginForm("Index", "DangNhap", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        <div class="form-group">
-            @Html.LabelFor(m => m.TaiKhoan)
-            @Html.TextBoxFor(m => m.TaiKhoan, "", new { @class = "form-control", @placeholder = "Email" })
 
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.MatKhau)
-            @Html.PasswordFor(m => m.MatKhau, new { @class = "form-control", @placeholder = "Mật khẩu" })
-        </div>
-        <div class="form-group">
-            <input type="submit" name="submit" class="btn btn-primary" value="Đăng nhập" />
-        </div>
-        <a asp-action="CreateAccount">Tạo tài khoản</a>
-    }*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var mess = $("#LoginMessage").text();
+        if (mess != "" && mess != null) {
+            alert(mess);
+        }
+    })
+</script>

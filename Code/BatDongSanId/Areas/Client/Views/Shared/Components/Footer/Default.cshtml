@@ -47,20 +47,20 @@
             <div class="footer-blog">
                 <h5>Tin nổi bật</h5>
                 @foreach (var tin in Model.TinBDSViewModel){
-                <div class="single-blog">
-                    <div class="lt-side">
-                        @*<img src="@Html.Raw(tin.HinhAnh)" alt="">*@
+                <div class="row" style="padding-bottom: 15px;">
+                    <div class="col-md-4">
+                        <img src="@Html.Raw(tin.HinhAnh)">
                     </div>
-                    <div class="rt-side">
-                        <h6>@Html.Raw(tin.MoTa)<br> your next house.</h6>
-                        <div class="blog-time">
+                    <div class="col-md-8">
+                        <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)">@Html.Raw(tin.TieuDe)</a>
+                        @*<div class="blog-time">
                             <i class="flaticon-clock"></i>
                             <span>5 min</span>
-                        </div>
-                        <a href="#" class="read-more">
+                        </div>*@
+                        @*<a href="#" class="read-more">
                             <i class="flaticon-right-arrow-1"></i>
                             <span>Chi tiết</span>
-                        </a>
+                        </a>*@
                     </div>
                 </div>}
             </div>
