@@ -1,0 +1,114 @@
+﻿@model IEnumerable<BatDongSanId.Areas.Client.Models.ViewModels.TinBDSViewModel>
+
+@{
+    ViewData["Title"] = "ChoXacThuc";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@*<div class="row">
+        <div class="col-md-4">
+            <form asp-action="TaiKhoan" method="get">
+                <select class="form-control" name="loaiTK">
+                    <option value="1">Quản trị</option>
+                    <option value="2">Nhân viên</option>
+                    <option value="3">Nhà môi giới</option>
+                    <option value="4">Khách hàng</option>
+                    <option value="0">Tất cả</option>
+                </select>
+                <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+            </form>
+        </div>
+        <div class="col-md-4">
+            <form asp-action="TaiKhoan" method="get">
+                <select class="form-control" name="flag">
+                    <option value="1">Đã khóa</option>
+                </select>
+                <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+            </form>
+        </div>
+    </div>*@
+
+<table class="table table-bordered">
+    <thead style="background-color:#000257;color:white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoaiTin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GoiTin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayDang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NguoiDang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TieuDe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PheDuyet)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiTin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GoiTin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NguoiDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TieuDe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PheDuyet)
+                </td>
+                <td>
+                    <a class="xacThuc" data="@item.ID">Xác thực</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("a.xacThuc").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            //var btn = $("button.room-content");
+            var tin = $(this).attr("data");
+            $.ajax({
+                url: '@Url.Action("DuyetTin", "TinBDS")',
+                data: { 'idTin': tin },
+                type: "post",
+                async: false,
+                success: function (result) {
+                    alert("Đã xác thực tin!");
+                }
+            });
+            return;
+        });
+    })
+</script>
+

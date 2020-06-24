@@ -36,7 +36,7 @@ namespace BatDongSanId.Areas.Client.Controllers
 
             LayDuLieu layDuLieu = new LayDuLieu(_dbContext, configuration);
             TrangChuListViewModel _trangChu = new TrangChuListViewModel();
-            var tinThuongViewModels = layDuLieu.LayTinBDS(3, "Tin thường", "All");
+            var tinThuongViewModels = layDuLieu.LayTinBDS(2, "Tin thường", "All");
             var tinHOTViewModels = layDuLieu.LayTinBDS(6, "Tin HOT", "All");
             var tinVIPViewModels = layDuLieu.LayTinBDS(int.Parse(configuration["AppSetting:TinVIPCount"]), "Tin VIP", "All");
             var nhaMoiGioiViewModels = layDuLieu.LayTaiKhoan(10, "Nhà môi giới");

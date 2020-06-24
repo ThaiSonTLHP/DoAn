@@ -1,0 +1,155 @@
+﻿@model IEnumerable<BatDongSanId.ViewModels.TaiKhoanViewModel>
+
+@{ ViewData["Title"] = "All";
+                Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="TaiKhoan" method="get">
+            <select class="form-control" name="loaiTK">
+                <option value="1">Quản trị</option>
+                <option value="2">Nhân viên</option>
+                <option value="3">Nhà môi giới</option>
+                <option value="4">Khách hàng</option>
+                <option value="0">Tất cả</option>
+            </select>
+            <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form asp-action="TaiKhoan" method="get">
+            <select class="form-control" name="flag">
+                <option value="1">Đã khóa</option>
+            </select>
+            <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+        </form>
+    </div>
+</div>
+
+<p>
+    <a asp-action="Create">Tạo tài khoản</a>
+</p>
+
+<table class="table table-bordered">
+    <thead style="background-color:#000257;color:white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatKhau)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioiTinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoDienThoai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoDuVi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoaiTaiKhoan)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MatKhau)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Ten)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GioiTinh)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SoDienThoai)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SoDuVi)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LoaiTaiKhoan)
+    </td>
+    <td>
+        @Html.ActionLink("Chi tiết", "Details", new { /* id=item.PrimaryKey */ }) |
+        <a class="khoa" @*data-toggle="modal" data-target="#exampleModal"*@ data="@item.ID">Khoá</a>
+    </td>
+</tr>
+}
+    </tbody>
+</table>
+
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Launch demo modal</button>*@
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xác nhận khóa tài khoản</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Khóa tài khoản này?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("a.khoa").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var id = $(this).attr("data");
+            var text = "";
+            //console.log(this);
+            //alert(tin);
+            if (confirm("Khóa tài khoản này?")) {
+                $.ajax({
+                    url: '@Url.Action("Khoa", "TaiKhoan")',
+                    data: { 'id': id },
+                    type: "post",
+                    async: false,
+                    success: function (result) {
+                        text = "Đã khóa";
+                    }
+                });
+                $(this).hide("slow").finish();
+                $(this).show("slow").text(text);
+                return;
+            }
+            else {
+                return;
+            }
+        });
+    })
+</script>

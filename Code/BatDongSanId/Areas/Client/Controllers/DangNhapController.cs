@@ -22,10 +22,10 @@ namespace BatDongSanId.Areas.Client.Controllers
     [Area("Client")]
     public class DangNhapController : Controller
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext dbContext;
         public DangNhapController(ApplicationDbContext dbContext)
         {
-            _dbContext = dbContext;
+            this.dbContext = dbContext;
         }
 
 
@@ -34,7 +34,6 @@ namespace BatDongSanId.Areas.Client.Controllers
             if (HttpContext.Session.GetString("LoginMessage") != null && HttpContext.Session.GetString("LoginMessage") != "")
             {
                 ViewBag.LoginMessage = "Vui lòng đăng nhập trước khi đăng tin!";
-                HttpContext.Session.Remove("LoginMessage");
             }
             else
             {
@@ -45,19 +44,32 @@ namespace BatDongSanId.Areas.Client.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            var _taiKhoan = _dbContext.TaiKhoan.FirstOrDefault(s => s.Email.Equals(username) && s.MatKhau.Equals(password));
+            var _taiKhoan = dbContext.TaiKhoan.FirstOrDefault(s => s.Email.Equals(username) && s.MatKhau.Equals(password));
             if(_taiKhoan != null && _taiKhoan.XacThuc != false)
             {
-                var _loaiTK = _dbContext.LoaiTaiKhoan.FirstOrDefault(l => l.ID.Equals(_taiKhoan.LoaiTaiKhoan));
+                var _loaiTK = dbContext.LoaiTaiKhoan.FirstOrDefault(l => l.ID.Equals(_taiKhoan.LoaiTaiKhoan));
                 HttpContext.Session.SetString("username", _taiKhoan.Ten);
+                HttpContext.Session.SetString("usertype", _loaiTK.Ten);
                 HttpContext.Session.SetInt32("userID", _taiKhoan.ID);
 
                 if (_loaiTK.Ten == "Nhà môi giới")
                 {
-                    return RedirectToAction("TaiKhoan", "QuanLyTaiKhoan");
+                    if (HttpContext.Session.GetString("LoginMessage") != null && HttpContext.Session.GetString("LoginMessage") != "")
+                    {
+                        HttpContext.Session.Remove("LoginMessage");
+                        return RedirectToAction("DangTin", "DangTin");
+                    }
+                    else
+                    {
+                        return RedirectToAction("TaiKhoan", "QuanLyTaiKhoan");
+                    }
                 }
                 else
                 {
+                    if (HttpContext.Session.GetString("LoginMessage") != null && HttpContext.Session.GetString("LoginMessage") != "")
+                    {
+                        HttpContext.Session.Remove("LoginMessage");
+                    }
                     return RedirectToAction("Index", "Home", new { area = "Admin" });
                 }
             }
@@ -72,6 +84,7 @@ namespace BatDongSanId.Areas.Client.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("username");
+            HttpContext.Session.Remove("usertype");
             HttpContext.Session.Remove("userID");
             return RedirectToAction("Index","TrangChu");
         }
@@ -98,7 +111,7 @@ namespace BatDongSanId.Areas.Client.Controllers
 
         public IActionResult Register()
         {
-            List<LoaiTaiKhoan> LoaiTaiKhoanList = _dbContext.LoaiTaiKhoan.ToList();
+            List<LoaiTaiKhoan> LoaiTaiKhoanList = dbContext.LoaiTaiKhoan.ToList();
             ViewBag.LoaiTaiKhoanList = new SelectList(LoaiTaiKhoanList, "ID", "Ten");
             List<string> gioiTinh = new List<string>
             {
@@ -133,8 +146,8 @@ namespace BatDongSanId.Areas.Client.Controllers
                     ms.Dispose();
                 }
 
-                _dbContext.TaiKhoan.Add(taiKhoan);
-                _dbContext.SaveChanges();
+                dbContext.TaiKhoan.Add(taiKhoan);
+                dbContext.SaveChanges();
                 return RedirectToAction("Index","TrangChu");
             }
             return View();
@@ -149,10 +162,10 @@ namespace BatDongSanId.Areas.Client.Controllers
         [HttpPost]
         public IActionResult KhoiPhucMatKhau(QuenMKViewModel quenMKViewModel)
         {
-            var account = _dbContext.TaiKhoan.FirstOrDefault(t => t.Email == quenMKViewModel.TaiKhoan && t.SoDienThoai == quenMKViewModel.SoDienThoai);
+            var account = dbContext.TaiKhoan.FirstOrDefault(t => t.Email == quenMKViewModel.TaiKhoan && t.SoDienThoai == quenMKViewModel.SoDienThoai);
             account.MatKhau = quenMKViewModel.MatKhauMoi;
-            _dbContext.Update(account);
-            _dbContext.SaveChanges();
+            dbContext.Update(account);
+            dbContext.SaveChanges();
             ViewBag.Status = "Thay đổi mật khẩu thành công!";
             return View();
         }
@@ -171,7 +184,7 @@ namespace BatDongSanId.Areas.Client.Controllers
 
         public bool CheckAccount(string _account, string _phone)
         {
-            var account = _dbContext.TaiKhoan.FirstOrDefault(t => t.Email == _account && t.SoDienThoai == _phone);
+            var account = dbContext.TaiKhoan.FirstOrDefault(t => t.Email == _account && t.SoDienThoai == _phone);
             if (account != null)
                 return true;
             else

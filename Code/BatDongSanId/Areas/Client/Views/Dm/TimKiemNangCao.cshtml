@@ -4,85 +4,59 @@
     Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
-    <div class="row">
-        <form class="form-group" asp-controller="Dm" asp-action="TimKiemNangCao" method="post">
-            <div class="">
-                <select class="form-control" name="TinhThanhOption">
-                    @foreach (var item in Model.TinhThanhs)
-                    {
-                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
-                    }
-                </select>
-                <select class="form-control" name="QuanHuyenOption">
-                    @foreach (var item in Model.QuanHuyens)
-                    {
-                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
-                    }
-                </select>
-            </div>
-            <div class="">
-                <select class="form-control" name="LoaiTinOption">
-                    @foreach (var item in Model.LoaiTinBatDongSans)
-                    {
-                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
-                    }
-                </select>
-            </div>
-            <div class="">
-                <select class="form-control" name="MucGiaOption">
-                    @foreach (var item in Model.MucGias)
-                    {
-                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
-                    }
-                </select>
-            </div>
-            <div class="">
-                <select class="form-control" name="LoaiBDSOption">
-                    @foreach (var item in Model.LoaiBatDongSans)
-                    {
-                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
-                    }
-                </select>
-            </div>
-            <div class="">
-                <select class="form-control" name="HuongOption">
-                    @foreach (var item in Model.Huongs)
-                    {
-                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
-                    }
-                </select>
-            </div>
-            <div class="">
-                <select class="form-control" name="MucDienTichOption">
-                    @foreach (var item in Model.MucDienTiches)
-                    {
-                        <option value="@item.ID">@Html.Raw(item.Ten)</option>
-                    }
-                </select>
-            </div>
-            <div class="">
-                <select class="form-control" name="XacThucOption">
-                    @foreach (var item in Model.XacThucs)
-                    {
-                        <option value="@item.value">@Html.Raw(item.text)</option>
-                    }
-                </select>
-            </div>
-            <div class="">
-                <select class="form-control" name="ThoiGianOption">
-                    @foreach (var item in Model.ThoiGians)
-                    {
-                        <option value="@item.value">@Html.Raw(item.text)</option>
-                    }
-                </select>
-            </div>
-            <div class="">
-                <button type="submit" name="SearchString"><i class="flaticon-search"></i>Tìm kiếm</button>
-            </div>
-        </form>
+    <div class="row h-75 justify-content-center align-items-center">
+        <div class="col-md-6">
+            <form asp-action="KetQuaTimKiem" method="post" enctype="multipart/form-data" id="form1" runat="server">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        @if (ViewBag.TinhThanh != null)
+                        {@Html.DropDownListFor(model => model.TinhThanhs, ViewBag.TinhThanh as SelectList, "Chọn tỉnh thành", new { @class = "form-control", @id = "TinhThanhID"})}
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.DropDownListFor(model => model.QuanHuyens, new SelectList(string.Empty), "Chọn quận huyện", new { @class = "form-control", @id = "QuanHuyenID", @name = "QuanHuyenOption" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @if (ViewBag.LoaiTin != null)
+                    {@Html.DropDownListFor(model => model.LoaiTinBatDongSans, ViewBag.LoaiTin as SelectList, "Loại tin", new { @class = "form-control", @name = "LoaiTinOption" })}
+                </div>
+                <div class="form-group">
+                    @if (ViewBag.LoaiBDS != null)
+                    {@Html.DropDownListFor(model => model.LoaiBatDongSans, ViewBag.LoaiBDS as SelectList, "Loại bất động sản", new { @class = "form-control", @name = "LoaiBDSOption" })}
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        @if (ViewBag.MucGia != null)
+                        {@Html.DropDownListFor(model => model.MucGias, ViewBag.MucGia as SelectList, "Mức giá", new { @class = "form-control", @name = "MucGiaOption" })}
+                    </div>
+                    <div class="form-group col-md-6">
+                        @if (ViewBag.MucDT != null)
+                        {@Html.DropDownListFor(model => model.MucDienTiches, ViewBag.MucDT as SelectList, "Diện tích", new { @class = "form-control", @name = "MucDTOption" })}
+                    </div>
+                </div>
+                <div class="form-group">
+                    @if (ViewBag.Huong != null)
+                    {@Html.DropDownListFor(model => model.Huongs, ViewBag.Huong as SelectList, "Hướng", new { @class = "form-control", @name = "HuongOption" })}
+                </div>
+                <div class="form-group">
+                    @if (ViewBag.XacThuc != null)
+                    {@Html.DropDownListFor(model => model.XacThucs, ViewBag.XacThuc as SelectList, "Xác thực", new { @class = "form-control", @name = "XacThucOption" })}
+                </div>
+                <div class="form-group">
+                    @if (ViewBag.ThoiGian != null)
+                    {@Html.DropDownListFor(model => model.ThoiGians, ViewBag.ThoiGian as SelectList, "Thời gian", new { @class = "form-control", @name = "ThoiGianOption" })}
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Tìm kiếm" class="btn btn-primary" />
+                </div>
+
+            </form>
+        </div>
     </div>
 </div>
 
+@*<script src="~/Client/js/jquery-3.3.1.min.js"></script>*@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {

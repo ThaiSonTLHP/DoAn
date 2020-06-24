@@ -68,6 +68,8 @@ namespace BatDongSanId.Areas.Client.Controllers
                         }).ToList().Count();
             if (count < int.Parse(configuration["AppSetting:TinPerDay"]))
             {
+
+
                 var tinBatDongSan = new TinBatDongSan();
 
                 //HttpContext.Session.SetInt32("userID", 4);

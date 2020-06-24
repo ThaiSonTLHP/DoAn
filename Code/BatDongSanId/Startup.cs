@@ -58,7 +58,7 @@ namespace BatDongSanId
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                // The default HSTS ID is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -76,6 +76,7 @@ namespace BatDongSanId
             {
                 endpoints.MapControllerRoute(
                     name: "default",
+                    //pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
                     pattern: "{area=Client}/{controller=TrangChu}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });

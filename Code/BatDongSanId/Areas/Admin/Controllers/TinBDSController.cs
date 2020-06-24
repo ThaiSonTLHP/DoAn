@@ -4,80 +4,77 @@ using System.Linq;
 using System.Threading.Tasks;
 using BatDongSanId.Areas.Client.Models.ViewModels;
 using BatDongSanId.Data;
+using BatDongSanId.Methods;
 using BatDongSanId.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace BatDongSanId.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class TinBDSController : Controller
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext dbContext;
+        private readonly IConfiguration configuration;
 
-        public TinBDSController(ApplicationDbContext dbContext)
+        public TinBDSController(ApplicationDbContext dbContext, IConfiguration configuration)
         {
-            _dbContext = dbContext;
+            this.dbContext = dbContext;
+            this.configuration = configuration;
         }
-        public IActionResult Index()
+        public IActionResult Tin()
         {
-            return View();
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            var listTin = layDuLieu.LayTinBDS();
+            return View(listTin);
         }
 
         public IActionResult ChoPheDuyet()
         {
-            var listTin = (from t in _dbContext.TinBatDongSan
-                           join lt in _dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
-                           join gt in _dbContext.GoiTin on t.GoiTin equals gt.ID
-                           join tk in _dbContext.TaiKhoan on t.NguoiDang equals tk.ID
-                           where t.TrangThaiDuyet == false
-                           select new TinBDSViewModel {
-                               ID = t.ID,
-                               LoaiTin = lt.Ten,
-                               GoiTin = gt.Ten,
-                               NgayDang = t.NgayDang,
-                               NguoiDang = tk.Ten,
-                               TieuDe = t.TieuDe,
-                               LienHe = tk.SoDienThoai,
-                               PheDuyet = t.TrangThaiDuyet
-                           }).ToList();
-            return View(listTin);
-        }
-
-        public void DuyetTin(int idTin)
-        {
-            var tin = _dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == idTin);
-            tin.TrangThaiDuyet = true;
-            _dbContext.TinBatDongSan.Update(tin);
-            _dbContext.SaveChanges();
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            var listTin = layDuLieu.LayTinBDS();
+            var listChuaDuyet = new List<TinBDSViewModel>();
+            foreach(var tin in listTin)
+            {
+                if(tin.PheDuyet == false)
+                {
+                    listChuaDuyet.Add(tin);
+                }
+            }
+            return View(listChuaDuyet);
         }
 
         public IActionResult ChoXacThuc()
         {
-            var listTin = (from t in _dbContext.TinBatDongSan
-                           join lt in _dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
-                           join gt in _dbContext.GoiTin on t.GoiTin equals gt.ID
-                           join tk in _dbContext.TaiKhoan on t.NguoiDang equals tk.ID
-                           where t.TrangThaiXacNhan == false
-                           select new TinBDSViewModel
-                           {
-                               ID = t.ID,
-                               LoaiTin = lt.Ten,
-                               GoiTin = gt.Ten,
-                               NgayDang = t.NgayDang,
-                               NguoiDang = tk.Ten,
-                               TieuDe = t.TieuDe,
-                               LienHe = tk.SoDienThoai,
-                               XacThuc ="Chưa xác thực"
-                           }).ToList();
-            return View(listTin);
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            var listTin = layDuLieu.LayTinBDS();
+            var listChuaXacThuc = new List<TinBDSViewModel>();
+            foreach (var tin in listTin)
+            {
+                if (tin.XacThucBool == false)
+                {
+                    listChuaXacThuc.Add(tin);
+                }
+            }
+            return View(listChuaXacThuc);
+        }
+
+
+        //------------------------ajax
+        public void DuyetTin(int idTin)
+        {
+            var tin = dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == idTin);
+            tin.TrangThaiDuyet = true;
+            dbContext.TinBatDongSan.Update(tin);
+            dbContext.SaveChanges();
         }
 
         public void XacThuc(int idTin)
         {
-            var tin = _dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == idTin);
-            tin.TrangThaiDuyet = true;
-            _dbContext.TinBatDongSan.Update(tin);
-            _dbContext.SaveChanges();
+            var tin = dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == idTin);
+            tin.TrangThaiXacNhan = true;
+            dbContext.TinBatDongSan.Update(tin);
+            dbContext.SaveChanges();
         }
     }
 }

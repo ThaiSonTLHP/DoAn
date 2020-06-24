@@ -29,59 +29,65 @@
     @{ ViewData["Title"] = "Default"; }
     <div class="row p-37">
         <div class="col-lg-4">
-            <div class="about-footer">
-                <h5>About Homes</h5>
-                <p>
-                    @*@Html.Raw(Model.GioiThieuViewModel.GioiThieu)*@
-                </p>
-                <div class="footer-social">
-                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-dribbble"></i></a>
-                    <a href="#"><i class="fa fa-behance"></i></a>
-                </div>
+            <div class="footer-address">
+                <h5>Liên hệ</h5>
+                <ul>
+                    @*<li>
+                    <i class="flaticon-placeholder"></i><span>@Html.Raw(Model.GioiThieuViewModel.DiaChi)</span>
+                </li>
+                <li><i class="flaticon-envelope"></i><span>@Html.Raw(Model.GioiThieuViewModel.Email)</span></li>
+                <li><i class="flaticon-smartphone"></i><span>@Html.Raw(Model.GioiThieuViewModel.SoDienThoai)</span></li>*@
+                    <li><i class="flaticon-placeholder"></i><span>233 Lạch Tray, Ngô Quyền, Hải Phòng</span></li>
+                    <li><i class="flaticon-envelope"></i><span>batdongsanih@gmail.com</span></li>
+                    <li><i class="flaticon-smartphone"></i><span>0313338331</span></li>
+                </ul>
+                <p>Monday – Friday: 9 am – 5 pm</p>
+                <p>Saturday: 9 am – 1pm</p>
             </div>
         </div>
         <div class="col-lg-4 col-md-6">
             <div class="footer-blog">
                 <h5>Tin nổi bật</h5>
-                @foreach (var tin in Model.TinBDSViewModel){
-                <div class="row" style="padding-bottom: 15px;">
-                    <div class="col-md-4">
-                        <img src="@Html.Raw(tin.HinhAnh)">
-                    </div>
-                    <div class="col-md-8">
-                        <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)">@Html.Raw(tin.TieuDe)</a>
-                        @*<div class="blog-time">
-                            <i class="flaticon-clock"></i>
-                            <span>5 min</span>
-                        </div>*@
-                        @*<a href="#" class="read-more">
-                            <i class="flaticon-right-arrow-1"></i>
-                            <span>Chi tiết</span>
-                        </a>*@
-                    </div>
-                </div>}
+                @foreach (var tin in Model.TinBDSViewModel)
+                {
+                    <div class="row" style="padding-bottom: 15px;">
+                        <div class="col-md-4">
+                            <img src="@Html.Raw(tin.HinhAnh)">
+                        </div>
+                        <div class="col-md-8">
+                            <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:10pt;">@Html.Raw(tin.TieuDe)</a>
+                            @*<div class="blog-time">
+                                    <i class="flaticon-clock"></i>
+                                    <span>5 min</span>
+                                </div>*@
+                            @*<a href="#" class="read-more">
+                                    <i class="flaticon-right-arrow-1"></i>
+                                    <span>Chi tiết</span>
+                                </a>*@
+                        </div>
+                    </div>}
             </div>
         </div>
         <div class="col-lg-4 col-md-6">
-            <div class="footer-address">
-                <h5>Liên hệ</h5>
-                <ul>
-                    @*<li>
-                        <i class="flaticon-placeholder"></i><span>@Html.Raw(Model.GioiThieuViewModel.DiaChi)</span>
-                    </li>
-                    <li><i class="flaticon-envelope"></i><span>@Html.Raw(Model.GioiThieuViewModel.Email)</span></li>
-                    <li><i class="flaticon-smartphone"></i><span>@Html.Raw(Model.GioiThieuViewModel.SoDienThoai)</span></li>*@
-                </ul>
-                <p>Monday – Friday: 9 am – 5 pm</p>
-                <p>Saturday: 9 am – 1pm</p>
+            <div class="about-footer">
+                <h5>Liên kết</h5>
+                <div class="fb-page" data-href="https://www.facebook.com/Bat-Dong-San-In-Here-102091188206264/?modal=admin_todo_tour" data-tabs="timeline" data-width="" data-height="150" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/facebook" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/facebook">Facebook</a></blockquote></div>
+                @*<p>
+                @Html.Raw(Model.GioiThieuViewModel.GioiThieu)
+            </p>
+            <div class="footer-social">
+                <a href="#"><i class="fa fa-pinterest"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-behance"></i></a>
+            </div>*@
             </div>
         </div>
     </div>
 </body>
 </html>
 
-
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=171275584290364&autoLogAppEvents=1" nonce="LDadGSKA"></script>
 

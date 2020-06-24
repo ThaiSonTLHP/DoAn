@@ -7,12 +7,16 @@
 @{ ViewData["Title"] = "Trang chủ"; }
 <section class="hotel-rooms spad" style="padding-top:0px;">
     <div class="container card" style="margin-bottom: 30px;">
-        <div class="row card-header">Tin VIP</div>
+        <div class="row card-header" style="background-color:#9f0000; color:white;">Tin VIP</div>
         <div class="row card-body">
             @foreach (var tin in Model.TinVIPViewModels)
             {
                 <div class="col-lg-6 col-xl-6">
                     <div class="room-items">
+                        <div style="margin: 5px;">
+                            <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
+                        </div>
+                        
                         <div class="row" style="margin:5px">
                             <div class="room-img set-bg col-md-3" data-setbg="@Html.Raw(tin.HinhAnh)">
                                 <form>
@@ -24,11 +28,10 @@
                             <div class="room-text col-md-9" style="padding-top:0px;padding-bottom:0px;">
                                 <div class="room-details" style="padding-bottom:0px;">
                                     <div class="room-title">
-                                        <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
-                                        <br />
                                         <a href="#">
                                             <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
                                         </a>
+                                        <br />
                                         <a href="#" class="large-width">
                                             <i class="flaticon-timer"></i><span>@Html.Raw(tin.NgayDang)</span>
                                         </a>
@@ -37,16 +40,10 @@
                                 <div class="room-features" style="padding-bottom:0px;margin-bottom:0px;">
                                     <div class="room-info">
                                         <div class="size">
-                                            <p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) |</p>
-                                        </div>
-                                        <div class="beds">
-                                            
-                                        </div>
-                                        <div class="garage">
                                             @if (Html.Raw(tin.XacThuc).ToString() == "Xác thực")
-                                            {<p>Xác thực: Xác thực</p>}
+                                            {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Xác thực</p>}
                                             else
-                                            {<p>Xác thực: Chưa</p>}
+                                            {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Chưa xác thực</p>}
                                         </div>
                                         <br />
                                         <div class="size">
@@ -60,18 +57,22 @@
                             </div>
                         </div>
                     </div>
-                </div>      
+                </div>
             }
         </div>
     </div>
 
     <div class="container card" style="margin-bottom: 30px;">
-        <div class="row card-header">Tin HOT</div>
+        <div class="row card-header" style="background-color:#00789f; color:white;">Tin HOT</div>
         <div class="row card-body">
             @foreach (var tin in Model.TinHOTViewModels)
             {
                 <div class="col-lg-6 col-xl-6">
                     <div class="room-items">
+                        <div style="margin: 5px;">
+                            <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
+                        </div>
+                        
                         <div class="row" style="margin:5px">
                             <div class="room-img set-bg col-md-3" data-setbg="@Html.Raw(tin.HinhAnh)">
                                 <form>
@@ -83,11 +84,10 @@
                             <div class="room-text col-md-9" style="padding-top:0px;padding-bottom:0px;">
                                 <div class="room-details" style="padding-bottom:0px;">
                                     <div class="room-title">
-                                        <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
-                                        <br />
                                         <a href="#">
                                             <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
                                         </a>
+                                        <br />
                                         <a href="#" class="large-width">
                                             <i class="flaticon-timer"></i><span>@Html.Raw(tin.NgayDang)</span>
                                         </a>
@@ -96,16 +96,10 @@
                                 <div class="room-features" style="padding-bottom:0px;margin-bottom:0px;">
                                     <div class="room-info">
                                         <div class="size">
-                                            <p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) |</p>
-                                        </div>
-                                        <div class="beds">
-                                            
-                                        </div>
-                                        <div class="garage">
                                             @if (Html.Raw(tin.XacThuc).ToString() == "Xác thực")
-                                            {<p>Xác thực: Xác thực</p>}
+                                            {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Xác thực</p>}
                                             else
-                                            {<p>Xác thực: Chưa</p>}
+                                            {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Chưa xác thực</p>}
                                         </div>
                                         <br />
                                         <div class="size">
@@ -119,7 +113,7 @@
                             </div>
                         </div>
                     </div>
-                </div>      
+                </div>    
             }
         </div>
     </div>
@@ -131,6 +125,10 @@
             {
                 <div class="col-lg-6 col-xl-6">
                     <div class="room-items">
+                        <div style="margin: 5px;">
+                            <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
+                        </div>
+                        
                         <div class="row" style="margin:5px">
                             <div class="room-img set-bg col-md-3" data-setbg="@Html.Raw(tin.HinhAnh)">
                                 <form>
@@ -142,11 +140,10 @@
                             <div class="room-text col-md-9" style="padding-top:0px;padding-bottom:0px;">
                                 <div class="room-details" style="padding-bottom:0px;">
                                     <div class="room-title">
-                                        <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
-                                        <br />
                                         <a href="#">
                                             <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
                                         </a>
+                                        <br />
                                         <a href="#" class="large-width">
                                             <i class="flaticon-timer"></i><span>@Html.Raw(tin.NgayDang)</span>
                                         </a>
@@ -155,16 +152,10 @@
                                 <div class="room-features" style="padding-bottom:0px;margin-bottom:0px;">
                                     <div class="room-info">
                                         <div class="size">
-                                            <p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) |</p>
-                                        </div>
-                                        <div class="beds">
-                                            
-                                        </div>
-                                        <div class="garage">
                                             @if (Html.Raw(tin.XacThuc).ToString() == "Xác thực")
-                                            {<p>Xác thực: Xác thực</p>}
+                                            {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Xác thực</p>}
                                             else
-                                            {<p>Xác thực: Chưa</p>}
+                                            {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Chưa xác thực</p>}
                                         </div>
                                         <br />
                                         <div class="size">
@@ -210,34 +201,6 @@
                 }
             });
             return;
-            @*if (@Context.Session.GetString("username") == "" || Context.Session.GetString("username") == null) {
-                alert("Bạn chưa đăng nhập!");
-                return false;
-            }
-            var account = $("#accountID").val();
-            var phone = $("#phoneID").val();;
-            $.ajax({
-                url: '@Url.Action("CheckAccount", "DangNhap")',
-                data: { '_account': account, '_phone': phone },
-                type: "post",
-                async: false,
-                success: function (result) {
-                    if (result == true) {
-                        $.ajax({
-                            url: '@Url.Action("SendCode", "DangNhap")',
-                            data: { 'add': account },
-                            type: "post",
-                            async: false,
-                            success: function (result) {
-                                code = result;
-                                //$("#codeID").prop('disabled', false);
-                                alert("Mã xác nhận vừa được gửi đến email của bạn!" + code);
-                            }
-                        });
-                    }
-                }
-            });
-            return false;*@
         });
     })
 </script>

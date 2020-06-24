@@ -109,6 +109,60 @@ namespace BatDongSanId.Areas.Client.Controllers
             return View();
         }
 
+        public IActionResult CapNhatNgay()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CapNhatNgay(TinBatDongSan tinBatDongSan)
+        {
+            var tinBDS = dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == tinBatDongSan.ID);
+            tinBDS.NgayLenBangTin = tinBatDongSan.NgayLenBangTin;
+            dbContext.Update(tinBDS);
+            dbContext.SaveChanges();
+            return View();
+        }
+
+        public IActionResult CapNhatNgayDang()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CapNhatNgayDang(TinBatDongSan tinBatDongSan)
+        {
+            var tinBDS = dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == tinBatDongSan.ID);
+            tinBDS.NgayLenBangTin = tinBatDongSan.NgayLenBangTin;
+            dbContext.Update(tinBDS);
+            dbContext.SaveChanges();
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public IActionResult TinDaDang()
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
@@ -143,6 +197,21 @@ namespace BatDongSanId.Areas.Client.Controllers
                 dbContext.LuuTinBatDongSan.Add(luuTin);
                 dbContext.SaveChanges();
             }
+        }
+
+        public void BoLuuTin(int idUser, int idTin)
+        {
+            var luu = dbContext.LuuTinBatDongSan.FirstOrDefault(x => x.TaiKhoan == idUser && x.TinBatDongSan == idTin);
+            dbContext.LuuTinBatDongSan.Remove(luu);
+            dbContext.SaveChanges();
+        }
+
+        public void XacNhanDaBan(int idTin)
+        {
+            var tin = dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == idTin);
+            tin.TrangThaiGiaoDich = true;
+            dbContext.Update(tin);
+            dbContext.SaveChanges();
         }
 
         string LayUrlHinhAnh(byte[] hinhAnh)

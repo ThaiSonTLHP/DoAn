@@ -28,32 +28,29 @@ namespace BatDongSanId.Areas.Admin.Controllers
 
 
         //-------------Danh sách-------------
-        public IActionResult All(int? flag)
+        public IActionResult TaiKhoan(int loaiTK = 0, int flag = 1)
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             var _taiKhoan = new List<TaiKhoanViewModel>();
-            if (flag != null)
+            if(loaiTK == 0)
             {
-                if(flag == 1)
-                {
-                    _taiKhoan = layDuLieu.LayTaiKhoan(0, "Quản trị");
-                }
-                if (flag == 2)
-                {
-                    _taiKhoan = layDuLieu.LayTaiKhoan(0, "Nhân viên");
-                }
-                if (flag == 3)
-                {
-                    _taiKhoan = layDuLieu.LayTaiKhoan(0, "Nhà môi giới");
-                }
-                if (flag == 4)
-                {
-                    _taiKhoan = layDuLieu.LayTaiKhoan(0, "Khách hàng");
-                }
+                _taiKhoan = layDuLieu.LayTaiKhoan(0, "All");
             }
-            else
+            if(loaiTK == 1)
             {
-                ViewBag.Error = "Xảy ra lỗi!";
+                _taiKhoan = layDuLieu.LayTaiKhoan(0, "Quản trị");
+            }
+            if (loaiTK == 2)
+            {
+                _taiKhoan = layDuLieu.LayTaiKhoan(0, "Nhân viên");
+            }
+            if (loaiTK == 3)
+            {
+                _taiKhoan = layDuLieu.LayTaiKhoan(0, "Nhà môi giới");
+            }
+            if (loaiTK == 4)
+            {
+                _taiKhoan = layDuLieu.LayTaiKhoan(0, "Khách hàng");
             }
             return View(_taiKhoan);
         }
@@ -66,7 +63,7 @@ namespace BatDongSanId.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var city = dbContext.TinhThanh.FirstOrDefault(m => m.ID == id.ToString());
+            var city = dbContext.TaiKhoan.FirstOrDefault(m => m.ID == id);
 
             if (city == null)
             {
@@ -188,6 +185,49 @@ namespace BatDongSanId.Areas.Admin.Controllers
         private bool CityExists(string id)
         {
             return dbContext.TinhThanh.Any(e => e.ID == id);
+        }
+
+        
+
+
+        //-------------------ajax
+        public void Khoa(int id)
+        {
+            var taiKhoan = dbContext.TaiKhoan.FirstOrDefault(t => t.ID == id);
+            taiKhoan.XacThuc = false;
+            dbContext.Update(taiKhoan);
+            dbContext.SaveChanges();
+        }
+
+        public void Xoa(int id)
+        {
+            var taiKhoan = dbContext.TaiKhoan.Find(id);
+            var listTin = (from t in dbContext.TinBatDongSan
+                           where t.NguoiDang == taiKhoan.ID
+                           select new TinBatDongSan()
+                           {
+                               ID = t.ID
+                           }).ToList();
+            foreach(var tin in listTin)
+            {
+                var listAnh = (from t in dbContext.HinhAnh
+                               where t.TinBatDongSan == tin.ID
+                               select new HinhAnh()
+                               {
+                                   ID = t.ID
+                               }).ToList();
+                foreach(var anh in listAnh)
+                {
+                    var hinhAnh = dbContext.HinhAnh.Find(anh.ID);
+                    dbContext.HinhAnh.Remove(hinhAnh);
+                    dbContext.SaveChanges();
+                }
+                var _tin = dbContext.TinBatDongSan.Find(tin.ID);
+                dbContext.TinBatDongSan.Remove(_tin);
+                dbContext.SaveChanges();
+            }
+            dbContext.TaiKhoan.Remove(taiKhoan);
+            dbContext.SaveChanges();
         }
     }
 }

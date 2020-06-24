@@ -30,7 +30,7 @@
                 <!-- Logo -->
                 <li class="logo-sn waves-effect py-3">
                     <div class="text-center">
-                        <a href="#" class="pl-0"><img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"></a>
+                        <a asp-controller="Home" asp-action="Index" class="pl-0"><img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"></a>
                     </div>
                 </li>
                 <!--/. Logo -->
@@ -54,48 +54,39 @@
                             <div class="collapsible-body">
                                 <ul>
                                     <li>
-                                        <a asp-controller="TaiKhoan" asp-action="ChoPheDuyet">Danh sách tài khoản</a>
+                                        <a asp-controller="TaiKhoan" asp-action="TaiKhoan">Danh sách tài khoản</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="TaiKhoan" asp-action="ChoPheDuyet">Loại tài khoản</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a class="collapsible-header waves-effect arrow-r"><i class="fas fa-edit"></i>Tin bất động sản<i class="fas fa-angle-down rotate-icon"></i></a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li>
-                                        <a asp-controller="TinBDS" asp-action="ChoPheDuyet" class="waves-effect">Chờ phê duyệt</a>
-                                    </li>
-                                    <li>
-                                        <a href="../pages/login.html" class="waves-effect">Tất cả</a>
-                                    </li>
-                                    <li>
-                                        <a href="../pages/login.html" class="waves-effect">Tin bán</a>
-                                    </li>
-                                    <li>
-                                        <a href="../pages/register.html" class="waves-effect">Tin mua</a>
-                                    </li>
-                                    <li>
-                                        <a href="../pages/login.html" class="waves-effect">Tin cho thuê</a>
-                                    </li>
-                                    <li>
-                                        <a href="../pages/register.html" class="waves-effect">Tin thuê</a>
+                                        <a asp-controller="TaiKhoan" asp-action="LoaiTaiKhoan">Loại tài khoản</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li>
-                            <a class="collapsible-header waves-effect arrow-r"><i class="far fa-file-alt"></i>Tin tức<i class="fas fa-angle-down rotate-icon"></i></a>
+                            <a class="collapsible-header waves-effect arrow-r"><i class="far fa-file-alt"></i>Tin bất động sản<i class="fas fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
                                     <li>
-                                        <a href="../profile/basic-1.html" class="waves-effect">Viết bài</a>
+                                        <a asp-controller="TinBDS" asp-action="Tin" class="waves-effect">Tin bất động sản</a>
                                     </li>
                                     <li>
-                                        <a href="../profile/basic-1.html" class="waves-effect">Danh sách tin tức</a>
+                                        <a asp-controller="TinBDS" asp-action="ChoPheDuyet" class="waves-effect">Duyệt tin</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="TinBDS" asp-action="ChoXacThuc" class="waves-effect">Xác thực</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fas fa-edit"></i>Tin tức<i class="fas fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li>
+                                        <a asp-controller="TinTuc" asp-action="TinTuc" class="waves-effect">Tin tức</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="TinTuc" asp-action="ViêtBai" class="waves-effect">Viết bài</a>
                                     </li>
                                 </ul>
                             </div>
@@ -270,7 +261,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="#">Tài khoản</a>
-                            <a class="dropdown-item" href="#">Đăng xuất</a>
+                            <a class="dropdown-item" asp-area="Client" asp-controller="DangNhap" asp-action="Logout">Đăng xuất</a>
                         </div>
                     </li>
                 }

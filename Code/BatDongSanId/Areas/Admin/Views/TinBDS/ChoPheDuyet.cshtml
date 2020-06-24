@@ -5,13 +5,8 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>ChoPheDuyet</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+<table class="table table-bordered">
+    <thead style="background-color:#000257;color:white;">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.ID)
@@ -20,19 +15,19 @@
                 @Html.DisplayNameFor(model => model.LoaiTin)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.GoiTin)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.NgayDang)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NguoiDang)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LienHe)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GoiTin)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.TieuDe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PheDuyet)
             </th>
             <th></th>
         </tr>
@@ -40,43 +35,40 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LoaiTin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NgayDang)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NguoiDang)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LienHe)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GoiTin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TieuDe)
-                </td>
-                <td>
-                    @Html.ActionLink("Sửa", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Chi tiết", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Xóa", "Delete", new { /* id=item.PrimaryKey */ }) |
-                    <button class = "duyetTinClass border-0" style="background-color: transparent" data="@item.ID">Duyệt</button>
-                </td>
-            </tr>
-        }
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LoaiTin)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GoiTin)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NgayDang)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NguoiDang)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TieuDe)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PheDuyet)
+    </td>
+    <td>
+        @Html.ActionLink("Chi tiết", "Details", new { /* id=item.PrimaryKey */ }) |
+        <a class="duyet"  data="@item.ID">Duyệt</a>
+    </td>
+</tr>}
     </tbody>
 </table>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("button.duyetTinClass").click(function (event) {
+        $("a.duyet").click(function (event) {
             event.preventDefault();
             event.stopPropagation();
             //var btn = $("button.room-content");

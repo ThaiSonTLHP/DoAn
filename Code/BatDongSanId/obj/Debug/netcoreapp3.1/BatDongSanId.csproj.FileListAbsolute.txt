@@ -208,8 +208,14 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\net
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\Shared\Components\Footer\Default.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\QuanLyTaiKhoan\TinDaDang.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\QuanLyTaiKhoan\TinDaLuu.cshtml.g.cs
-C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\TaiKhoan\All.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\QuanLyTaiKhoan\CapNhatTaiKhoan.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\QuanLyTaiKhoan\CapNhatTin.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\Dm\TimKiemNangCao.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\LienHe\GioiThieu.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\QuanLyTaiKhoan\CapNhatNgay.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\Dm\KetQuaTimKiem.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\TaiKhoan\TaiKhoan.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\TinBDS\Tin.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\TinBDS\ChoXacThuc.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\Dm\TinMua.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\Dm\TinThue.cshtml.g.cs

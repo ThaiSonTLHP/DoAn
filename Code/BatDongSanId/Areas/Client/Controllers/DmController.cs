@@ -12,6 +12,8 @@ using X.PagedList;
 using BatDongSanId.Methods;
 using Microsoft.Extensions.Configuration;
 using BatDongSanId.Areas.Client.Models.ListViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using BatDongSanId.Models;
 
 namespace BatDongSanId.Areas.Client.Controllers
 {
@@ -35,22 +37,31 @@ namespace BatDongSanId.Areas.Client.Controllers
             return View(layDuLieu.LayTinBDS(0, "All", "Cần bán").ToPagedList(pageNumber, pageSize));
         }
 
-        public IActionResult TinChoThue()
+        public IActionResult TinChoThue(int? page)
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
-            return View(GetListTinBDS("Cho thuê"));
+            if (page == null) page = 1;
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(layDuLieu.LayTinBDS(0, "All", "Cho thuê").ToPagedList(pageNumber, pageSize));
         }
 
-        public IActionResult TinMua()
+        public IActionResult TinMua(int? page)
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
-            return View(GetListTinBDS("Cần mua"));
+            if (page == null) page = 1;
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(layDuLieu.LayTinBDS(0, "All", "Cần mua").ToPagedList(pageNumber, pageSize));
         }
 
-        public IActionResult TinThue()
+        public IActionResult TinThue(int? page)
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
-            return View(GetListTinBDS("Cần thuê"));
+            if (page == null) page = 1;
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(layDuLieu.LayTinBDS(0, "All", "Cần thuê").ToPagedList(pageNumber, pageSize));
         }
 
         public IActionResult ChiTietTinBDS(int id)
@@ -106,26 +117,57 @@ namespace BatDongSanId.Areas.Client.Controllers
 
         public IActionResult TimKiemNangCao()
         {
-            TimKiemListViewModel timKiemListViewModel = new TimKiemListViewModel();
-            timKiemListViewModel.TinhThanhs = dbContext.TinhThanh.OrderBy(m => m.Ten).ToList();
-            timKiemListViewModel.QuanHuyens = dbContext.QuanHuyen.OrderBy(m => m.Ten).ToList();
-            timKiemListViewModel.LoaiTinBatDongSans = dbContext.LoaiTinBatDongSan.OrderBy(m => m.ID).ToList();
-            timKiemListViewModel.MucGias = dbContext.MucGia.OrderBy(m => m.ID).ToList();
-            timKiemListViewModel.LoaiBatDongSans = dbContext.LoaiBatDongSan.OrderBy(m => m.ID).ToList();
-            timKiemListViewModel.Huongs = dbContext.Huong.OrderBy(m => m.ID).ToList(); ;
-            timKiemListViewModel.MucDienTiches = dbContext.MucDienTich.OrderBy(m => m.ID).ToList(); ;
-            timKiemListViewModel.XacThucs = new List<XacThuc>() { 
-                new XacThuc() { value = true , text = "Đã xác thực" }, 
-                new XacThuc() { value = false , text = "Chưa xác thực" } };
-            timKiemListViewModel.ThoiGians = new List<ThoiGian>() { 
-                new ThoiGian() { value = 1, text = "24 giờ qua" },
-                new ThoiGian() { value = 7, text ="Tuần qua" },
-                new ThoiGian() { value = 30, text ="Tháng qua" } };
-            return View(timKiemListViewModel);
+            var TinhThanhs = dbContext.TinhThanh.OrderBy(m => m.Ten).ToList();
+            var QuanHuyens = dbContext.QuanHuyen.OrderBy(m => m.Ten).ToList();
+            var LoaiTinBatDongSans = dbContext.LoaiTinBatDongSan.OrderBy(m => m.ID).ToList();
+            var MucGias = dbContext.MucGia.OrderBy(m => m.ID).ToList();
+            var LoaiBatDongSans = dbContext.LoaiBatDongSan.OrderBy(m => m.ID).ToList();
+            var Huongs = dbContext.Huong.OrderBy(m => m.ID).ToList(); ;
+            var MucDienTiches = dbContext.MucDienTich.OrderBy(m => m.ID).ToList();
+
+            //var XacThucs = new List<XacThuc>
+            //{
+            //    new XacThuc(true, "Đã xác thực"),
+            //    new XacThuc(false, "Chưa xác thực")
+            //}.ToList();
+
+            //var ThoiGians = new List<ThoiGian>
+            //{
+            //    new ThoiGian(1, "24 giờ qua"),
+            //    new ThoiGian(7, "Tuần qua"),
+            //    new ThoiGian(30, "Tháng qua")
+            //}.ToList();
+
+            var XacThucs = new List<SelectListItem>();
+            XacThucs.Add(new SelectListItem { Text = "Đã xác thực", Value = "true" });
+            XacThucs.Add(new SelectListItem { Text = "Chưa xác thực", Value = "false" });
+
+            var ThoiGians = new List<SelectListItem>();
+            ThoiGians.Add(new SelectListItem { Text = "24 giờ qua", Value = "1" });
+            ThoiGians.Add(new SelectListItem { Text = "Tuần qua", Value = "7" });
+            ThoiGians.Add(new SelectListItem { Text = "Tháng qua", Value = "30" });
+
+            ViewBag.TinhThanh = new SelectList(TinhThanhs, "ID", "Ten");
+            ViewBag.LoaiTin = new SelectList(LoaiTinBatDongSans, "ID", "Ten");
+            ViewBag.MucGia = new SelectList(MucGias, "ID", "Ten");
+            ViewBag.LoaiBDS = new SelectList(LoaiBatDongSans, "ID", "Ten");
+            ViewBag.Huong = new SelectList(Huongs, "ID", "Ten");
+            ViewBag.MucDT = new SelectList(MucDienTiches, "ID", "Ten");
+            ViewBag.XacThuc = new SelectList(XacThucs, "Value", "Text");
+            ViewBag.ThoiGian = new SelectList(ThoiGians, "Value", "Text");
+            return View();
         }
 
-        [HttpPost]
-        public IActionResult TimKiemNangCao(string TinhThanhOption, int LoaiTinOption, int MucGiaOption, int LoaiBDSOption)
+
+        public IActionResult KetQuaTimKiem(
+            string QuanHuyenOption,
+            int LoaiTinOption,
+            int MucGiaOption,
+            int LoaiBDSOption,
+            int MucDTOption,
+            int HuongOption,
+            string XacThucOption,
+            string ThoiGianOption)
         {
             var listTinBDS = (from t in dbContext.TinBatDongSan
                               join lt in dbContext.LoaiTinBatDongSan on t.LoaiBatDongSan equals lt.ID
@@ -136,9 +178,14 @@ namespace BatDongSanId.Areas.Client.Controllers
                               join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
                               join h in dbContext.Huong on t.Huong equals h.ID
                               where lt.ID == LoaiTinOption
-                              && tt.ID == TinhThanhOption
+                              && qh.ID == QuanHuyenOption
                               && t.MucGia == MucGiaOption
                               && t.LoaiBatDongSan == LoaiBDSOption
+                              && t.MucGia == MucGiaOption
+                              && t.MucDienTich == MucDTOption
+                              && h.ID == HuongOption
+                              && t.TrangThaiXacNhan == Boolean.Parse(XacThucOption)
+                              && DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(ThoiGianOption)),DateTime.Now) <= 0
                               select new TinBDSViewModel()
                               {
                                   ID = t.ID,

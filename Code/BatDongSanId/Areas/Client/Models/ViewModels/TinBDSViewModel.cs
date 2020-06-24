@@ -55,7 +55,11 @@ namespace BatDongSanId.Areas.Client.Models.ViewModels
 
         public string XacThuc { get; set; }
 
+        public Boolean XacThucBool { get; set; }
+
         public Boolean PheDuyet { get; set; }
+
+        public Boolean DaBan { get; set; }
 
         public int NguoiDangID { get; set; }
     }
