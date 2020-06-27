@@ -219,3 +219,6 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\net
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\TinBDS\ChoXacThuc.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\Dm\TinMua.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\Dm\TinThue.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Client\Views\QuanLyTaiKhoan\ChiTietTaiKhoan.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\TaiKhoan\Details.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\TinBDS\DaGiaoDich.cshtml.g.cs

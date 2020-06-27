@@ -75,9 +75,10 @@ namespace BatDongSanId
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    //pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
-                    pattern: "{area=Client}/{controller=TrangChu}/{action=Index}/{id?}");
+                name: "default",
+                pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
+                //pattern: "{area=Client}/{controller=TrangChu}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
             });
         }

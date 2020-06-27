@@ -22,11 +22,17 @@ namespace BatDongSanId.Areas.Admin.Controllers
             this.dbContext = dbContext;
             this.configuration = configuration;
         }
+
         public IActionResult Tin()
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             var listTin = layDuLieu.LayTinBDS();
             return View(listTin);
+        }
+
+        public IActionResult ChiTiet(int id)
+        {
+            return View();
         }
 
         public IActionResult ChoPheDuyet()
@@ -57,6 +63,21 @@ namespace BatDongSanId.Areas.Admin.Controllers
                 }
             }
             return View(listChuaXacThuc);
+        }
+
+        public IActionResult DaGiaoDich()
+        {
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            var listTin = layDuLieu.LayTinBDS();
+            var listGiaoDich = new List<TinBDSViewModel>();
+            foreach (var tin in listTin)
+            {
+                if (tin.DaBan == true)
+                {
+                    listGiaoDich.Add(tin);
+                }
+            }
+            return View(listGiaoDich);
         }
 
 

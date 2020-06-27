@@ -56,6 +56,11 @@ namespace BatDongSanId.Areas.Client.Controllers
             return View(qLTKListViewModel);
         }
 
+        public IActionResult ChiTietTaiKhoan()
+        {
+            return View();
+        }
+
         public IActionResult CapNhatTaiKhoan()
         {
             return View();
@@ -133,7 +138,7 @@ namespace BatDongSanId.Areas.Client.Controllers
         public IActionResult CapNhatNgayDang(TinBatDongSan tinBatDongSan)
         {
             var tinBDS = dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == tinBatDongSan.ID);
-            tinBDS.NgayLenBangTin = tinBatDongSan.NgayLenBangTin;
+            tinBDS.NgayDang = tinBatDongSan.NgayDang;
             dbContext.Update(tinBDS);
             dbContext.SaveChanges();
             return View();
@@ -175,11 +180,6 @@ namespace BatDongSanId.Areas.Client.Controllers
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             var listTin = layDuLieu.LayTinBDS(HttpContext.Session.GetInt32("userID"), 2);
             return View(listTin);
-        }
-
-        public IActionResult QuanLyVi()
-        {
-            return View();
         }
 
         public IActionResult XacNhan()

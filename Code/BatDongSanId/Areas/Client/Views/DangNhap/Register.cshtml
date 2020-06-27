@@ -44,8 +44,6 @@
                         </div>
                         <div class="form-group">
                             @Html.DropDownListFor(model => model.GioiTinh, ViewBag.GioiTinh as SelectList, "Chọn giới tính", new { @class = "form-control" })
-                            @*<input asp-for="GioiTinh" class="form-control" placeholder="Giới tính" />
-            <span asp-validation-for="GioiTinh" class="text-danger"></span>*@
                         </div>
                         <div class="form-group">
                             <input asp-for="Email" class="form-control" placeholder="Nhập email" id="emailID" />

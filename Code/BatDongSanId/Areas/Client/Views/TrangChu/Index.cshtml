@@ -12,7 +12,7 @@
             @foreach (var tin in Model.TinVIPViewModels)
             {
                 <div class="col-lg-6 col-xl-6">
-                    <div class="room-items">
+                    <div class=" room-items mystyle-tin-boder">
                         <div style="margin: 5px;">
                             <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
                         </div>
@@ -68,7 +68,7 @@
             @foreach (var tin in Model.TinHOTViewModels)
             {
                 <div class="col-lg-6 col-xl-6">
-                    <div class="room-items">
+                    <div class=" room-items mystyle-tin-boder">
                         <div style="margin: 5px;">
                             <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
                         </div>
@@ -124,7 +124,7 @@
             @foreach (var tin in Model.TinThuongViewModels)
             {
                 <div class="col-lg-6 col-xl-6">
-                    <div class="room-items">
+                    <div class=" room-items mystyle-tin-boder">
                         <div style="margin: 5px;">
                             <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
                         </div>

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<BatDongSanId.Areas.Client.Models.ViewModels.TinBDSViewModel>
+@{
+    ViewData["Title"] = "DaGiaoDich";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <thead style="background-color:#000257;color:white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoaiTin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GoiTin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayDang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NguoiDang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TieuDe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PheDuyet)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiTin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GoiTin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NguoiDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TieuDe)
+                </td>
+                @if(item.PheDuyet == true) {
+                    <td>Đã duyệt</td>
+                }
+                else {
+                    <td>Chưa duyệt</td>
+                }
+                <td>
+                    @Html.ActionLink("Chi tiết", "Details", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+}
+    </tbody>
+</table>
+
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("a.duyet").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            //var btn = $("button.room-content");
+            var tin = $(this).attr("data");
+            $.ajax({
+                url: '@Url.Action("DuyetTin", "TinBDS")',
+                data: { 'idTin': tin },
+                type: "post",
+                async: false,
+                success: function (result) {
+                    alert("Đã duyệt tin!");
+                }
+            });
+            return;
+        });
+    })
+</script>*@
+

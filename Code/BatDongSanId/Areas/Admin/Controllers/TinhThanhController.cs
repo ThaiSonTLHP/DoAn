@@ -36,14 +36,14 @@ namespace BatDongSanId.Areas.Admin.Controllers
 
 
         //-------------Xem chi tiết-------------
-        public IActionResult Details(int? id)
+        public IActionResult Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var city =  _dbContext.TinhThanh.FirstOrDefault(m => m.ID == id.ToString());
+            var city =  _dbContext.TinhThanh.FirstOrDefault(m => m.ID == id);
 
             if (city == null)
             {
@@ -76,7 +76,7 @@ namespace BatDongSanId.Areas.Admin.Controllers
 
 
         //-------------Sửa-------------
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -92,9 +92,9 @@ namespace BatDongSanId.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, TinhThanh tinhThanh)
+        public IActionResult Edit(string id, TinhThanh tinhThanh)
         {
-            if (id.ToString() != tinhThanh.ID)
+            if (id != tinhThanh.ID)
             {
                 return NotFound();
             }
@@ -125,14 +125,14 @@ namespace BatDongSanId.Areas.Admin.Controllers
 
 
         //-------------Xóa-------------
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var city = _dbContext.TinhThanh.FirstOrDefault(m => m.ID == id.ToString());
+            var city = _dbContext.TinhThanh.FirstOrDefault(m => m.ID == id);
             if (city == null)
             {
                 return NotFound();
@@ -143,7 +143,7 @@ namespace BatDongSanId.Areas.Admin.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(string id)
         {
             var city =  _dbContext.TinhThanh.Find(id);
             _dbContext.TinhThanh.Remove(city);

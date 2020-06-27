@@ -76,6 +76,11 @@ namespace BatDongSanId.Areas.Client.Controllers
             return View();
         }
 
+        public IActionResult TinTuc()
+        {
+            return View();
+        }
+
         public IActionResult ChiTietNhaMoiGioi()
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
@@ -84,7 +89,9 @@ namespace BatDongSanId.Areas.Client.Controllers
 
         public IActionResult Search(string TinhThanhOption, int LoaiTinOption, int MucGiaOption, int LoaiBDSOption)
         {
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             var listTinBDS = (from t in dbContext.TinBatDongSan
+                              join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
                               join lt in dbContext.LoaiTinBatDongSan on t.LoaiBatDongSan equals lt.ID
                               join nd in dbContext.TaiKhoan on t.NguoiDang equals nd.ID
                               join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
@@ -92,26 +99,39 @@ namespace BatDongSanId.Areas.Client.Controllers
                               join tt in dbContext.TinhThanh on t.TinhThanh equals tt.ID
                               join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
                               join h in dbContext.Huong on t.Huong equals h.ID
-                              where lt.ID == LoaiTinOption 
-                              && tt.ID == TinhThanhOption
+                              where t.LoaiTin == LoaiTinOption 
+                              && t.TinhThanh == TinhThanhOption
                               && t.MucGia == MucGiaOption
                               && t.LoaiBatDongSan == LoaiBDSOption
                               select new TinBDSViewModel()
                               {
                                   ID = t.ID,
-                                  LoaiTin = lt.Ten,
-                                  NguoiDang = nd.Ten,
-                                  LienHe = nd.SoDienThoai,
+                                  LienHe = tk.SoDienThoai,
                                   NgayDang = t.NgayDang,
+                                  LoaiTin = lt.Ten,
                                   GoiTin = gt.Ten,
+                                  PheDuyet = t.TrangThaiDuyet,
+                                  NguoiDang = tk.Ten,
                                   LoaiBatDongSan = lbds.Ten,
                                   TinhThanh = tt.Ten,
                                   QuanHuyen = qh.Ten,
-                                  Gia = t.Gia.ToString(),
-                                  DienTich = t.DienTich.ToString(),
                                   Huong = h.Ten,
+                                  DienTich = t.DienTich,
+                                  Gia = t.Gia,
+                                  XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
+                                  XacThucBool = t.TrangThaiXacNhan,
+                                  TieuDe = t.MoTa.Substring(0, 100) + "...",
+                                  DaBan = t.TrangThaiGiaoDich,
                                   MoTa = t.MoTa
                               }).ToList();
+            if (listTinBDS.Count() > 0)
+            {
+                foreach (TinBDSViewModel tin in listTinBDS)
+                {
+                    tin.Gia = layDuLieu.GiaTien(tin.Gia);
+                    tin.HinhAnh = layDuLieu.LayHinhAnh(tin.ID, "Tin bất động sản");
+                }
+            }
             return View(listTinBDS);
         }
 
@@ -160,16 +180,18 @@ namespace BatDongSanId.Areas.Client.Controllers
 
 
         public IActionResult KetQuaTimKiem(
-            string QuanHuyenOption,
-            int LoaiTinOption,
-            int MucGiaOption,
-            int LoaiBDSOption,
-            int MucDTOption,
-            int HuongOption,
-            string XacThucOption,
-            string ThoiGianOption)
+            string QuanHuyens,
+            int LoaiTinBatDongSans,
+            int MucGias,
+            int LoaiBatDongSans,
+            int MucDienTiches,
+            int Huongs,
+            string XacThucs,
+            string ThoiGians)
         {
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             var listTinBDS = (from t in dbContext.TinBatDongSan
+                              join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
                               join lt in dbContext.LoaiTinBatDongSan on t.LoaiBatDongSan equals lt.ID
                               join nd in dbContext.TaiKhoan on t.NguoiDang equals nd.ID
                               join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
@@ -177,15 +199,14 @@ namespace BatDongSanId.Areas.Client.Controllers
                               join tt in dbContext.TinhThanh on t.TinhThanh equals tt.ID
                               join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
                               join h in dbContext.Huong on t.Huong equals h.ID
-                              where lt.ID == LoaiTinOption
-                              && qh.ID == QuanHuyenOption
-                              && t.MucGia == MucGiaOption
-                              && t.LoaiBatDongSan == LoaiBDSOption
-                              && t.MucGia == MucGiaOption
-                              && t.MucDienTich == MucDTOption
-                              && h.ID == HuongOption
-                              && t.TrangThaiXacNhan == Boolean.Parse(XacThucOption)
-                              && DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(ThoiGianOption)),DateTime.Now) <= 0
+                              where t.LoaiTin == LoaiTinBatDongSans
+                              && t.QuanHuyen == QuanHuyens
+                              && t.MucGia == MucGias
+                              && t.LoaiBatDongSan == LoaiBatDongSans
+                              && t.MucDienTich == MucDienTiches
+                              && h.ID == Huongs
+                              && t.TrangThaiXacNhan == Boolean.Parse(XacThucs)
+                              && DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(ThoiGians)),DateTime.Now) >= 0
                               select new TinBDSViewModel()
                               {
                                   ID = t.ID,
@@ -202,6 +223,15 @@ namespace BatDongSanId.Areas.Client.Controllers
                                   Huong = h.Ten,
                                   MoTa = t.MoTa
                               }).ToList();
+            if (listTinBDS.Count() > 0)
+            {
+                foreach (TinBDSViewModel tin in listTinBDS)
+                {
+                    tin.Gia = layDuLieu.GiaTien(tin.Gia);
+                    tin.HinhAnh = layDuLieu.LayHinhAnh(tin.ID, "Tin bất động sản");
+                }
+            }
+            
             return View(listTinBDS);
         }
 

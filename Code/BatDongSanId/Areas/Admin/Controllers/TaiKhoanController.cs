@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
+using BatDongSanId.Areas.Client.Models.ListViewModels;
 using BatDongSanId.Data;
 using BatDongSanId.Methods;
 using BatDongSanId.Models;
 using BatDongSanId.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -56,21 +58,39 @@ namespace BatDongSanId.Areas.Admin.Controllers
         }
 
         //-------------Xem chi tiết-------------
-        public IActionResult Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null)
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            QLTKListViewModel qLTKListViewModel = new QLTKListViewModel();
+            qLTKListViewModel.taiKhoanViewModel = (from t in dbContext.TaiKhoan
+                                                   join ltk in dbContext.LoaiTaiKhoan on t.LoaiTaiKhoan equals ltk.ID
+                                                   where t.ID == id
+                                                   select new TaiKhoanViewModel()
+                                                   {
+                                                       ID = t.ID,
+                                                       Ten = t.Ten,
+                                                       Email = t.Email,
+                                                       SoDienThoai = t.SoDienThoai,
+                                                       DiaChi = t.DiaChi,
+                                                       AnhDaiDienData = t.AnhDaiDien,
+                                                       SoDuVi = t.SoDuVi,
+                                                       LoaiTaiKhoan = ltk.Ten
+                                                   }).FirstOrDefault();
+            qLTKListViewModel.taiKhoanViewModel.AnhDaiDienUrl = LayUrlHinhAnh(qLTKListViewModel.taiKhoanViewModel.AnhDaiDienData);
+            qLTKListViewModel.soTinDang = (from tin in dbContext.TinBatDongSan
+                                           join tk in dbContext.TaiKhoan on tin.NguoiDang equals tk.ID
+                                           where tk.ID == id
+                                           select new TinBatDongSan() { ID = tin.ID }).ToList().Count();
+            qLTKListViewModel.soTinLuu = (from luu in dbContext.LuuTinBatDongSan
+                                          join tk in dbContext.TaiKhoan on luu.TaiKhoan equals tk.ID
+                                          join tin in dbContext.TinBatDongSan on luu.TinBatDongSan equals tin.ID
+                                          where tk.ID == id
+                                          select new TinBatDongSan() { ID = tin.ID }).ToList().Count();
+            if (qLTKListViewModel == null)
             {
                 return NotFound();
             }
-
-            var city = dbContext.TaiKhoan.FirstOrDefault(m => m.ID == id);
-
-            if (city == null)
-            {
-                return NotFound();
-            }
-
-            return View(city);
+            return View(qLTKListViewModel);
         }
 
 
@@ -191,12 +211,24 @@ namespace BatDongSanId.Areas.Admin.Controllers
 
 
         //-------------------ajax
+        public void NapTien(int id, string tien)
+        {
+            var taiKhoan = dbContext.TaiKhoan.FirstOrDefault(t => t.ID == id);
+            taiKhoan.SoDuVi += double.Parse(tien);
+            dbContext.Update(taiKhoan);
+            dbContext.SaveChanges();
+        }
+
+
         public void Khoa(int id)
         {
             var taiKhoan = dbContext.TaiKhoan.FirstOrDefault(t => t.ID == id);
             taiKhoan.XacThuc = false;
             dbContext.Update(taiKhoan);
             dbContext.SaveChanges();
+            Mail.SendMail(taiKhoan.Email,
+                "Tài khoản bất động sản",
+                "Tài khoản của bạn tại website đã bị khóa, vui lòng liên hệ với website để biết thêm thông tin.");
         }
 
         public void Xoa(int id)
@@ -228,6 +260,22 @@ namespace BatDongSanId.Areas.Admin.Controllers
             }
             dbContext.TaiKhoan.Remove(taiKhoan);
             dbContext.SaveChanges();
+        }
+
+
+        string LayUrlHinhAnh(byte[] hinhAnh)
+        {
+            string anhDataURL;
+            if (hinhAnh != null)
+            {
+                string anhBase64Data = Convert.ToBase64String(hinhAnh);
+                anhDataURL = string.Format("data:image/jpg;base64,{0}", anhBase64Data);
+            }
+            else
+            {
+                anhDataURL = "~/Client/img/rooms/1.jpg";
+            }
+            return anhDataURL;
         }
     }
 }

@@ -35,9 +35,10 @@ namespace BatDongSanId.Areas.Client.Controllers
             //int pageNumber = (page ?? 1);
 
             LayDuLieu layDuLieu = new LayDuLieu(_dbContext, configuration);
+            layDuLieu.CapNhat();
             TrangChuListViewModel _trangChu = new TrangChuListViewModel();
             var tinThuongViewModels = layDuLieu.LayTinBDS(2, "Tin thường", "All");
-            var tinHOTViewModels = layDuLieu.LayTinBDS(6, "Tin HOT", "All");
+            var tinHOTViewModels = layDuLieu.LayTinBDS(int.Parse(configuration["AppSetting:TinHOTCount"]), "Tin HOT", "All");
             var tinVIPViewModels = layDuLieu.LayTinBDS(int.Parse(configuration["AppSetting:TinVIPCount"]), "Tin VIP", "All");
             var nhaMoiGioiViewModels = layDuLieu.LayTaiKhoan(10, "Nhà môi giới");
             var tinTucViewModels = layDuLieu.LayTinTuc(6);

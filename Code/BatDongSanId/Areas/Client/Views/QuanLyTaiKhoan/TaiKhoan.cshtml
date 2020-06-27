@@ -7,17 +7,25 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
-            <div>
+            <div style="border:1px solid black; width: auto; height: 235px;">
                 <img src="@Html.Raw(Model.taiKhoanViewModel.AnhDaiDienUrl)" />
             </div>
-            <div>
-
-            </div>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-8" @*style="padding: 30px;"*@>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p style="font-size: 13pt;">Tên: @Html.Raw(Model.taiKhoanViewModel.Ten)</p>
+                    <p style="font-size: 13pt;">Email/ Tài khoản: @Html.Raw(Model.taiKhoanViewModel.Email)</p>
+                    <p style="font-size: 13pt;">Địa chỉ: @Html.Raw(Model.taiKhoanViewModel.DiaChi)</p>
+                    <p style="font-size: 13pt;">Số điện thoại: @Html.Raw(Model.taiKhoanViewModel.SoDienThoai)</p>
+                    <p style="font-size: 13pt;">Số dư ví: @Html.Raw(Model.taiKhoanViewModel.SoDuVi)</p>
+                    <p style="font-size: 13pt;">Loại tài khoản: @Html.Raw(Model.taiKhoanViewModel.LoaiTaiKhoan)</p>
+                </div>
+            </div>
+            <hr />
             <div class="row">
                 <div class="col-sm-6">
-                    <p>Số tin đã đăng: @Html.Raw(Model.soTinDang)</p>
+                    <p style="font-size: 15pt;">Số tin đã đăng: @Html.Raw(Model.soTinDang)</p>
                 </div>
                 <div class="col-sm-6">
                     <a asp-action="TinDaDang">Xem chi tiết</a>
@@ -25,18 +33,10 @@
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <p>Số tin đã luu: @Html.Raw(Model.soTinLuu)</p>
+                    <p style="font-size: 15pt;">Số tin đã luu: @Html.Raw(Model.soTinLuu)</p>
                 </div>
                 <div class="col-sm-6">
                     <a asp-action="TinDaLuu">Xem chi tiết</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <p>Số dư ví: @Html.Raw(Model.taiKhoanViewModel.SoDuVi)</p>
-                </div>
-                <div class="col-sm-6">
-                    <a asp-action="SoDuVi">Xem chi tiết</a>
                 </div>
             </div>
         </div>

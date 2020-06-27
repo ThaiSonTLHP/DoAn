@@ -89,7 +89,7 @@
         @Html.DisplayFor(modelItem => item.LoaiTaiKhoan)
     </td>
     <td>
-        @Html.ActionLink("Chi tiết", "Details", new { /* id=item.PrimaryKey */ }) |
+        <a asp-controller="TaiKhoan" asp-action="Details" asp-route-id="@Html.Raw(item.ID)">Chi tiết</a> |
         <a class="khoa" @*data-toggle="modal" data-target="#exampleModal"*@ data="@item.ID">Khoá</a>
     </td>
 </tr>

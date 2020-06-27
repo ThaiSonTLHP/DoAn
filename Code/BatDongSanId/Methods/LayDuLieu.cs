@@ -21,6 +21,112 @@ namespace BatDongSanId.Methods
             this.configuration = configuration;
         }
 
+        // cập nhật lại trạng thái gói tin hết hạn và tin chưa lên bảng tin
+        public void CapNhat()
+        {
+            //var listThuong = (from t in dbContext.TinBatDongSan select new TinBatDongSan(){ID = t.ID}).ToList();
+            //DateTime time = new DateTime(9999, 01, 01, 0, 0, 0);
+            //foreach (var tin in listThuong)
+            //{
+            //    var _tin = dbContext.TinBatDongSan.Find(tin.ID);
+            //    _tin.NgayLenBangTin = /*_tin.NgayDang.AddYears(-10);*/ time;
+            //    dbContext.Update(_tin);
+            //    dbContext.SaveChanges();
+            //}
+
+
+            var tinThuong = dbContext.GoiTin.FirstOrDefault(g => g.Ten == "Tin thường");
+
+
+
+            //cập nhật tin hết hạn
+            var list = (from t in dbContext.TinBatDongSan
+                        join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
+                        where 
+                        DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(configuration["AppSetting:TinVIPTime"])), DateTime.Now) < 0
+                        && gt.Ten == "Tin VIP"
+                        && t.TrangThaiDuyet == true
+                        select new TinBatDongSan()
+                        {
+                            ID = t.ID,
+                            GoiTin = gt.ID
+                        }).ToList();
+            foreach (var tin in list)
+            {
+                var _tin = dbContext.TinBatDongSan.Find(tin.ID);
+                _tin.GoiTin = tinThuong.ID;
+                dbContext.Update(_tin);
+                dbContext.SaveChanges();
+            }
+
+            //cập nhật tin chưa được lên
+            var listUpdate = (from t in dbContext.TinBatDongSan
+                              join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
+                              where gt.Ten == "Tin VIP"
+                              && t.TrangThaiDuyet == true
+                              select new TinBatDongSan()
+                              {
+                                  ID = t.ID,
+                                  NgayLenBangTin = t.NgayLenBangTin,
+                                  NgayDang = t.NgayDang
+                              }).OrderBy(t=>t.NgayDang).ToList();
+            listUpdate = listUpdate.GetRange(0, listUpdate.Count() < int.Parse(configuration["AppSetting:TinVIPCount"]) ? listUpdate.Count : int.Parse(configuration["AppSetting:TinVIPCount"]));
+            foreach (var tin in listUpdate)
+            {
+                if (DateTime.Compare(tin.NgayLenBangTin, tin.NgayDang) > 0)
+                {
+                    var _tin = dbContext.TinBatDongSan.Find(tin.ID);
+                    _tin.NgayLenBangTin = DateTime.Now;
+                    dbContext.Update(_tin);
+                    dbContext.SaveChanges();
+                }
+            }
+
+
+
+            //cập nhật tin hết hạn
+            var listHOT = (from t in dbContext.TinBatDongSan
+                        join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
+                        where DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(configuration["AppSetting:TinHOTTime"])), DateTime.Now) < 0
+                        && gt.Ten == "Tin HOT"
+                        && t.TrangThaiDuyet == true
+                        select new TinBatDongSan()
+                        {
+                            ID = t.ID,
+                            GoiTin = gt.ID
+                        }).ToList();
+            foreach (var tin in list)
+            {
+                var _tin = dbContext.TinBatDongSan.Find(tin.ID);
+                _tin.GoiTin = tinThuong.ID;
+                dbContext.Update(_tin);
+                dbContext.SaveChanges();
+            }
+
+            //cập nhật tin chưa được lên
+            var listHOTUpdate = (from t in dbContext.TinBatDongSan
+                              join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
+                              where gt.Ten == "Tin HOT"
+                              && t.TrangThaiDuyet == true
+                              select new TinBatDongSan()
+                              {
+                                  ID = t.ID,
+                                  NgayLenBangTin = t.NgayLenBangTin,
+                                  NgayDang = t.NgayDang
+                              }).OrderBy(t => t.NgayDang).ToList();
+            listHOTUpdate = listHOTUpdate.GetRange(0, listHOTUpdate.Count() < int.Parse(configuration["AppSetting:TinHOTCount"]) ? listHOTUpdate.Count : int.Parse(configuration["AppSetting:TinHOTCount"]));
+            foreach (var tin in listHOTUpdate)
+            {
+                if (DateTime.Compare(tin.NgayLenBangTin,tin.NgayDang) > 0)
+                {
+                    var _tin = dbContext.TinBatDongSan.Find(tin.ID);
+                    _tin.NgayLenBangTin = DateTime.Now;
+                    dbContext.Update(_tin);
+                    dbContext.SaveChanges();
+                }
+            }
+        }
+
         public List<TinBDSViewModel> LayTinBDS()
         {
             var listTinBDS = (from t in dbContext.TinBatDongSan
@@ -51,7 +157,7 @@ namespace BatDongSanId.Methods
                                   TieuDe = t.MoTa.Substring(0, 60) + "...",
                                   DaBan = t.TrangThaiGiaoDich,
                                   MoTa = t.MoTa
-                              }).ToList();
+                              }).OrderBy(x => x.ID).ToList();
             return listTinBDS;
         }
 
@@ -59,95 +165,10 @@ namespace BatDongSanId.Methods
         {
             List<TinBDSViewModel> listTinBDS = new List<TinBDSViewModel>();
             var tinThuong = dbContext.GoiTin.FirstOrDefault(g => g.Ten == "Tin thường");
+
+            //lay theo goi tin
             if (goiTin != "All" && loaiTinBDS == "All")
             {
-                // cập nhật lại trạng thái gói tin hết hạn và tin chưa lên bảng tin
-                if(goiTin == "Tin VIP")
-                {
-                    //cập nhật tin hết hạn
-                    var list = (from t in dbContext.TinBatDongSan
-                                join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
-                                where DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(configuration["AppSetting:TinVIPTime"])),DateTime.Now) > 0
-                                && gt.Ten == goiTin
-                                && t.TrangThaiDuyet == true
-                                select new TinBatDongSan()
-                                {
-                                    ID = t.ID,
-                                    GoiTin = gt.ID
-                                }).ToList();
-                    foreach(var tin in list)
-                    {
-                        tin.GoiTin = tinThuong.ID;
-                        dbContext.Update(tin);
-                        dbContext.SaveChanges();
-                    }
-
-                    //cập nhật tin chưa được lên
-                    var listUpdate = (from t in dbContext.TinBatDongSan
-                                      join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
-                                      where  gt.Ten == goiTin
-                                      && t.TrangThaiDuyet == true
-                                      select new TinBatDongSan()
-                                      {
-                                          ID = t.ID,
-                                          NgayLenBangTin = t.NgayLenBangTin
-                                      }).ToList();
-                    listUpdate = listUpdate.GetRange(0, listUpdate.Count() < soLuong ? listUpdate.Count : soLuong);
-                    foreach (var tin in listUpdate)
-                    {
-                        if(tin.NgayLenBangTin == null)
-                        {
-                            tin.NgayLenBangTin = DateTime.Now;
-                            dbContext.Update(tin);
-                            dbContext.SaveChanges();
-                        }
-                    }
-                }
-                if (goiTin == "Tin HOT")
-                {
-                    //cập nhật tin hết hạn
-                    var list = (from t in dbContext.TinBatDongSan
-                                join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
-                                where DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(configuration["AppSetting:TinHOTTime"])), DateTime.Now) > 0
-                                && gt.Ten == goiTin
-                                && t.TrangThaiDuyet == true
-                                select new TinBatDongSan()
-                                {
-                                    ID = t.ID,
-                                    GoiTin = gt.ID
-                                }).ToList();
-                    foreach (var tin in list)
-                    {
-                        tin.GoiTin = tinThuong.ID;
-                        dbContext.Update(tin);
-                        dbContext.SaveChanges();
-                    }
-
-                    //cập nhật tin chưa được lên
-                    var listUpdate = (from t in dbContext.TinBatDongSan
-                                      join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
-                                      where gt.Ten == goiTin
-                                      && t.TrangThaiDuyet == true
-                                      select new TinBatDongSan()
-                                      {
-                                          ID = t.ID,
-                                          NgayLenBangTin = t.NgayLenBangTin
-                                      }).ToList();
-                    listUpdate = listUpdate.GetRange(0, listUpdate.Count() < soLuong ? listUpdate.Count : soLuong);
-                    foreach (var tin in listUpdate)
-                    {
-                        if (tin.NgayLenBangTin == null)
-                        {
-                            tin.NgayLenBangTin = DateTime.Now;
-                            dbContext.Update(tin);
-                            dbContext.SaveChanges();
-                        }
-                    }
-                }
-
-
-
-
                 listTinBDS = (from t in dbContext.TinBatDongSan
                             join lt in dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
                             join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
@@ -175,9 +196,15 @@ namespace BatDongSanId.Methods
                                 XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
                                 TieuDe = t.MoTa.Substring(0, 60) + "...",
                                 MoTa = t.MoTa
-                            }).ToList();
+                            }).OrderBy(t=>t.NgayDang).ToList();
+                if (goiTin == "Tin thường")
+                {
+                    listTinBDS.Reverse();
+                }
             }
-            else if(goiTin == "All" && loaiTinBDS != "All")
+
+            //lay theo loai tin
+            else if (goiTin == "All" && loaiTinBDS != "All")
             {
                 listTinBDS = (from t in dbContext.TinBatDongSan
                               join lt in dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
@@ -206,8 +233,9 @@ namespace BatDongSanId.Methods
                                   XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
                                   TieuDe = t.MoTa.Substring(0, 60) + "...",
                                   MoTa = t.MoTa
-                              }).ToList();
+                              }).OrderBy(t => t.NgayDang).ToList();
             }
+
             foreach (TinBDSViewModel tin in listTinBDS)
             {
                 tin.Gia = GiaTien(tin.Gia);

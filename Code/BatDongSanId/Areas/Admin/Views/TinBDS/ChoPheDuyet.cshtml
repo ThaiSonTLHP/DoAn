@@ -54,9 +54,12 @@
     <td>
         @Html.DisplayFor(modelItem => item.TieuDe)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.PheDuyet)
-    </td>
+    @if(item.PheDuyet == true) {
+                    <td>Đã duyệt</td>
+                }
+                else {
+                    <td>Chưa duyệt</td>
+                }
     <td>
         @Html.ActionLink("Chi tiết", "Details", new { /* id=item.PrimaryKey */ }) |
         <a class="duyet"  data="@item.ID">Duyệt</a>

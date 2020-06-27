@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BatDongSanId.Areas.Client.Models.ViewModels;
 using BatDongSanId.Data;
+using BatDongSanId.Methods;
 using BatDongSanId.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -58,20 +59,18 @@ namespace BatDongSanId.Areas.Client.Controllers
         [HttpPost]
         public IActionResult DangTin(TinBDSViewModel tinBDSViewModel)
         {
+            var _time = DateTime.Now;
             var _nguoiDang = dbContext.TaiKhoan.FirstOrDefault(x => x.ID == HttpContext.Session.GetInt32("userID"));
             var count = (from t in dbContext.TinBatDongSan
                         join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
-                        where t.NgayDang == DateTime.Now
+                        where t.NgayDang.Date == _time.Date
                         select new TinBatDongSan()
                         {
                             ID = t.ID
                         }).ToList().Count();
             if (count < int.Parse(configuration["AppSetting:TinPerDay"]))
             {
-
-
                 var tinBatDongSan = new TinBatDongSan();
-
                 //HttpContext.Session.SetInt32("userID", 4);
                 var _goiTin = dbContext.GoiTin.FirstOrDefault(x => x.ID == int.Parse(tinBDSViewModel.GoiTin));
                 var _mucGia = dbContext.MucGia.FirstOrDefault(x => (x.Min <= double.Parse(tinBDSViewModel.Gia) && x.Max >= double.Parse(tinBDSViewModel.Gia)));
@@ -81,13 +80,40 @@ namespace BatDongSanId.Areas.Client.Controllers
 
                 tinBatDongSan.LoaiTin = int.Parse(tinBDSViewModel.LoaiTin);
                 tinBatDongSan.NguoiDang = _nguoiDang.ID;
-
-                var _time = DateTime.Now;
+                
                 tinBatDongSan.NgayDang = _time;
                 tinBatDongSan.TrangThaiGiaoDich = false;
                 tinBatDongSan.TrangThaiXacNhan = false;
                 if(_goiTin.Ten == "Tin VIP" || _goiTin.Ten == "Tin HOT")
                 {
+                    LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+                    if (_goiTin.Ten == "Tin VIP")
+                    {
+                        if(layDuLieu.LayTinBDS(int.Parse(configuration["AppSetting:TinVIPCount"]), "Tin VIP", "All").Count()<
+                            int.Parse(configuration["AppSetting:TinVIPCount"]))
+                        {
+                            tinBatDongSan.NgayLenBangTin = _time;
+                        }
+                        else
+                        {
+                            tinBatDongSan.NgayLenBangTin = new DateTime(9999, 01, 01, 0, 0, 0);
+                        }
+                    }
+                    else if(_goiTin.Ten == "Tin HOT")
+                    {
+                        if (layDuLieu.LayTinBDS(int.Parse(configuration["AppSetting:TinHOTCount"]), "Tin HOT", "All").Count() <
+                            int.Parse(configuration["AppSetting:TinHOTCount"]))
+                        {
+                            tinBatDongSan.NgayLenBangTin = _time;
+                        }
+                        else
+                        {
+                            tinBatDongSan.NgayLenBangTin = new DateTime(9999, 01, 01, 0, 0, 0);
+                        }
+                    }
+
+
+
                     if (_nguoiDang.SoDuVi >= _goiTin.MucPhi)
                     {
                         _nguoiDang.SoDuVi -= _goiTin.MucPhi;
@@ -101,7 +127,7 @@ namespace BatDongSanId.Areas.Client.Controllers
                 }
                 else
                 {
-                    tinBatDongSan.NgayLenBangTin = DateTime.Now;
+                    tinBatDongSan.NgayLenBangTin = _time;
                     tinBatDongSan.TrangThaiDuyet = true;
                 }
 

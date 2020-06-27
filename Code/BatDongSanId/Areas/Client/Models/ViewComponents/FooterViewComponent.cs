@@ -35,7 +35,7 @@ namespace BatDongSanId.Areas.Client.Models.ViewComponents
                                             join tt in dbContext.TinhThanh on t.TinhThanh equals tt.ID
                                             join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
                                             join h in dbContext.Huong on t.Huong equals h.ID
-                                            where gt.Ten == "Tin VIP"
+                                            //where gt.Ten == "Tin VIP"
                                             select new TinBDSViewModel()
                                             {
                                                 ID = t.ID,
@@ -53,10 +53,14 @@ namespace BatDongSanId.Areas.Client.Models.ViewComponents
                                                 TieuDe = t.MoTa.Substring(0, 80) + "...",
                                                 MoTa = t.MoTa
                                             }).OrderBy(m => m.NgayDang).ToListAsync();
-            footer.TinBDSViewModel = listTin.GetRange(0, 2);
-            foreach(var tin in listTin)
+            if (listTin.Count() > 2)
             {
-                tin.HinhAnh = layDuLieu.LayHinhAnh(tin.ID, "Tin bất động sản");
+                listTin.Reverse();
+                footer.TinBDSViewModel = listTin.GetRange(0, 2);
+                foreach (var tin in listTin)
+                {
+                    tin.HinhAnh = layDuLieu.LayHinhAnh(tin.ID, "Tin bất động sản");
+                }
             }
             return View(footer);
         }

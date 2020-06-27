@@ -4,6 +4,15 @@
     ViewData["Title"] = "DangTin";
     Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .imgStyle
+    {
+        height: 100px;
+        width: 100px;
+        border: 1px solid grey;
+        margin: 5px;
+    }
+</style>
 <div class="row justify-content-center">
     <h4>Đăng tin</h4>
 </div>
@@ -64,9 +73,11 @@
                     <input type="file" class="custom-file-input" id="imgInp" name="file1" multiple="multiple" onchange="readURL(this);" />
                     <label class="custom-file-label">Chọn ảnh</label>
                 </div>
-                <div style="margin-top:10px;margin-bottom:10px;">
+                <div class="gallery row" style="margin:20px;"></div>
+
+                @*<div style="margin-top:10px;margin-bottom:10px;">
                     <img id="blah" src="#" alt="&emsp;Ảnh của bạn" />
-                </div>
+                </div>*@
 
                 <div class="form-group">
                     <input type="submit" value="Xác nhận" class="btn btn-primary" />
@@ -101,47 +112,44 @@
         });
     })
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+    //function readURL(input) {
+    //    if (input.files && input.files[0]) {
+    //        var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#blah').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $("#imgInp").change(function () {
-        readURL(this);
-    });
-
-    //$(document).ready(function () {
-    //    $("#TinhThanhID").change(function () {
-    //        var SelecedVal = $(this).val();
-    //        $("#QuanHuyenID").html('');
-    //        $("#QuanHuyenID").append($("<option></option>").attr("value", '').text('Select State'));
-    //        if (SelecedVal != '') {
-    //            //alert("hello");
-    //            $.get('/DangTin/GetQuanHuyenList/', {"_tinhThanh": SelecedVal}).success(function (data) {
-    //                alert(data);
-    //                $.each(data, function (index, item) {
-    //                    $("#QuanHuyenID").append($("<option></option>").attr("value", item.ID)
-    //                        .text(item.Ten));
-    //                });
-    //            })
+    //        reader.onload = function (e) {
+    //            $('#blah').attr('src', e.target.result);
     //        }
-    //    });
-    //})
 
-    @*$(document).ready(function () {
-        $.ajax({
-            url: '@Url.Action("GetQuanHuyenList", "DangTin")',
-            type: "GET",
-            success: function (result) {
-                alert(result.ID);
+    //        reader.readAsDataURL(input.files[0]);
+    //    }
+    //}
+    //$("#imgInp").change(function () {
+    //    readURL(this);
+    //});
+
+
+    // Multiple images preview in browser
+    $(function () {
+        // Multiple images preview in browser
+        var imagesPreview = function (input, placeToInsertImagePreview) {
+            if (input.files) {
+                var filesAmount = input.files.length;
+
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function (event) {
+                        $($.parseHTML('<img class="imgStyle">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
+                }
             }
-        })
-    })*@
+
+        };
+
+        $('#imgInp').on('change', function () {
+            imagesPreview(this, 'div.gallery');
+        });
+    });
 </script>
 

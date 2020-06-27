@@ -77,9 +77,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.TieuDe)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PheDuyet)
-                </td>
+                @if(item.PheDuyet == true) {
+                    <td>Đã duyệt</td>
+                }
+                else {
+                    <td>Chưa duyệt</td>
+                }
                 <td>
                     <a class="xacThuc" data="@item.ID">Xác thực</a>
                 </td>

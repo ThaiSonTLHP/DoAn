@@ -185,3 +185,10 @@
 .mystyle-leftmenu li a i{
     margin-right: 10px;
 }
+
+
+
+.mystyle-tin-boder {
+    background-color: #ffffff;
+    border: 1px solid #00bead;
+}
