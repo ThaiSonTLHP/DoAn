@@ -127,6 +127,39 @@ namespace BatDongSanId.Methods
             }
         }
 
+        public TinBDSViewModel LayTinBDS(int id)
+        {
+            var tin = (from t in dbContext.TinBatDongSan
+                        join lt in dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
+                        join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
+                        join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
+                        join lbds in dbContext.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
+                        join tt in dbContext.TinhThanh on t.TinhThanh equals tt.ID
+                        join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
+                        join h in dbContext.Huong on t.Huong equals h.ID
+                        where t.ID == id
+                        select new TinBDSViewModel()
+                        {
+                            ID = t.ID,
+                            LienHe = tk.SoDienThoai,
+                            NgayDang = t.NgayDang.Date,
+                            LoaiTin = lt.Ten,
+                            NguoiDang = tk.Ten,
+                            LoaiBatDongSan = lbds.Ten,
+                            TinhThanh = tt.Ten,
+                            QuanHuyen = qh.Ten,
+                            Huong = h.Ten,
+                            DienTich = t.DienTich,
+                            Gia = t.Gia,
+                            XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
+                            TieuDe = t.MoTa.Substring(0, 60) + "...",
+                            MoTa = t.MoTa
+                        }).FirstOrDefault();
+            tin.Gia = GiaTien(tin.Gia);
+            tin.HinhAnh = LayHinhAnh(tin.ID, "Tin bất động sản");
+            return tin;
+        }
+
         public List<TinBDSViewModel> LayTinBDS()
         {
             var listTinBDS = (from t in dbContext.TinBatDongSan
@@ -550,6 +583,7 @@ namespace BatDongSanId.Methods
                             && t.ID == id
                             select new TaiKhoanViewModel()
                             {
+                                ID = t.ID,
                                 MatKhau = t.MatKhau,
                                 Ten = t.Ten,
                                 GioiTinh = (t.GioiTinh == true) ? "Nam" : "Nữ",

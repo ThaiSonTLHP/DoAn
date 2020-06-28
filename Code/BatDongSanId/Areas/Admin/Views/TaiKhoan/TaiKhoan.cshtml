@@ -7,11 +7,11 @@
     <div class="col-md-4">
         <form asp-action="TaiKhoan" method="get">
             <select class="form-control" name="loaiTK">
+                <option value="0">Tất cả</option>
                 <option value="1">Quản trị</option>
                 <option value="2">Nhân viên</option>
                 <option value="3">Nhà môi giới</option>
                 <option value="4">Khách hàng</option>
-                <option value="0">Tất cả</option>
             </select>
             <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
         </form>

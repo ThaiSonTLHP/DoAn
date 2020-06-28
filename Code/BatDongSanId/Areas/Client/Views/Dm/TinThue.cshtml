@@ -1,13 +1,13 @@
 ﻿@model X.PagedList.IPagedList<BatDongSanId.Areas.Client.Models.ViewModels.TinBDSViewModel>
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Mvc.Core.Common;
-@{ ViewData["Title"] = "Tin cho thuê";
+@{ ViewData["Title"] = "Tin cần thuê";
     Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml"; }
 @using Microsoft.AspNetCore.Http;
 
 <section class="hotel-rooms spad" style="padding-top:0px;">
     <div class="container card">
-        <div class="row card-header">Tin cho thuê</div>
+        <div class="row card-header">Tin cần thuê</div>
         <div class="row card-body">
             @foreach (var tin in Model)
             {<div class="col-lg-6 col-xl-6">

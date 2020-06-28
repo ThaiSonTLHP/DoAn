@@ -59,6 +59,12 @@ namespace BatDongSanId.Areas.Client.Controllers
                         HttpContext.Session.Remove("LoginMessage");
                         return RedirectToAction("DangTin", "DangTin");
                     }
+                    //else if (HttpContext.Session.GetInt32("ChiTietTinFlag") != null)
+                    //{
+                    //    int? id = HttpContext.Session.GetInt32("ChiTietTinFlag");
+                    //    HttpContext.Session.Remove("ChiTietTinFlag");
+                    //    return RedirectToAction("ChiTietTinBDS", "Dm", id);
+                    //}
                     else
                     {
                         return RedirectToAction("TaiKhoan", "QuanLyTaiKhoan");
@@ -76,7 +82,7 @@ namespace BatDongSanId.Areas.Client.Controllers
             else
             {
                 ViewBag.error = "Invalid Account";
-                return RedirectToAction("Failed");
+                return RedirectToAction("Login");
             }
         }
 

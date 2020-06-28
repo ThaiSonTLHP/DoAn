@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BatDongSanId.Areas.Admin.Models.ViewModel;
 using BatDongSanId.Areas.Client.Models.ViewModels;
 using BatDongSanId.Data;
 using BatDongSanId.Methods;
@@ -23,16 +24,38 @@ namespace BatDongSanId.Areas.Admin.Controllers
             this.configuration = configuration;
         }
 
-        public IActionResult Tin()
+        public IActionResult Tin(int flag = 0)
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
-            var listTin = layDuLieu.LayTinBDS();
+            List<TinBDSViewModel> listTin = new List<TinBDSViewModel>();
+
+            if(flag == 0)
+            {
+                listTin = layDuLieu.LayTinBDS();
+            }
+            else if(flag == 1)
+            {
+                listTin = layDuLieu.LayTinBDS(0, "All", "Cần bán");
+            }
+            else if (flag == 2)
+            {
+                listTin = layDuLieu.LayTinBDS(0, "All", "Cho thuê");
+            }
+            else if (flag == 3)
+            {
+                listTin = layDuLieu.LayTinBDS(0, "All", "Cần mua");
+            }
+            else if (flag == 4)
+            {
+                listTin = layDuLieu.LayTinBDS(0, "All", "Cần thuê");
+            }
             return View(listTin);
         }
 
-        public IActionResult ChiTiet(int id)
+        public IActionResult ChiTietTin(int id)
         {
-            return View();
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            return View(layDuLieu.ChiTietBDS(id));
         }
 
         public IActionResult ChoPheDuyet()
@@ -78,6 +101,26 @@ namespace BatDongSanId.Areas.Admin.Controllers
                 }
             }
             return View(listGiaoDich);
+        }
+
+        public IActionResult PhanHoi()
+        {
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            PhanHoiViewModel phanHoiViewModel = new PhanHoiViewModel();
+            return View(phanHoiViewModel);
+        }
+
+        public IActionResult ChiTietPhanHoi(int id)
+        {
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            PhanHoiViewModel phanHoiViewModel = new PhanHoiViewModel();
+            phanHoiViewModel.phanHoi = dbContext.BaoCao.Find(id);
+            phanHoiViewModel.taiKhoanBaoCao = layDuLieu.ChiTietTaiKhoan(phanHoiViewModel.phanHoi.NguoiGui);
+            phanHoiViewModel.tinBDSViewModel = layDuLieu.LayTinBDS(phanHoiViewModel.phanHoi.Tin);
+            phanHoiViewModel.hinhAnhs = layDuLieu.LayListHinhAnh(phanHoiViewModel.phanHoi.Tin, "Tin bất động sản");
+            var tin = dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == phanHoiViewModel.phanHoi.Tin);
+            phanHoiViewModel.taiKhoanViewModel = layDuLieu.ChiTietTaiKhoan(tin.NguoiDang);
+            return View(phanHoiViewModel);
         }
 
 

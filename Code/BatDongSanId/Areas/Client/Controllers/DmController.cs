@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using BatDongSanId.Areas.Client.Models.ListViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BatDongSanId.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace BatDongSanId.Areas.Client.Controllers
 {
@@ -67,6 +68,7 @@ namespace BatDongSanId.Areas.Client.Controllers
         public IActionResult ChiTietTinBDS(int id)
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            //HttpContext.Session.SetInt32("ChiTietTinFlag", id);
             return View(layDuLieu.ChiTietBDS(id));
         }
 
@@ -293,6 +295,18 @@ namespace BatDongSanId.Areas.Client.Controllers
                                   MoTa = t.MoTa
                               }).FirstOrDefault();
             return listTinBDS;
+        }
+
+        //-----------------ajax
+        public void BaoCaoTin(int id, int user, string lyDo)
+        {
+            var baoCao = new BaoCao();
+            baoCao.Tin = id;
+            baoCao.NguoiGui = user;
+            baoCao.LyDo = lyDo;
+            baoCao.DaXem = false;
+            dbContext.BaoCao.Add(baoCao);
+            dbContext.SaveChanges();
         }
     }
 }

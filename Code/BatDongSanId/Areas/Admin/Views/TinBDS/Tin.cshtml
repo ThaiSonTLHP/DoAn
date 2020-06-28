@@ -4,28 +4,28 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-@*<div class="row">
+<div class="row">
     <div class="col-md-4">
-        <form asp-action="TaiKhoan" method="get">
-            <select class="form-control" name="loaiTK">
-                <option value="1">Quản trị</option>
-                <option value="2">Nhân viên</option>
-                <option value="3">Nhà môi giới</option>
-                <option value="4">Khách hàng</option>
+        <form asp-action="Tin" method="get">
+            <select class="form-control" name="flag">
                 <option value="0">Tất cả</option>
+                <option value="1">Cần bán</option>
+                <option value="2">Cho thuê</option>
+                <option value="3">Cần mua</option>
+                <option value="4">Cần thuê</option>
             </select>
             <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
         </form>
     </div>
-    <div class="col-md-4">
+    @*<div class="col-md-4">
         <form asp-action="TaiKhoan" method="get">
             <select class="form-control" name="flag">
                 <option value="1">Đã khóa</option>
             </select>
             <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
         </form>
-    </div>
-</div>*@
+    </div>*@
+</div>
 
 <table class="table table-bordered">
     <thead style="background-color:#000257;color:white;">
@@ -83,7 +83,7 @@
                     <td>Chưa duyệt</td>
                 }
     <td>
-        <a asp-action="ChiTiet" asp-route-id="@item.ID">Chi tiết</a> |
+        <a asp-action="ChiTietTin" asp-route-id="@item.ID">Chi tiết</a> |
         <a class="khoa"  data="@item.ID">Khoá</a>
     </td>
 </tr>}

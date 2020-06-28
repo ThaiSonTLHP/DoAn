@@ -4,14 +4,16 @@ using BatDongSanId.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BatDongSanId.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200628041057_BaoCao")]
+    partial class BaoCao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,14 +28,8 @@ namespace BatDongSanId.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("DaXem")
-                        .HasColumnType("bit");
-
                     b.Property<string>("LyDo")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NguoiGui")
-                        .HasColumnType("int");
 
                     b.Property<int>("Tin")
                         .HasColumnType("int");
