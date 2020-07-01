@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\ThaiSon\Desktop\Publish_DoAn</_PublishTargetUrl>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=27.71.224.34,1207%3bEncrypt=False%3bDatabase=aspnet-BatDongSanId-94F5C9D4-1F25-4019-BEB2-B740BB8A9635%3bTrusted_Connection=True%3bMultipleActiveResultSets=true%3bIntegrated Security=False%3bUser ID=sa%3bPassword=Anduong%402020</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

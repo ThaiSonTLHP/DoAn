@@ -7,38 +7,66 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
-            <div style="border:1px solid black; width: auto; height: 235px;">
-                <img src="@Html.Raw(Model.taiKhoanViewModel.AnhDaiDienUrl)" />
+            <div style="width: auto; height: 235px;">
+                <img style="border:1px solid black;" src="@Html.Raw(Model.taiKhoanViewModel.AnhDaiDienUrl)" />
             </div>
         </div>
-        <div class="col-sm-8" @*style="padding: 30px;"*@>
+        <div class="col-sm-8" style="padding-left: 30px; border-left: 1px solid #D3D3D3">
             <div class="row">
                 <div class="col-sm-12">
-                    <p style="font-size: 13pt;">Tên: @Html.Raw(Model.taiKhoanViewModel.Ten)</p>
+                    @*<p style="font-size: 13pt;">Tên: @Html.Raw(Model.taiKhoanViewModel.Ten)</p>
                     <p style="font-size: 13pt;">Email/ Tài khoản: @Html.Raw(Model.taiKhoanViewModel.Email)</p>
                     <p style="font-size: 13pt;">Địa chỉ: @Html.Raw(Model.taiKhoanViewModel.DiaChi)</p>
                     <p style="font-size: 13pt;">Số điện thoại: @Html.Raw(Model.taiKhoanViewModel.SoDienThoai)</p>
                     <p style="font-size: 13pt;">Số dư ví: @Html.Raw(Model.taiKhoanViewModel.SoDuVi)</p>
-                    <p style="font-size: 13pt;">Loại tài khoản: @Html.Raw(Model.taiKhoanViewModel.LoaiTaiKhoan)</p>
+                    <p style="font-size: 13pt;">Loại tài khoản: @Html.Raw(Model.taiKhoanViewModel.LoaiTaiKhoan)</p>*@
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Tên:</th>
+                                <td>@Html.Raw(Model.taiKhoanViewModel.Ten)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Email/ Tài khoản:</th>
+                                <td>@Html.Raw(Model.taiKhoanViewModel.Email)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Địa chỉ:</th>
+                                <td colspan="2">@Html.Raw(Model.taiKhoanViewModel.DiaChi)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Số điện thoại:</th>
+                                <td>@Html.Raw(Model.taiKhoanViewModel.SoDienThoai)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Số dư ví:</th>
+                                <td>@Html.Raw(Model.taiKhoanViewModel.SoDuVi)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Loại tài khoản:</th>
+                                <td colspan="2">@Html.Raw(Model.taiKhoanViewModel.LoaiTaiKhoan)</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <hr />
-            <div class="row">
-                <div class="col-sm-6">
-                    <p style="font-size: 15pt;">Số tin đã đăng: @Html.Raw(Model.soTinDang)</p>
-                </div>
-                <div class="col-sm-6">
-                    <a asp-action="TinDaDang">Xem chi tiết</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <p style="font-size: 15pt;">Số tin đã luu: @Html.Raw(Model.soTinLuu)</p>
-                </div>
-                <div class="col-sm-6">
-                    <a asp-action="TinDaLuu">Xem chi tiết</a>
-                </div>
-            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-6">
+            <p style="font-size: 13pt;">Số tin đã đăng: @Html.Raw(Model.soTinDang)</p>
+        </div>
+        <div class="col-sm-6">
+            <a style="font-size: 13pt;" asp-action="TinDaDang">Xem chi tiết</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <p style="font-size: 13pt;">Số tin đã luu: @Html.Raw(Model.soTinLuu)</p>
+        </div>
+        <div class="col-sm-6">
+            <a style="font-size: 13pt;" asp-action="TinDaLuu">Xem chi tiết</a>
         </div>
     </div>
 </div>

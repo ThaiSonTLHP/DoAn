@@ -100,6 +100,7 @@
             event.preventDefault();
             event.stopPropagation();
             //var btn = $("button.room-content");
+            var text = "";
             var tin = $(this).attr("data");
             $.ajax({
                 url: '@Url.Action("DuyetTin", "TinBDS")',
@@ -107,9 +108,11 @@
                 type: "post",
                 async: false,
                 success: function (result) {
-                    alert("Đã xác thực tin!");
+                    text = "Đã xác thực";
                 }
             });
+            $(this).hide("slow").finish();
+            $(this).show("slow").text(text);
             return;
         });
     })

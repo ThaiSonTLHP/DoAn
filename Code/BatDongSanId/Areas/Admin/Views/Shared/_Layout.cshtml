@@ -32,16 +32,17 @@
                     <div class="text-center">
                         <a asp-controller="Home" asp-action="Index" class="pl-0"><img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"></a>
                     </div>
+                    <hr />
                 </li>
                 <!--/. Logo -->
                 <!--Search Form-->
-                <li>
+                @*<li>
                     <form class="search-form" role="search">
                         <div class="md-form mt-0 waves-light">
                             <input type="text" class="form-control py-2" placeholder="Tìm kiếm">
                         </div>
                     </form>
-                </li>
+                </li>*@
                 <!--/.Search Form-->
                 <!-- Side navigation links -->
                 <li>
@@ -57,7 +58,7 @@
                                         <a asp-controller="TaiKhoan" asp-action="TaiKhoan">Danh sách tài khoản</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="TaiKhoan" asp-action="LoaiTaiKhoan">Loại tài khoản</a>
+                                        <a asp-controller="DanhMuc" asp-action="LoaiTaiKhoan">Loại tài khoản</a>
                                     </li>
                                 </ul>
                             </div>
@@ -102,36 +103,36 @@
                             <div class="collapsible-body">
                                 <ul>
                                     <li>
-                                        <a asp-controller="LoaiTin" asp-action="Index" class="waves-effect">Loại tin bất động sản</a>
+                                        <a asp-controller="DanhMuc" asp-action="LoaiTinBDS" class="waves-effect">Loại tin bất động sản</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="LoaiTinTuc" asp-action="Index" class="waves-effect">Loại tin tức</a>
+                                        <a asp-controller="DanhMuc" asp-action="LoaiTinTuc" class="waves-effect">Loại tin tức</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="TinhThanh" asp-action="Index" class="waves-effect">Tỉnh thành</a>
+                                        <a asp-controller="DanhMuc" asp-action="TinhThanh" class="waves-effect">Tỉnh thành</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="QuanHuyen" asp-action="Index" class="waves-effect">Quận huyện</a>
+                                        <a asp-controller="DanhMuc" asp-action="QuanHuyen" class="waves-effect">Quận huyện</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="MucGia" asp-action="Index" class="waves-effect">Mức giá</a>
+                                        <a asp-controller="DanhMuc" asp-action="MucGia" class="waves-effect">Mức giá</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="MucDienTich" asp-action="Index" class="waves-effect">Mức diện tích</a>
+                                        <a asp-controller="DanhMuc" asp-action="MucDienTich" class="waves-effect">Mức diện tích</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="LoaiBatDongSan" asp-action="Index" class="waves-effect">Loại bất động sản</a>
+                                        <a asp-controller="DanhMuc" asp-action="LoaiBDS" class="waves-effect">Loại bất động sản</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="GoiTin" asp-action="Index" class="waves-effect">Gói tin</a>
+                                        <a asp-controller="DanhMuc" asp-action="GoiTin" class="waves-effect">Gói tin</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="Huong" asp-action="Index" class="waves-effect">Hướng</a>
+                                        <a asp-controller="DanhMuc" asp-action="Huong" class="waves-effect">Hướng</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li>
+                        @*<li>
                             <a class="collapsible-header waves-effect arrow-r"><i class="fas fa-cog"></i> Cấu hình<i class="fas fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
@@ -140,7 +141,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li>*@
                     </ul>
                 </li>
                 <!--/. Side navigation links -->
@@ -167,7 +168,7 @@
                     @await Component.InvokeAsync("BaoCao")
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link waves-effect"><i class="far fa-comments"></i> <span class="clearfix d-none d-sm-inline-block">Hỗ trợ</span></a>
+                    <a asp-controller="" asp-action="" class="nav-link waves-effect"><i class="far fa-comments"></i> <span class="clearfix d-none d-sm-inline-block">Hỗ trợ</span></a>
                 </li>
                 @if (Context.Session.GetString("username") != null)
                 {
@@ -177,7 +178,7 @@
             <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">@Context.Session.GetString("username")</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">Tài khoản</a>
+            <a class="dropdown-item" asp-controller="Home" asp-action="Index">Tài khoản</a>
             <a class="dropdown-item" asp-area="Client" asp-controller="DangNhap" asp-action="Logout">Đăng xuất</a>
         </div>
     </li>}

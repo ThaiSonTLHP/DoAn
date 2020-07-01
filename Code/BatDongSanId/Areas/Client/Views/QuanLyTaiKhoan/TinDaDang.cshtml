@@ -73,9 +73,7 @@
             event.stopPropagation();
             //var btn = $("button.room-content");
             var tin = $(this).attr("data");
-            //console.log(this);
-            //alert(tin);
-            //alert(user);
+            var text = "";
             console.log($(this).text().toString());
             $.ajax({
                 url: '@Url.Action("XacNhanDaBan", "QuanLyTaiKhoan")',
@@ -83,10 +81,12 @@
                 type: "post",
                 async: false,
                 success: function (result) {
-                    alert("Đã xác nhận!");
-                    $(this).text("Đã xác nhận");
+                    text = "Đã xác nhận";
                 }
             });
+            if (text != "") {
+                $(this).text(text);
+            }
             return;
         });
     })

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using BatDongSanId.Areas.Client.Models.ListViewModels;
 using BatDongSanId.Data;
@@ -21,17 +22,28 @@ namespace BatDongSanId.Areas.Admin.Controllers
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IConfiguration configuration;
+        private readonly CheckUser checkUser;
 
         public TaiKhoanController(ApplicationDbContext dbContext, IConfiguration configuration)
         {
             this.dbContext = dbContext;
             this.configuration = configuration;
+            checkUser = new CheckUser(dbContext);
         }
 
 
         //-------------Danh sách-------------
         public IActionResult TaiKhoan(int loaiTK = 0, int flag = 1)
         {
+            if (!checkUser.CheckSuperAdmin(HttpContext.Session.GetInt32("userID")))
+            {
+                if (checkUser.CheckAdmin(HttpContext.Session.GetInt32("userID")))
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                }
+                return RedirectToAction("Login", "DangNhap", new { area = "Client" });
+            }
+
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             var _taiKhoan = new List<TaiKhoanViewModel>();
             if(loaiTK == 0)
@@ -60,6 +72,15 @@ namespace BatDongSanId.Areas.Admin.Controllers
         //-------------Xem chi tiết-------------
         public IActionResult Details(int id)
         {
+            if (!checkUser.CheckSuperAdmin(HttpContext.Session.GetInt32("userID")))
+            {
+                if (checkUser.CheckAdmin(HttpContext.Session.GetInt32("userID")))
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                }
+                return RedirectToAction("Login", "DangNhap", new { area = "Client" });
+            }
+
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             QLTKListViewModel qLTKListViewModel = new QLTKListViewModel();
             qLTKListViewModel.taiKhoanViewModel = (from t in dbContext.TaiKhoan
@@ -74,7 +95,8 @@ namespace BatDongSanId.Areas.Admin.Controllers
                                                        DiaChi = t.DiaChi,
                                                        AnhDaiDienData = t.AnhDaiDien,
                                                        SoDuVi = t.SoDuVi,
-                                                       LoaiTaiKhoan = ltk.Ten
+                                                       LoaiTaiKhoan = ltk.Ten,
+                                                       XacNhan = t.XacThuc
                                                    }).FirstOrDefault();
             qLTKListViewModel.taiKhoanViewModel.AnhDaiDienUrl = LayUrlHinhAnh(qLTKListViewModel.taiKhoanViewModel.AnhDaiDienData);
             qLTKListViewModel.soTinDang = (from tin in dbContext.TinBatDongSan
@@ -98,6 +120,15 @@ namespace BatDongSanId.Areas.Admin.Controllers
         //-------------Tạo mới-------------
         public IActionResult Create()
         {
+            if (!checkUser.CheckSuperAdmin(HttpContext.Session.GetInt32("userID")))
+            {
+                if (checkUser.CheckAdmin(HttpContext.Session.GetInt32("userID")))
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                }
+                return RedirectToAction("Login", "DangNhap", new { area = "Client" });
+            }
+
             List<LoaiTaiKhoan> LoaiTaiKhoanList = dbContext.LoaiTaiKhoan.ToList();
             ViewBag.LoaiTaiKhoanList = new SelectList(LoaiTaiKhoanList, "ID", "Ten");
             return View();
@@ -129,23 +160,41 @@ namespace BatDongSanId.Areas.Admin.Controllers
         //-------------Sửa-------------
         public IActionResult Edit(int? id)
         {
+            if (!checkUser.CheckSuperAdmin(HttpContext.Session.GetInt32("userID")))
+            {
+                if (checkUser.CheckAdmin(HttpContext.Session.GetInt32("userID")))
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                }
+                return RedirectToAction("Login", "DangNhap", new { area = "Client" });
+            }
+
             if (id == null)
             {
                 return NotFound();
             }
-            var city = dbContext.TinhThanh.Find(id);
-            if (city == null)
+            var user = dbContext.TaiKhoan.Find(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return View(city);
+            return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, TinhThanh tinhThanh)
+        public IActionResult Edit(int id, TaiKhoanViewModel taiKhoan)
         {
-            if (id.ToString() != tinhThanh.ID)
+            if (!checkUser.CheckSuperAdmin(HttpContext.Session.GetInt32("userID")))
+            {
+                if (checkUser.CheckAdmin(HttpContext.Session.GetInt32("userID")))
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                }
+                return RedirectToAction("Login", "DangNhap", new { area = "Client" });
+            }
+
+            if (id != taiKhoan.ID)
             {
                 return NotFound();
             }
@@ -154,12 +203,12 @@ namespace BatDongSanId.Areas.Admin.Controllers
             {
                 try
                 {
-                    dbContext.Update(tinhThanh);
+                    dbContext.Update(taiKhoan);
                     dbContext.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CityExists(tinhThanh.ID))
+                    if (!UserExists(taiKhoan.ID))
                     {
                         return NotFound();
                     }
@@ -168,43 +217,18 @@ namespace BatDongSanId.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "TaiKhoan");
             }
-            return View(tinhThanh);
+            return View(taiKhoan);
         }
 
 
 
         //-------------Xóa-------------
-        public IActionResult Delete(int? id)
+
+        private bool UserExists(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var city = dbContext.TinhThanh.FirstOrDefault(m => m.ID == id.ToString());
-            if (city == null)
-            {
-                return NotFound();
-            }
-
-            return View(city);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            var city = dbContext.TinhThanh.Find(id);
-            dbContext.TinhThanh.Remove(city);
-            dbContext.SaveChanges();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool CityExists(string id)
-        {
-            return dbContext.TinhThanh.Any(e => e.ID == id);
+            return dbContext.TaiKhoan.Any(e => e.ID == id);
         }
 
         
@@ -227,39 +251,58 @@ namespace BatDongSanId.Areas.Admin.Controllers
             dbContext.Update(taiKhoan);
             dbContext.SaveChanges();
             Mail.SendMail(taiKhoan.Email,
-                "Tài khoản bất động sản",
-                "Tài khoản của bạn tại website đã bị khóa, vui lòng liên hệ với website để biết thêm thông tin.");
+                "Khóa tài khoản",
+                "Tài khoản của bạn tại http://batdongsanhp.karion.com.vn đã bị khóa, vui lòng liên hệ với website hoặc số điện thoại: 0339436790 để biết thêm thông tin.");
         }
 
-        public void Xoa(int id)
+        public void MoKhoa(int id)
         {
-            var taiKhoan = dbContext.TaiKhoan.Find(id);
-            var listTin = (from t in dbContext.TinBatDongSan
-                           where t.NguoiDang == taiKhoan.ID
-                           select new TinBatDongSan()
-                           {
-                               ID = t.ID
-                           }).ToList();
-            foreach(var tin in listTin)
-            {
-                var listAnh = (from t in dbContext.HinhAnh
-                               where t.TinBatDongSan == tin.ID
-                               select new HinhAnh()
-                               {
-                                   ID = t.ID
-                               }).ToList();
-                foreach(var anh in listAnh)
-                {
-                    var hinhAnh = dbContext.HinhAnh.Find(anh.ID);
-                    dbContext.HinhAnh.Remove(hinhAnh);
-                    dbContext.SaveChanges();
-                }
-                var _tin = dbContext.TinBatDongSan.Find(tin.ID);
-                dbContext.TinBatDongSan.Remove(_tin);
-                dbContext.SaveChanges();
-            }
-            dbContext.TaiKhoan.Remove(taiKhoan);
+            var taiKhoan = dbContext.TaiKhoan.FirstOrDefault(t => t.ID == id);
+            taiKhoan.XacThuc = true;
+            dbContext.Update(taiKhoan);
             dbContext.SaveChanges();
+            Mail.SendMail(taiKhoan.Email,
+                "Mở khóa tài khoản",
+                "Tài khoản của bạn tại http://batdongsanhp.karion.com.vn đã được mở khóa, vui lòng liên hệ với website hoặc số điện thoại: 0339436790 để biết thêm thông tin.");
+        }
+
+        public bool Xoa(int id)
+        {
+            if(HttpContext.Session.GetInt32("userID").GetValueOrDefault() == id)
+            {
+                return false;
+            }
+            else
+            {
+                //var taiKhoan = dbContext.TaiKhoan.Find(id);
+                //var listTin = (from t in dbContext.TinBatDongSan
+                //               where t.NguoiDang == taiKhoan.ID
+                //               select new TinBatDongSan()
+                //               {
+                //                   ID = t.ID
+                //               }).ToList();
+                //foreach (var tin in listTin)
+                //{
+                //    var listAnh = (from t in dbContext.HinhAnh
+                //                   where t.TinBatDongSan == tin.ID
+                //                   select new HinhAnh()
+                //                   {
+                //                       ID = t.ID
+                //                   }).ToList();
+                //    foreach (var anh in listAnh)
+                //    {
+                //        var hinhAnh = dbContext.HinhAnh.Find(anh.ID);
+                //        dbContext.HinhAnh.Remove(hinhAnh);
+                //        dbContext.SaveChanges();
+                //    }
+                //    var _tin = dbContext.TinBatDongSan.Find(tin.ID);
+                //    dbContext.TinBatDongSan.Remove(_tin);
+                //    dbContext.SaveChanges();
+                //}
+                //dbContext.TaiKhoan.Remove(taiKhoan);
+                //dbContext.SaveChanges();
+                return true;
+            }
         }
 
 

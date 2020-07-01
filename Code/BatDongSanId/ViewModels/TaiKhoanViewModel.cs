@@ -38,5 +38,7 @@ namespace BatDongSanId.ViewModels
         public byte[] AnhDaiDienData { get; set; }
 
         public string AnhDaiDienUrl { get; set; }
+
+        public Boolean XacNhan { get; set; }
     }
 }

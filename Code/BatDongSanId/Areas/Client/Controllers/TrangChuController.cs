@@ -35,7 +35,8 @@ namespace BatDongSanId.Areas.Client.Controllers
             //int pageNumber = (page ?? 1);
 
             LayDuLieu layDuLieu = new LayDuLieu(_dbContext, configuration);
-            layDuLieu.CapNhat();
+            layDuLieu.CapNhatTinVip();
+            layDuLieu.CapNhatTinHot();
             TrangChuListViewModel _trangChu = new TrangChuListViewModel();
             var tinThuongViewModels = layDuLieu.LayTinBDS(2, "Tin thường", "All");
             var tinHOTViewModels = layDuLieu.LayTinBDS(int.Parse(configuration["AppSetting:TinHOTCount"]), "Tin HOT", "All");

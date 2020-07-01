@@ -90,7 +90,14 @@
     </td>
     <td>
         <a asp-controller="TaiKhoan" asp-action="Details" asp-route-id="@Html.Raw(item.ID)">Chi tiết</a> |
-        <a class="khoa" @*data-toggle="modal" data-target="#exampleModal"*@ data="@item.ID">Khoá</a>
+        @if (item.XacNhan == true)
+        {
+            <a class="khoa" data-toggle="modal" data-target="#exampleModal" data="@item.ID">Khoá</a>
+        }
+        else
+        {
+            <a class="mokhoa" data-toggle="modal" data-target="#exampleModal" data="@item.ID">Mở khóa</a>
+        }
     </td>
 </tr>
 }
@@ -141,6 +148,31 @@
                     async: false,
                     success: function (result) {
                         text = "Đã khóa";
+                    }
+                });
+                $(this).hide("slow").finish();
+                $(this).show("slow").text(text);
+                return;
+            }
+            else {
+                return;
+            }
+        });
+        $("a.mokhoa").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var id = $(this).attr("data");
+            var text = "";
+            //console.log(this);
+            //alert(tin);
+            if (confirm("Mở tài khoản này?")) {
+                $.ajax({
+                    url: '@Url.Action("MoKhoa", "TaiKhoan")',
+                    data: { 'id': id },
+                    type: "post",
+                    async: false,
+                    success: function (result) {
+                        text = "Đã mở khóa";
                     }
                 });
                 $(this).hide("slow").finish();

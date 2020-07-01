@@ -76,15 +76,18 @@
             event.stopPropagation();
             //var btn = $("button.room-content");
             var tin = $(this).attr("data");
+            var text = "";
             $.ajax({
                 url: '@Url.Action("DuyetTin", "TinBDS")',
                 data: { 'idTin': tin },
                 type: "post",
                 async: false,
                 success: function (result) {
-                    alert("Đã duyệt tin!");
+                    text = "Đã duyệt";
                 }
             });
+            $(this).hide("slow").finish();
+            $(this).show("slow").text(text);
             return;
         });
     })

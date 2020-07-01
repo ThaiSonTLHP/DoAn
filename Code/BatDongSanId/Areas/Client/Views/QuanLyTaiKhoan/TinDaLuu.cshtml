@@ -68,9 +68,6 @@
             var tin = $(this).attr("data");
             var user = @Context.Session.GetInt32("userID");
             var text = "";
-            //console.log(this);
-            //alert(tin);
-            //alert(user);
             $.ajax({
                 url: '@Url.Action("BoLuuTin", "QuanLyTaiKhoan")',
                 data: { 'idUser': user, 'idTin': tin },
@@ -78,7 +75,6 @@
                 async: false,
                 success: function (result) {
                     text = "Đã bỏ lưu";
-                    console.log($(this).text().toString());
                 }
             });
             if (text != "") {

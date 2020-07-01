@@ -6,30 +6,36 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BatDongSanId.Data;
+using Microsoft.Extensions.Configuration;
+using BatDongSanId.Methods;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace BatDongSanId.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class HomeController : Controller
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext dbContext;
+        private readonly IConfiguration configuration;
+        private readonly CheckUser checkUser;
 
-        public HomeController(ApplicationDbContext dbContext)
+        public HomeController(ApplicationDbContext dbContext, IConfiguration configuration)
         {
-            _dbContext = dbContext;
+            this.dbContext = dbContext;
+            this.configuration = configuration;
+            checkUser = new CheckUser(dbContext);
         }
         public IActionResult Index()
         {
-            //var _tinTucList = (from t in dbContext.TinTuc
-            //                   join lt in dbContext.LoaiTinTuc on t.LoaiTinTucID equals lt.ID
-            //                   join tk in dbContext.TKQuanTri on t.QuanTriId equals tk.ID
-            //                   select new TinTucViewModel()
-            //                   {
-            //                       ID = t.ID,
-            //                       TieuDe = t.TieuDe,
-            //                   }).ToList();
-            //IList<TinTucViewModel> tinTucList = _tinTucList;
-            return View();
+            if (!checkUser.CheckAdmin(HttpContext.Session.GetInt32("userID")))
+            {
+                return RedirectToAction("Login", "DangNhap", new { area = "Client" });
+            }
+
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            var taiKhoan = layDuLieu.ChiTietTaiKhoan(HttpContext.Session.GetInt32("userID").GetValueOrDefault());
+            return View(taiKhoan);
         }
     }
 }

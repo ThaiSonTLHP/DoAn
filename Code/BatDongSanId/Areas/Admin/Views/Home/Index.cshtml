@@ -1,66 +1,41 @@
-﻿@*@model IEnumerable<BatDongSanId.Models.ViewModels.TinTucViewModel>*@
+﻿@model BatDongSanId.ViewModels.TaiKhoanViewModel
 
 @{ ViewData["Title"] = "Trang quản trị";
                 Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
 
-@*<h2>Quản trị</h2>
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>*@
-@*<table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TieuDe)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NgayDang)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LoaiTinTuc)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NguoiQuanTri)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NoiDung)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TieuDe)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NgayDang)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LoaiTinTuc)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NguoiQuanTri)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NoiDung)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                    </td>
-                </tr>
-
-            }
-        </tbody>
-    </table>*@
-
+<div class="row justify-content-center" style="margin-top: 50px;">
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="col-lg-5">
+                <img src="@Html.Raw(Model.AnhDaiDienUrl)" style="border:1px solid black;width: 100%; max-width: 300px" />
+            </div>
+            <div class="col-lg-7" style="border-left: 1px solid #808080;">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr style="font-size: 13pt; border-bottom: 1px solid #D3D3D3">
+                            <th scope="row">Tài khoản:</th>
+                            <td>@Html.Raw(Model.Ten)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Loại tài khoản:</th>
+                            <td>@Html.Raw(Model.LoaiTaiKhoan)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Số điện thoại:</th>
+                            <td colspan="2">@Html.Raw(Model.SoDienThoai)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Email/ Tài khoản:</th>
+                            <td>@Html.Raw(Model.Email)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Địa chỉ:</th>
+                            <td>@Html.Raw(Model.DiaChi)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,42 +14,100 @@
         <div class="col-sm-8" style="border-left: 1px solid #00c1ff;">
             <div class="row">
                 <div class="col-sm-12">
-                    <p style="font-size: 13pt;">Tên: @Html.Raw(Model.taiKhoanViewModel.Ten)</p>
-                    <p style="font-size: 13pt;">Email/ Tài khoản: @Html.Raw(Model.taiKhoanViewModel.Email)</p>
-                    <p style="font-size: 13pt;">Địa chỉ: @Html.Raw(Model.taiKhoanViewModel.DiaChi)</p>
-                    <p style="font-size: 13pt;">Số điện thoại: @Html.Raw(Model.taiKhoanViewModel.SoDienThoai)</p>
-                    <p style="font-size: 13pt;">Số dư ví: @Html.Raw(Model.taiKhoanViewModel.SoDuVi)</p>
-                    <p style="font-size: 13pt;">Loại tài khoản: @Html.Raw(Model.taiKhoanViewModel.LoaiTaiKhoan)</p>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Tên:</th>
+                                <td>@Html.Raw(Model.taiKhoanViewModel.Ten)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Email/ Tài khoản:</th>
+                                <td>@Html.Raw(Model.taiKhoanViewModel.Email)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Địa chỉ:</th>
+                                <td colspan="2">@Html.Raw(Model.taiKhoanViewModel.DiaChi)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Số điện thoại:</th>
+                                <td>@Html.Raw(Model.taiKhoanViewModel.SoDienThoai)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Số dư ví:</th>
+                                <td>@Html.Raw(Model.taiKhoanViewModel.SoDuVi)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Loại tài khoản:</th>
+                                <td colspan="2">@Html.Raw(Model.taiKhoanViewModel.LoaiTaiKhoan)</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <p id="userID" style="visibility:hidden;" data="@Model.taiKhoanViewModel.ID"></p>
                 </div>
             </div>
         </div>
     </div>
     <hr />
-    <div class="row">
-        <div class="col-sm-6">
-            <p style="font-size: 15pt;">Số tin đã đăng: @Html.Raw(Model.soTinDang)</p>
+    @if (Model.taiKhoanViewModel.LoaiTaiKhoan == "Nhà môi giới" || Model.taiKhoanViewModel.LoaiTaiKhoan == "Khách hàng")
+    {
+        <div class="row">
+            <div class="col-sm-6">
+                <p style="font-size: 13pt;">Số tin đã đăng: @Html.Raw(Model.soTinDang)</p>
+            </div>
+            <div class="col-sm-6">
+                <a style="font-size: 13pt;" asp-action="TinDaDang">Xem chi tiết</a>
+            </div>
         </div>
-        <div class="col-sm-6">
-            <a asp-action="TinDaDang">Xem chi tiết</a>
+        <div class="row">
+            <div class="col-sm-6">
+                <p style="font-size: 13pt;">Số tin đã luu: @Html.Raw(Model.soTinLuu)</p>
+            </div>
+            <div class="col-sm-6">
+                <a style="font-size: 13pt;" asp-action="TinDaLuu">Xem chi tiết</a>
+            </div>
+        </div>
+        <hr />
+        <a asp-action="" id="napTien" style="font-size: 15pt;">Nạp tiền</a>
+        <div class="row" id="napTienForm" style="margin-top: 20px;">
+            <div class="form-group col-sm-6">
+                <input type="text" class="form-control" id="tien" placeholder="Nhập số tiền (VNĐ)" />
+            </div>
+            <div class="form-group col-sm-6">
+                <input type="button" class="btn btn-primary" id="nap" value="Nạp" style="margin: 0px;" />
+            </div>
+        </div>
+        <hr />
+    }
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-md-2">
+            <a asp-action="Edit" data="@Model.taiKhoanViewModel.ID">Sửa tài khoản</a>
+        </div>
+        <div class="col-md-2">
+            <a asp-action="" data="@Model.taiKhoanViewModel.ID" class="xoa">Xóa tài khoản</a>
+        </div>
+        <div class="col-md-2">
+            <a asp-action="Khoa" data="@Model.taiKhoanViewModel.ID">Khóa tài khoản</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <p style="font-size: 15pt;">Số tin đã luu: @Html.Raw(Model.soTinLuu)</p>
-        </div>
-        <div class="col-sm-6">
-            <a asp-action="TinDaLuu">Xem chi tiết</a>
-        </div>
-    </div>
-    <hr />
-    <a asp-action="" id="napTien" style="font-size: 15pt;">Nạp tiền</a>
-    <div class="row" id="napTienForm" style="margin-top: 20px;">
-        <div class="form-group col-sm-6">
-            <input type="text" class="form-control" id="tien" placeholder="Nhập số tiền (VNĐ)" />
-        </div>
-        <div class="form-group col-sm-6">
-            <input type="button" class="btn btn-primary" id="nap" value="Nạp" style="margin: 0px;" />
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xác nhận khóa tài khoản</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Xóa tài khoản này?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary">Xác nhận</button>
+            </div>
         </div>
     </div>
 </div>
@@ -62,8 +120,10 @@
             if ($("#napTienForm").is(':hidden')) {
                 $("#napTienForm").show('slow');
                 return false;
+            } else {
+                $("#napTienForm").hide('slow');
+                return false;
             }
-            return false;
         });
         $("#nap").click(function () {
             if ($("#tien").val() == "") {
@@ -81,6 +141,36 @@
                 }
             });
             return false;
+        });
+
+        $("a.xoa").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var id = $(this).attr("data");
+            //console.log(this);
+            //alert(tin);
+            if (confirm("Xóa tài khoản này sẽ xóa toàn bộ thông tin tài khoản và tin đăng/ lưu. Bạn có chắc muốn xóa?")) {
+                $.ajax({
+                    url: '@Url.Action("Xoa", "TaiKhoan")',
+                    data: { 'id': id },
+                    type: "post",
+                    async: false,
+                    success: function (result) {
+                        if (result == true) {
+                            $.ajax({
+                                url: '@Url.Action("TaiKhoan", "TaiKhoan")',data: {},type: "post",async: false,
+                                success: function (result) {}
+                            });
+                        } else {
+                            alert("Không thể xóa tài khoản này!");
+                            return false;
+                        }
+                    }
+                });
+            }
+            else {
+                return false;
+            }
         });
     })
 </script>

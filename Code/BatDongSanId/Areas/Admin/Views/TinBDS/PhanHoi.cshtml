@@ -1,8 +1,106 @@
-﻿
+﻿@model IEnumerable<BatDongSanId.Areas.Admin.Models.ViewModel.BaoCaoViewModel>
+
 @{
-    ViewData["Title"] = "PhanHoi";
+    ViewData["Title"] = "Phản hồi";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>PhanHoi</h1>
+<h1>Danh sách phản hồi từ người dùng</h1>
+<hr />
+<table class="table table-bordered">
+    <thead style="background-color:#000257;color:white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NguoiGui)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LyDo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DaXem)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NguoiGui)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LyDo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DaXem)
+                </td>
+                <td>
+                    <a asp-action="ChiTietPhanHoi" asp-route-id="@item.ID">Xem | </a>
+                    <a asp-action="" data="@item.ID" class="xoa">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xác nhận khóa tài khoản</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Xóa phản hồi này?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("a.xoa").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var id = $(this).attr("data");
+            //console.log(this);
+            //alert(tin);
+            if (confirm("Xóa phản hồi này?")) {
+                $.ajax({
+                    url: '@Url.Action("XoaPhanHoi", "TinBDS")',
+                    data: { 'id': id },
+                    type: "post",
+                    async: false,
+                    success: function (result) {
+                        location.reload();
+                    }
+                });
+                return;
+            }
+            else {
+                return;
+            }
+        });
+    })
+</script>

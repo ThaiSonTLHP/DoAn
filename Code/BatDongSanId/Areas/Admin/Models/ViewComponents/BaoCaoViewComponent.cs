@@ -33,7 +33,8 @@ namespace BatDongSanId.Areas.Admin.Models.ViewComponents
                                      LyDo = b.LyDo.Substring(0, 40)+"..."
                                  }).OrderBy(b=>b.ID).ToListAsync();
             listTin.Reverse();
-            listTin.GetRange(0 , listTin.Count() < 5 ? listTin.Count() : 5);
+            ViewBag.Count = listTin.Count();
+            listTin = listTin.GetRange(0 , listTin.Count() < 5 ? listTin.Count() : 5);
             return View(listTin);
         }
     }

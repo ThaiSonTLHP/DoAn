@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BatDongSanId.Areas.Admin.Models.ViewModel.QuanHuyenViewModel>
+
+@{
+    ViewData["Title"] = "QuanHuyen";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Quận/ Huyện</h1>
+<hr />
+<table class="table table-bordered">
+    <thead style="background-color:#000257;color:white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhThanh)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TinhThanh)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Chi tiết", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Xóa", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

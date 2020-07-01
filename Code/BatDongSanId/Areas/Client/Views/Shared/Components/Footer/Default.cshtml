@@ -24,7 +24,7 @@
 
     <link rel="stylesheet" href="~/css/MyStyle.css" type="text/css">
 </head>
-<body>
+<body> 
     @model BatDongSanId.Areas.Client.Models.ListViewModels.FooterListViewModel
     @{ ViewData["Title"] = "Default"; }
     <div class="row p-37">
@@ -52,7 +52,7 @@
                 {
                     <div class="row" style="padding-bottom: 15px;">
                         <div class="col-md-4">
-                            <img src="@Html.Raw(tin.HinhAnh)">
+                            <img style="height: 70px; width: 100px;" src="@Html.Raw(tin.HinhAnh)">
                         </div>
                         <div class="col-md-8">
                             <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:10pt;">@Html.Raw(tin.TieuDe)</a>

@@ -19,14 +19,20 @@ namespace BatDongSanId.Areas.Client.Controllers
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IConfiguration configuration;
+        private readonly CheckUser checkUser;
+
         public QuanLyTaiKhoanController(ApplicationDbContext dbContext, IConfiguration configuration)
         {
             this.dbContext = dbContext;
             this.configuration = configuration;
+            checkUser = new CheckUser(dbContext);
         }
 
         public IActionResult TaiKhoan()
         {
+            if (!checkUser.CheckClient(HttpContext.Session.GetInt32("userID")))
+                return RedirectToAction("Login", "DangNhap", new { area = "Client" });
+
             QLTKListViewModel qLTKListViewModel = new QLTKListViewModel();
             qLTKListViewModel.taiKhoanViewModel = (from t in dbContext.TaiKhoan
                                                     join ltk in dbContext.LoaiTaiKhoan on t.LoaiTaiKhoan equals ltk.ID
@@ -56,11 +62,44 @@ namespace BatDongSanId.Areas.Client.Controllers
             return View(qLTKListViewModel);
         }
 
-        public IActionResult ChiTietTaiKhoan()
+        public IActionResult TinDaDang()
         {
+            if (!checkUser.CheckClient(HttpContext.Session.GetInt32("userID")))
+                return RedirectToAction("Login", "DangNhap", new { area = "Client" });
+
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            var listTin = layDuLieu.LayTinBDS(HttpContext.Session.GetInt32("userID"), 1);
+            return View(listTin);
+        }
+
+        public IActionResult TinDaLuu()
+        {
+            if (!checkUser.CheckClient(HttpContext.Session.GetInt32("userID")))
+                return RedirectToAction("Login", "DangNhap", new { area = "Client" });
+
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            var listTin = layDuLieu.LayTinBDS(HttpContext.Session.GetInt32("userID"), 2);
+            return View(listTin);
+        }
+
+        public IActionResult DoiMatKhau()
+        {
+            if (!checkUser.CheckClient(HttpContext.Session.GetInt32("userID")))
+                return RedirectToAction("Login", "DangNhap", new { area = "Client" });
             return View();
         }
 
+        public IActionResult XacNhan()
+        {
+            if (!checkUser.CheckClient(HttpContext.Session.GetInt32("userID")))
+                return RedirectToAction("Login", "DangNhap", new { area = "Client" });
+
+            return View();
+        }
+
+
+
+        //-----------------------them anh
         public IActionResult CapNhatTaiKhoan()
         {
             return View();
@@ -146,47 +185,7 @@ namespace BatDongSanId.Areas.Client.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public IActionResult TinDaDang()
-        {
-            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
-            var listTin = layDuLieu.LayTinBDS(HttpContext.Session.GetInt32("userID"), 1);
-            return View(listTin);
-        }
-
-        public IActionResult TinDaLuu()
-        {
-            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
-            var listTin = layDuLieu.LayTinBDS(HttpContext.Session.GetInt32("userID"), 2);
-            return View(listTin);
-        }
-
-        public IActionResult XacNhan()
-        {
-            return View();
-        }
-
+        //--------------------ajax
         public void LuuTin(int idUser, int idTin)
         {
             if(dbContext.LuuTinBatDongSan.FirstOrDefault(x => x.TaiKhoan == idUser && x.TinBatDongSan == idTin) == null)
@@ -212,6 +211,22 @@ namespace BatDongSanId.Areas.Client.Controllers
             tin.TrangThaiGiaoDich = true;
             dbContext.Update(tin);
             dbContext.SaveChanges();
+        }
+
+        public string ChangePass(string pass, string newPass)
+        {
+            var user = dbContext.TaiKhoan.FirstOrDefault(x => x.ID == HttpContext.Session.GetInt32("userID").GetValueOrDefault());
+            if(user.MatKhau == pass)
+            {
+                user.MatKhau = newPass;
+                dbContext.Update(user);
+                dbContext.SaveChanges();
+                return "Thay đổi mật khẩu thành công!";
+            }
+            else
+            {
+                return "Mật khẩu cũ không đúng!";
+            }
         }
 
         string LayUrlHinhAnh(byte[] hinhAnh)

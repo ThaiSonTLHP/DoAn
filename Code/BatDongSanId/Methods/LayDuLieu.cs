@@ -22,7 +22,7 @@ namespace BatDongSanId.Methods
         }
 
         // cập nhật lại trạng thái gói tin hết hạn và tin chưa lên bảng tin
-        public void CapNhat()
+        public void CapNhatTinVip()
         {
             //var listThuong = (from t in dbContext.TinBatDongSan select new TinBatDongSan(){ID = t.ID}).ToList();
             //DateTime time = new DateTime(9999, 01, 01, 0, 0, 0);
@@ -34,29 +34,29 @@ namespace BatDongSanId.Methods
             //    dbContext.SaveChanges();
             //}
 
-
             var tinThuong = dbContext.GoiTin.FirstOrDefault(g => g.Ten == "Tin thường");
-
-
 
             //cập nhật tin hết hạn
             var list = (from t in dbContext.TinBatDongSan
                         join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
-                        where 
-                        DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(configuration["AppSetting:TinVIPTime"])), DateTime.Now) < 0
-                        && gt.Ten == "Tin VIP"
+                        where
+                        gt.Ten == "Tin VIP"
                         && t.TrangThaiDuyet == true
                         select new TinBatDongSan()
                         {
                             ID = t.ID,
-                            GoiTin = gt.ID
+                            GoiTin = gt.ID,
+                            NgayLenBangTin = t.NgayLenBangTin
                         }).ToList();
             foreach (var tin in list)
             {
-                var _tin = dbContext.TinBatDongSan.Find(tin.ID);
-                _tin.GoiTin = tinThuong.ID;
-                dbContext.Update(_tin);
-                dbContext.SaveChanges();
+                if(DateTime.Compare(tin.NgayLenBangTin.AddDays(int.Parse(configuration["AppSetting:TinVIPTime"])), DateTime.Now) < 0)
+                {
+                    var _tin = dbContext.TinBatDongSan.Find(tin.ID);
+                    _tin.GoiTin = tinThuong.ID;
+                    dbContext.Update(_tin);
+                    dbContext.SaveChanges();
+                }
             }
 
             //cập nhật tin chưa được lên
@@ -73,7 +73,7 @@ namespace BatDongSanId.Methods
             listUpdate = listUpdate.GetRange(0, listUpdate.Count() < int.Parse(configuration["AppSetting:TinVIPCount"]) ? listUpdate.Count : int.Parse(configuration["AppSetting:TinVIPCount"]));
             foreach (var tin in listUpdate)
             {
-                if (DateTime.Compare(tin.NgayLenBangTin, tin.NgayDang) > 0)
+                if (DateTime.Compare(tin.NgayLenBangTin, DateTime.Now) > 0)
                 {
                     var _tin = dbContext.TinBatDongSan.Find(tin.ID);
                     _tin.NgayLenBangTin = DateTime.Now;
@@ -81,32 +81,38 @@ namespace BatDongSanId.Methods
                     dbContext.SaveChanges();
                 }
             }
+        }
 
-
-
+        public void CapNhatTinHot()
+        {
+            var tinThuong = dbContext.GoiTin.FirstOrDefault(g => g.Ten == "Tin thường");
             //cập nhật tin hết hạn
-            var listHOT = (from t in dbContext.TinBatDongSan
+            var list = (from t in dbContext.TinBatDongSan
                         join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
-                        where DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(configuration["AppSetting:TinHOTTime"])), DateTime.Now) < 0
-                        && gt.Ten == "Tin HOT"
+                        where
+                        gt.Ten == "Tin HOT"
                         && t.TrangThaiDuyet == true
                         select new TinBatDongSan()
                         {
                             ID = t.ID,
-                            GoiTin = gt.ID
+                            GoiTin = gt.ID,
+                            NgayLenBangTin = t.NgayLenBangTin
                         }).ToList();
             foreach (var tin in list)
             {
-                var _tin = dbContext.TinBatDongSan.Find(tin.ID);
-                _tin.GoiTin = tinThuong.ID;
-                dbContext.Update(_tin);
-                dbContext.SaveChanges();
+                if (DateTime.Compare(tin.NgayLenBangTin.AddDays(int.Parse(configuration["AppSetting:TinHOTTime"])), DateTime.Now) < 0)
+                {
+                    var _tin = dbContext.TinBatDongSan.Find(tin.ID);
+                    _tin.GoiTin = tinThuong.ID;
+                    dbContext.Update(_tin);
+                    dbContext.SaveChanges();
+                }
             }
 
             //cập nhật tin chưa được lên
-            var listHOTUpdate = (from t in dbContext.TinBatDongSan
+            var listUpdate = (from t in dbContext.TinBatDongSan
                               join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
-                              where gt.Ten == "Tin HOT"
+                              where gt.Ten == "Tin VIP"
                               && t.TrangThaiDuyet == true
                               select new TinBatDongSan()
                               {
@@ -114,10 +120,10 @@ namespace BatDongSanId.Methods
                                   NgayLenBangTin = t.NgayLenBangTin,
                                   NgayDang = t.NgayDang
                               }).OrderBy(t => t.NgayDang).ToList();
-            listHOTUpdate = listHOTUpdate.GetRange(0, listHOTUpdate.Count() < int.Parse(configuration["AppSetting:TinHOTCount"]) ? listHOTUpdate.Count : int.Parse(configuration["AppSetting:TinHOTCount"]));
-            foreach (var tin in listHOTUpdate)
+            listUpdate = listUpdate.GetRange(0, listUpdate.Count() < int.Parse(configuration["AppSetting:TinHOTCount"]) ? listUpdate.Count : int.Parse(configuration["AppSetting:TinHOTCount"]));
+            foreach (var tin in listUpdate)
             {
-                if (DateTime.Compare(tin.NgayLenBangTin,tin.NgayDang) > 0)
+                if (DateTime.Compare(tin.NgayLenBangTin, DateTime.Now) > 0)
                 {
                     var _tin = dbContext.TinBatDongSan.Find(tin.ID);
                     _tin.NgayLenBangTin = DateTime.Now;
@@ -532,7 +538,8 @@ namespace BatDongSanId.Methods
                                         SoDienThoai = t.SoDienThoai,
                                         DiaChi = t.DiaChi,
                                         SoDuVi = t.SoDuVi,
-                                        LoaiTaiKhoan = ltk.Ten
+                                        LoaiTaiKhoan = ltk.Ten,
+                                        XacNhan = t.XacThuc
                                     }).ToList();
                 }
                 else
@@ -550,7 +557,8 @@ namespace BatDongSanId.Methods
                                         SoDienThoai = t.SoDienThoai,
                                         DiaChi = t.DiaChi,
                                         SoDuVi = t.SoDuVi,
-                                        LoaiTaiKhoan = ltk.Ten
+                                        LoaiTaiKhoan = ltk.Ten,
+                                        XacNhan = t.XacThuc
                                     }).ToList();
                 }
             }
@@ -569,7 +577,8 @@ namespace BatDongSanId.Methods
                                     SoDienThoai = t.SoDienThoai,
                                     DiaChi = t.DiaChi,
                                     SoDuVi = t.SoDuVi,
-                                    LoaiTaiKhoan = ltk.Ten
+                                    LoaiTaiKhoan = ltk.Ten,
+                                    XacNhan = t.XacThuc
                                 }).ToList().GetRange(0, soLuong);
             }
             return listTaiKhoan;
@@ -579,8 +588,7 @@ namespace BatDongSanId.Methods
         {
             var taiKhoan = (from t in dbContext.TaiKhoan
                             join ltk in dbContext.LoaiTaiKhoan on t.LoaiTaiKhoan equals ltk.ID
-                            where (ltk.Ten == "Nhà môi giới" || ltk.Ten == "Khách hàng")
-                            && t.ID == id
+                            where t.ID == id
                             select new TaiKhoanViewModel()
                             {
                                 ID = t.ID,
@@ -592,7 +600,8 @@ namespace BatDongSanId.Methods
                                 DiaChi = t.DiaChi,
                                 SoDuVi = t.SoDuVi,
                                 AnhDaiDienData = t.AnhDaiDien,
-                                LoaiTaiKhoan = ltk.Ten
+                                LoaiTaiKhoan = ltk.Ten,
+                                XacNhan = t.XacThuc
                             }).FirstOrDefault();
             taiKhoan.AnhDaiDienUrl = LayUrlHinhAnh(taiKhoan.AnhDaiDienData);
             return taiKhoan;

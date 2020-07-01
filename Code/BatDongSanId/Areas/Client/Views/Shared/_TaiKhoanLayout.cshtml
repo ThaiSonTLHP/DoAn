@@ -10,10 +10,10 @@
     <div class="row">
         <div class="col-sm-3">
             <ul class="mystyle-leftmenu">
-                <li><a asp-controller="QuanLyTaiKhoan" asp-action="TaiKhoan" style="font-size:15pt;"><i class="fas"></i>@Context.Session.GetString("username")</a></li>
-                <li><a asp-controller="QuanLyTaiKhoan" asp-action="ChiTietTaiKhoan"><i class="fas fa-user"></i>Tài khoản</a></li>
-                <li><a asp-controller="QuanLyTaiKhoan" asp-action="TinDaDang"><i class="fas fa-edit"></i>Tin đã đăng</a></li>
-                <li><a asp-controller="QuanLyTaiKhoan" asp-action="TinDaLuu"><i class="fas fa-heart"></i>Tin đã lưu</a></li>
+                <li><a style="margin-left: 5px;font-size:15pt;" asp-controller="QuanLyTaiKhoan" asp-action="TaiKhoan"><i class="fas fa-user"></i>@Context.Session.GetString("username")</a></listyle="padding-left:>
+                <li><a style="margin-left: 20px;" asp-controller="QuanLyTaiKhoan" asp-action="TinDaDang"><i class="fas fa-edit"></i>Tin đã đăng</a></li>
+                <li><a style="margin-left: 20px;" asp-controller="QuanLyTaiKhoan" asp-action="TinDaLuu"><i class="fas fa-heart"></i>Tin đã lưu</a></li>
+                <li><a style="margin-left: 20px;" asp-controller="QuanLyTaiKhoan" asp-action="DoiMatKhau"><i class="fas fa-cog"></i>Đổi mật khẩu</a></li>
             </ul>
         </div>
         <div class="col-sm-9" style="border-left:solid 1px;">
