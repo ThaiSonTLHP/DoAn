@@ -54,6 +54,7 @@ namespace BatDongSanId.Methods
                 {
                     var _tin = dbContext.TinBatDongSan.Find(tin.ID);
                     _tin.GoiTin = tinThuong.ID;
+                    _tin.HetHan = 1;
                     dbContext.Update(_tin);
                     dbContext.SaveChanges();
                 }
@@ -104,6 +105,7 @@ namespace BatDongSanId.Methods
                 {
                     var _tin = dbContext.TinBatDongSan.Find(tin.ID);
                     _tin.GoiTin = tinThuong.ID;
+                    _tin.HetHan = 2;
                     dbContext.Update(_tin);
                     dbContext.SaveChanges();
                 }
@@ -323,7 +325,9 @@ namespace BatDongSanId.Methods
                                   XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
                                   TieuDe = t.MoTa.Substring(0, 60) + "...",
                                   DaBan = t.TrangThaiGiaoDich,
-                                  MoTa = t.MoTa
+                                  MoTa = t.MoTa,
+                                  HetHan = t.HetHan,
+                                  GoiTin = gt.Ten
                               }).ToList();
             }
             else if(flag == 2)
@@ -619,14 +623,17 @@ namespace BatDongSanId.Methods
                                   NgayDang = t.NgayDang,
                                   NguoiDang = tk.Ten,
                                   LoaiTinTuc = lt.Ten,
-                                  NoiDung = t.NoiDung
+                                  NoiDung = t.NoiDung.Substring(0, 200) + "..."
                               }).ToList();
             foreach (TinTucViewModel tin in listTinTuc)
             {
                 tin.HinhAnh = LayHinhAnh(tin.ID, "Tin tức");
             }
-            List<TinTucViewModel> listSoLuongTin = listTinTuc.GetRange(0, soLuong > listTinTuc.Count() ? listTinTuc.Count() : soLuong);
-            return listSoLuongTin;
+            if(soLuong != 0)
+            {
+                listTinTuc = listTinTuc.GetRange(0, soLuong > listTinTuc.Count() ? listTinTuc.Count() : soLuong);
+            }
+            return listTinTuc;
         }
     }
 }

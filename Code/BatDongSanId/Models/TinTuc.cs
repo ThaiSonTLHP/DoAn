@@ -26,8 +26,5 @@ namespace BatDongSanId.Models
 
         [Display(Name = "Loại tin")]
         public int LoaiTinTuc { get; set; }
-
-        public int TestDB { get; set; }
-
     }
 }

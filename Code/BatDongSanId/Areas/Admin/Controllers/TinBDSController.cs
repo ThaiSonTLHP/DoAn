@@ -27,7 +27,7 @@ namespace BatDongSanId.Areas.Admin.Controllers
             checkUser = new CheckUser(dbContext);
         }
 
-        public IActionResult Tin(int flag = 0, int option = 0, string searchString = "")
+        public IActionResult Tin(int loaiTin = 0, int option = 0, string searchString = "")
         {
             if (!checkUser.CheckAdmin(HttpContext.Session.GetInt32("userID")))
             {
@@ -36,32 +36,53 @@ namespace BatDongSanId.Areas.Admin.Controllers
 
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             List<TinBDSViewModel> listTin = new List<TinBDSViewModel>();
-            if(option == 0)
+            if(loaiTin != 0)
             {
-                if (flag == 0)
+                if (loaiTin == 5)
                 {
                     listTin = layDuLieu.LayTinBDS();
                 }
-                else if (flag == 1)
+                else if (loaiTin == 1)
                 {
                     listTin = layDuLieu.LayTinBDS(0, "All", "Cần bán");
                 }
-                else if (flag == 2)
+                else if (loaiTin == 2)
                 {
                     listTin = layDuLieu.LayTinBDS(0, "All", "Cho thuê");
                 }
-                else if (flag == 3)
+                else if (loaiTin == 3)
                 {
                     listTin = layDuLieu.LayTinBDS(0, "All", "Cần mua");
                 }
-                else if (flag == 4)
+                else if (loaiTin == 4)
                 {
                     listTin = layDuLieu.LayTinBDS(0, "All", "Cần thuê");
                 }
             }
-            else
+
+            if(option != 0)
             {
                 listTin = layDuLieu.LayTinBDS();
+                //id
+                if(option == 1)
+                {
+                    listTin = listTin.Where(t => t.ID.ToString().Contains(searchString)).ToList();
+                }
+                //ngay dang
+                if (option == 2)
+                {
+                    listTin = listTin.Where(t => t.NgayDang.ToString().Contains(searchString)).ToList();
+                }
+                //nguoi dang
+                if (option == 3)
+                {
+                    listTin = listTin.Where(t => t.NguoiDang.Contains(searchString)).ToList();
+                }
+                //mo ta
+                if (option == 4)
+                {
+                    listTin = listTin.Where(t => t.MoTa.Contains(searchString)).ToList();
+                }
             }
             return View(listTin);
         }

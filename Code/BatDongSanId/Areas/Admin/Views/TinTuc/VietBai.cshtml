@@ -1,0 +1,88 @@
+﻿@model BatDongSanId.Models.TinTuc
+@{
+    ViewData["Title"] = "Đăng tin tức";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Viết tin</h1>
+<hr />
+
+<form asp-action="VietBai" method="post">
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.LoaiTinTuc, ViewBag.LoaiTinTuc as SelectList, "Chọn loại tin", new { @class = "form-control" })
+    </div>
+    <div>
+        <input asp-for="TieuDe" type="text" class="form-control" placeholder="Nhập tiêu đề" />
+    </div>
+    <div>
+        <textarea id="rtxBlogContent" asp-for="NoiDung"></textarea>
+        @section scripts{
+            <script src="~/Admin/lib/ckeditor/ckeditor.js"></script>
+            <script src="~/Admin/lib/ckeditor/adapters/jquery.js"></script>
+            <script>
+                $("#rtxBlogContent").ckeditor();
+            </script>
+        }
+    </div>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="imgInp" name="file1" multiple="multiple" onchange="readURL(this);" />
+        <label class="custom-file-label">Chọn ảnh</label>
+    </div>
+    <div class="gallery row" style="margin:20px;"></div>
+    <div>
+        <input type="submit" class="btn btn-primary" value="Đăng tin" />
+    </div>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    @*$(document).ready(function () {
+        var mess = '@ViewBag.Message';
+        if (mess != null && mess != "") {
+            alert(mess);
+        }
+        console.log(mess);
+
+        $("#TinhThanhID").change(function () {
+            var SelecedVal = $(this).val();
+            $("#QuanHuyenID").html('');
+            $("#QuanHuyenID").append($("<option></option>").attr("value", '').text('Chọn quận huyện'));
+            if (SelecedVal != '') {
+                $.ajax({
+                    url: '@Url.Action("GetQuanHuyenList", "DangTin")',
+                    data: { '_tinhThanh': SelecedVal },
+                    type: "post",
+                    success: function (result) {
+                        $("#QuanHuyenID").empty();
+                        $.each(result, function (index, item) {
+                            $("#QuanHuyenID").append($("<option></option>").attr("value", item.id).text(item.ten));
+                        });
+                    }
+                });
+            }
+        });
+    })*@
+
+    $(function () {
+        // Multiple images preview in browser
+        var imagesPreview = function (input, placeToInsertImagePreview) {
+            if (input.files) {
+                var filesAmount = input.files.length;
+
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function (event) {
+                        $($.parseHTML('<img class="imgStyle">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+
+        };
+
+        $('#imgInp').on('change', function () {
+            imagesPreview(this, 'div.gallery');
+        });
+    });
+</script>

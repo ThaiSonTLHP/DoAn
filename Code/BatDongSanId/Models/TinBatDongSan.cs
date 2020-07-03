@@ -68,5 +68,8 @@ namespace BatDongSanId.Models
         [Display(Name = "Mô tả")]
         [Required]
         public string MoTa { get; set; }
+
+        [Display(Name = "Gói tin trước hết hạn")]
+        public int HetHan { get; set; }
     }
 }

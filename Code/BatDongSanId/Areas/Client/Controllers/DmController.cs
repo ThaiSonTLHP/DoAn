@@ -65,6 +65,33 @@ namespace BatDongSanId.Areas.Client.Controllers
             return View(layDuLieu.LayTinBDS(0, "All", "Cần thuê").ToPagedList(pageNumber, pageSize));
         }
 
+        public IActionResult TinVIP(int? page)
+        {
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            if (page == null) page = 1;
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(layDuLieu.LayTinBDS(0, "Tin VIP", "All").ToPagedList(pageNumber, pageSize));
+        }
+
+        public IActionResult TinHOT(int? page)
+        {
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            if (page == null) page = 1;
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(layDuLieu.LayTinBDS(0, "Tin HOT", "All").ToPagedList(pageNumber, pageSize));
+        }
+
+        public IActionResult TinThuong(int? page)
+        {
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            if (page == null) page = 1;
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(layDuLieu.LayTinBDS(0, "Tin thường", "All").ToPagedList(pageNumber, pageSize));
+        }
+
         public IActionResult ChiTietTinBDS(int id)
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
@@ -78,9 +105,13 @@ namespace BatDongSanId.Areas.Client.Controllers
             return View();
         }
 
-        public IActionResult TinTuc()
+        public IActionResult TinTuc(int? page)
         {
-            return View();
+            if (page == null) page = 1;
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            return View(layDuLieu.LayTinTuc(0).ToPagedList(pageNumber, pageSize));
         }
 
         public IActionResult ChiTietNhaMoiGioi()
@@ -182,17 +213,22 @@ namespace BatDongSanId.Areas.Client.Controllers
 
 
         public IActionResult KetQuaTimKiem(
-            string QuanHuyens,
-            int LoaiTinBatDongSans,
-            int MucGias,
-            int LoaiBatDongSans,
-            int MucDienTiches,
-            int Huongs,
-            string XacThucs,
-            string ThoiGians)
+            string QuanHuyens = "",
+            int LoaiTinBatDongSans = 0,
+            int MucGias = 0,
+            int LoaiBatDongSans = 0,
+            int MucDienTiches = 0,
+            int Huongs = 0,
+            string XacThucs = "",
+            string ThoiGians = "",
+            int option = 0,
+            string searchString = "")
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
-            var listTinBDS = (from t in dbContext.TinBatDongSan
+            var listTinBDS = new List<TinBDSViewModel>();
+            if(option == 0)
+            {
+                listTinBDS = (from t in dbContext.TinBatDongSan
                               join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
                               join lt in dbContext.LoaiTinBatDongSan on t.LoaiBatDongSan equals lt.ID
                               join nd in dbContext.TaiKhoan on t.NguoiDang equals nd.ID
@@ -208,7 +244,7 @@ namespace BatDongSanId.Areas.Client.Controllers
                               && t.MucDienTich == MucDienTiches
                               && h.ID == Huongs
                               && t.TrangThaiXacNhan == Boolean.Parse(XacThucs)
-                              && DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(ThoiGians)),DateTime.Now) >= 0
+                              && DateTime.Compare(t.NgayLenBangTin.AddDays(int.Parse(ThoiGians)), DateTime.Now) >= 0
                               select new TinBDSViewModel()
                               {
                                   ID = t.ID,
@@ -225,6 +261,72 @@ namespace BatDongSanId.Areas.Client.Controllers
                                   Huong = h.Ten,
                                   MoTa = t.MoTa
                               }).ToList();
+            }
+            else
+            {
+                //all
+                listTinBDS = layDuLieu.LayTinBDS();
+                if (option == 1)
+                {
+                    listTinBDS = listTinBDS.Where(
+                        t => t.TinhThanh.Contains(searchString) ||
+                        t.QuanHuyen.Contains(searchString) ||
+                        t.LoaiTin.Contains(searchString) ||
+                        t.LoaiBatDongSan.Contains(searchString) ||
+                        t.Gia.Contains(searchString) ||
+                        t.DienTich.Contains(searchString) ||
+                        t.Huong.Contains(searchString) ||
+                        t.NgayDang.ToString().Contains(searchString) ||
+                        t.MoTa.Contains(searchString)
+                    ).ToList();
+                }
+                //tinh thanh
+                if (option == 2)
+                {
+                    listTinBDS = listTinBDS.Where(t => t.TinhThanh.Contains(searchString)).ToList();
+                }
+                //quan huyen
+                if (option == 3)
+                {
+                    listTinBDS = listTinBDS.Where(t => t.QuanHuyen.Contains(searchString)).ToList();
+                }
+                //loai tin
+                if (option == 4)
+                {
+                    listTinBDS = listTinBDS.Where(t => t.LoaiTin.Contains(searchString)).ToList();
+                }
+                //loai bat dong san
+                if (option == 5)
+                {
+                    listTinBDS = listTinBDS.Where(t => t.LoaiBatDongSan.Contains(searchString)).ToList();
+                }
+                //gia
+                if (option == 6)
+                {
+                    listTinBDS = listTinBDS.Where(t => t.Gia.Contains(searchString)).ToList();
+                }
+                //dien tich
+                if (option == 7)
+                {
+                    listTinBDS = listTinBDS.Where(t => t.DienTich.Contains(searchString)).ToList();
+                }
+                //huong
+                if (option == 8)
+                {
+                    listTinBDS = listTinBDS.Where(t => t.Huong.Contains(searchString)).ToList();
+                }
+                //ngay dang
+                if (option == 9)
+                {
+                    listTinBDS = listTinBDS.Where(t => t.NgayDang.ToString().Contains(searchString)).ToList();
+                }
+                //mo ta
+                if (option == 10)
+                {
+                    listTinBDS = listTinBDS.Where(t => t.MoTa.Contains(searchString)).ToList();
+                }
+            }
+            
             if (listTinBDS.Count() > 0)
             {
                 foreach (TinBDSViewModel tin in listTinBDS)

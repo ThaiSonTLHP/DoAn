@@ -55,7 +55,7 @@
                             <div class="collapsible-body">
                                 <ul>
                                     <li>
-                                        <a asp-controller="TaiKhoan" asp-action="TaiKhoan">Danh sách tài khoản</a>
+                                        <a asp-controller="TaiKhoan" asp-action="TaiKhoan" asp-route-loaiTK="5">Danh sách tài khoản</a>
                                     </li>
                                     <li>
                                         <a asp-controller="DanhMuc" asp-action="LoaiTaiKhoan">Loại tài khoản</a>
@@ -68,7 +68,7 @@
                             <div class="collapsible-body">
                                 <ul>
                                     <li>
-                                        <a asp-controller="TinBDS" asp-action="Tin" class="waves-effect">Tất cả</a>
+                                        <a asp-controller="TinBDS" asp-action="Tin" asp-route-loaiTin="5" class="waves-effect">Tất cả</a>
                                     </li>
                                     <li>
                                         <a asp-controller="TinBDS" asp-action="ChoPheDuyet" class="waves-effect">Chưa duyệt</a>
@@ -90,10 +90,10 @@
                             <div class="collapsible-body">
                                 <ul>
                                     <li>
-                                        <a asp-controller="TinTuc" asp-action="TinTuc" class="waves-effect">Tin tức</a>
+                                        <a asp-controller="TinTuc" asp-action="Tin" class="waves-effect">Tin tức</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="TinTuc" asp-action="ViêtBai" class="waves-effect">Viết bài</a>
+                                        <a asp-controller="TinTuc" asp-action="VietBai" class="waves-effect">Viết bài</a>
                                     </li>
                                 </ul>
                             </div>

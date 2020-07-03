@@ -3,31 +3,68 @@
 @{ ViewData["Title"] = "All";
                 Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
 
+
+
+
+<h1>Danh sách tài khoản</h1>
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="TaiKhoan" method="get">
-            <select class="form-control" name="loaiTK">
-                <option value="0">Tất cả</option>
-                <option value="1">Quản trị</option>
-                <option value="2">Nhân viên</option>
-                <option value="3">Nhà môi giới</option>
-                <option value="4">Khách hàng</option>
-            </select>
-            <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+            <div class="row">
+                <div class="col-md-8">
+                    <select class="form-control" name="loaiTK">
+                        <option style="border-bottom: 1px solid #00c1ff;" value="5">Tất cả</option>
+                        <option value="1">Quản trị</option>
+                        <option value="2">Nhân viên</option>
+                        <option value="3">Nhà môi giới</option>
+                        <option value="4">Khách hàng</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+                </div>
+            </div>
         </form>
     </div>
     <div class="col-md-4">
         <form asp-action="TaiKhoan" method="get">
-            <select class="form-control" name="flag">
-                <option value="1">Đã khóa</option>
-            </select>
-            <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+            <div class="row">
+                <div class="col-md-8">
+                    <select class="form-control" name="status">
+                        <option value="1">Đã khóa</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+                </div>
+            </div>
         </form>
     </div>
 </div>
+<hr />
+
+<form asp-action="TaiKhoan" method="get">
+    <div class="row">
+        <div class="col-md-4">
+            <select class="form-control" name="option">
+                <option value="1">Tìm theo ID</option>
+                <option value="2">Tìm theo tên</option>
+                <option value="3">Tìm theo email</option>
+                <option value="4">Tìm theo số điện thoại</option>
+            </select>
+        </div>
+        <div class="col-md-4 form-group">
+            <input type="text" class="form-control" name="searchString" placeholder="Nhập thông tin tìm kiếm"/>
+        </div>
+        <div class="col-md-4">
+            <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Tìm" />
+        </div>
+    </div>
+</form>
 
 <p>
-    <a asp-action="Create">Tạo tài khoản</a>
+    <a asp-action="Create" style="margin-top: 15px;">Tạo tài khoản</a>
 </p>
 
 <table class="table table-bordered">

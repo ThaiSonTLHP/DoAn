@@ -106,8 +106,9 @@
                         success: function (result) {
                             _result = result;
                             alert(_result);
-                            alert("Mã xác nhận vừa được gửi đến email của bạn!");
-                            $("#randomID").show("slow");
+                            if (_result == "Mã xác nhận vừa được gửi đến email của bạn!") {
+                                $("#randomID").show("slow");
+                            }
                         }
                     });
                     return false;

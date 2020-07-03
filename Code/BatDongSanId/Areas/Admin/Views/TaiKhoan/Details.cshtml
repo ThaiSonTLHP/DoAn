@@ -80,15 +80,16 @@
     }
     <div class="row" style="margin-top: 50px;">
         <div class="col-md-2">
-            <a asp-action="Edit" data="@Model.taiKhoanViewModel.ID">Sửa tài khoản</a>
+            <a asp-action="Edit" asp-route-id="@Model.taiKhoanViewModel.ID">Sửa tài khoản</a>
         </div>
         <div class="col-md-2">
             <a asp-action="" data="@Model.taiKhoanViewModel.ID" class="xoa">Xóa tài khoản</a>
         </div>
         <div class="col-md-2">
-            <a asp-action="Khoa" data="@Model.taiKhoanViewModel.ID">Khóa tài khoản</a>
+            <a asp-action="" data="@Model.taiKhoanViewModel.ID" class="khoa">Khóa tài khoản</a>
         </div>
     </div>
+    @Html.Hidden("RedirectTo", Url.Action("TaiKhoan", "TaiKhoan"))
 </div>
 
 <!-- Modal -->
@@ -157,10 +158,7 @@
                     async: false,
                     success: function (result) {
                         if (result == true) {
-                            $.ajax({
-                                url: '@Url.Action("TaiKhoan", "TaiKhoan")',data: {},type: "post",async: false,
-                                success: function (result) {}
-                            });
+                            window.location.href = '/Admin/TaiKhoan/TaiKhoan/';
                         } else {
                             alert("Không thể xóa tài khoản này!");
                             return false;
@@ -170,6 +168,30 @@
             }
             else {
                 return false;
+            }
+        });
+
+        $("a.khoa").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var id = $(this).attr("data");
+            var text = "";
+            if (confirm("Khóa tài khoản này?")) {
+                $.ajax({
+                    url: '@Url.Action("Khoa", "TaiKhoan")',
+                    data: { 'id': id },
+                    type: "post",
+                    async: false,
+                    success: function (result) {
+                        text = "Đã khóa";
+                    }
+                });
+                $(this).hide("slow").finish();
+                $(this).show("slow").text(text);
+                return;
+            }
+            else {
+                return;
             }
         });
     })

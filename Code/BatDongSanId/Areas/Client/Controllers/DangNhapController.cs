@@ -16,6 +16,7 @@ using BatDongSanId.Areas.Client.Models.ViewModels;
 using BatDongSanId.ViewModels;
 using BatDongSanId.Models;
 using BatDongSanId.Methods;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace BatDongSanId.Areas.Client.Controllers
 {
@@ -117,7 +118,15 @@ namespace BatDongSanId.Areas.Client.Controllers
 
         public IActionResult Register()
         {
-            List<LoaiTaiKhoan> LoaiTaiKhoanList = dbContext.LoaiTaiKhoan.ToList();
+            List<LoaiTaiKhoan> LoaiTaiKhoanList = (from l in dbContext.LoaiTaiKhoan
+                                                   where l.ID == 3 || l.ID == 4
+                                                   select new LoaiTaiKhoan()
+                                                   {
+                                                       ID = l.ID,
+                                                       Ten = l.Ten,
+                                                       ChucNang = l.ChucNang
+                                                   }
+                                                  ).ToList();
             ViewBag.LoaiTaiKhoanList = new SelectList(LoaiTaiKhoanList, "ID", "Ten");
             List<string> gioiTinh = new List<string>
             {
@@ -179,12 +188,20 @@ namespace BatDongSanId.Areas.Client.Controllers
 
         public string SendCode(string add)
         {
-            Random random = new Random();
-            string _random = random.Next(100000, 999999).ToString();
-            string subject = "Xác thực đăng ký tài khoản";
-            string body = _random + " là mã xác nhận của bạn.";
-            Mail.SendMail(add, subject, body);
-            return _random;
+            var taiKhoan = dbContext.TaiKhoan.FirstOrDefault(t => t.Email == add);
+            if (taiKhoan != null)
+            {
+                return "Email đã được sử dụng cho một tài khoản khác!";
+            }
+            else
+            {
+                Random random = new Random();
+                string _random = random.Next(100000, 999999).ToString();
+                string subject = "Xác thực đăng ký tài khoản";
+                string body = _random + " là mã xác nhận của bạn.";
+                Mail.SendMail(add, subject, body);
+                return "Mã xác nhận vừa được gửi đến email của bạn!";
+            }
         }
 
 

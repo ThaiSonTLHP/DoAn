@@ -306,6 +306,9 @@ namespace BatDongSanId.Data.Migrations
                     b.Property<int>("GoiTin")
                         .HasColumnType("int");
 
+                    b.Property<int>("HetHan")
+                        .HasColumnType("int");
+
                     b.Property<int>("Huong")
                         .HasColumnType("int");
 

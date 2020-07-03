@@ -57,10 +57,13 @@ namespace BatDongSanId.Areas.Client.Models.ViewModels
 
         public Boolean XacThucBool { get; set; }
 
+        [Display(Name = "Phê duyệt")]
         public Boolean PheDuyet { get; set; }
 
         public Boolean DaBan { get; set; }
 
         public int NguoiDangID { get; set; }
+
+        public int HetHan { get; set; }
     }
 }

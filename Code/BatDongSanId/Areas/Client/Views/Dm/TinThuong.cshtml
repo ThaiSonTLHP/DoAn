@@ -1,0 +1,101 @@
+﻿@model X.PagedList.IPagedList<BatDongSanId.Areas.Client.Models.ViewModels.TinBDSViewModel>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Core.Common;
+@{ ViewData["Title"] = "Tin thường";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml"; }
+@using Microsoft.AspNetCore.Http;
+
+<section class="hotel-rooms spad" style="padding-top:0px;">
+    <div class="container card">
+        <div class="row card-header">Tin thường</div>
+        <div class="row card-body">
+            @foreach (var tin in Model)
+            {<div class="col-lg-6 col-xl-6">
+                    <div class=" room-items mystyle-tin-boder">
+                        <div style="margin: 5px;">
+                            <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
+                        </div>
+
+                        <div class="row" style="margin:5px">
+                            <div class="room-img set-bg col-md-3" data-setbg="@Html.Raw(tin.HinhAnh)">
+                                <form>
+                                    <button id="@Html.Raw(tin.HinhAnh)" class="room-content border-0" style="background-color: transparent" data="@tin.ID">
+                                        <i class="flaticon-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="room-text col-md-9" style="padding-top:0px;padding-bottom:0px;">
+                                <div class="room-details" style="padding-bottom:0px;">
+                                    <div class="room-title">
+                                        <a href="#">
+                                            <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
+                                        </a>
+                                        <br />
+                                        <a href="#" class="large-width">
+                                            <i class="flaticon-timer"></i><span>@Html.Raw(tin.NgayDang)</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="room-features" style="padding-bottom:0px;margin-bottom:0px;">
+                                    <div class="room-info">
+                                        <div class="size">
+                                            @if (Html.Raw(tin.XacThuc).ToString() == "Xác thực")
+                                            {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Xác thực</p>}
+                                        else
+                                        {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Chưa xác thực</p>}
+                                        </div>
+                                        <br />
+                                        <div class="size">
+                                            <p>@Html.Raw(tin.LoaiTin) : @Html.Raw(tin.Gia)</p>
+                                        </div>
+                                        <div class="beds">
+                                            <p>Liên hệ: @Html.Raw(tin.LienHe)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>}
+        </div>
+    </div>
+</section>
+
+<!-- Thêm mã phân trang -->
+<br />
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("TinThuong", new { page, @class = "page-item" }),
+    new PagedListRenderOptions
+    {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }
+    })
+<!-- Kết thúc -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("button.room-content").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            //var btn = $("button.room-content");
+            var tin = $(this).attr("data");
+            var user = @Context.Session.GetInt32("userID");
+            if (user == null) {
+                alert("Bạn chưa đăng nhập!");
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("LuuTin", "QuanLyTaiKhoan")',
+                data: { 'idUser': user, 'idTin': tin },
+                type: "post",
+                async: false,
+                success: function (result) {
+                    alert("Đã lưu tin!");
+                }
+            });
+            return;
+        });
+    })
+</script>

@@ -69,6 +69,7 @@ namespace BatDongSanId.Areas.Client.Controllers
 
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             var listTin = layDuLieu.LayTinBDS(HttpContext.Session.GetInt32("userID"), 1);
+            listTin.Reverse();
             return View(listTin);
         }
 
@@ -79,6 +80,7 @@ namespace BatDongSanId.Areas.Client.Controllers
 
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             var listTin = layDuLieu.LayTinBDS(HttpContext.Session.GetInt32("userID"), 2);
+            listTin.Reverse();
             return View(listTin);
         }
 
@@ -226,6 +228,33 @@ namespace BatDongSanId.Areas.Client.Controllers
             else
             {
                 return "Mật khẩu cũ không đúng!";
+            }
+        }
+
+        public bool GiaHan(int id, int goitin)
+        {
+            var tin = dbContext.TinBatDongSan.Find(id);
+            var user = dbContext.TaiKhoan.Find(tin.NguoiDang);
+            var goiTin = dbContext.GoiTin.Find(goitin);
+            if(user.SoDuVi >= goiTin.MucPhi)
+            {
+                user.SoDuVi -= goiTin.MucPhi;
+                tin.GoiTin = 1;
+                tin.TrangThaiDuyet = true;
+                tin.HetHan = 0;
+                dbContext.Update(user);
+                dbContext.Update(tin);
+                dbContext.SaveChanges();
+                return true;
+            }
+            else
+            {
+                tin.GoiTin = 1;
+                tin.TrangThaiDuyet = false;
+                tin.HetHan = 0;
+                dbContext.Update(tin);
+                dbContext.SaveChanges();
+                return false;
             }
         }
 

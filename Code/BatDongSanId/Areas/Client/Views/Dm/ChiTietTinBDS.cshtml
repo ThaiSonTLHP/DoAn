@@ -22,16 +22,14 @@
                 </div>
                 <div class="col-lg-7">
                     <div>
-                        <p style="font-size: 13pt;">Người đăng : @Html.Raw(Model.taiKhoanViewModel.Ten)</p>
+                        <p id="nguoidang" style="font-size: 13pt;">Người đăng : @Html.Raw(Model.taiKhoanViewModel.Ten)</p>
                     </div>
                     <hr />
-                    <div>
+                    <div id="lienhe">
                         <p>SĐT: @Html.Raw(Model.taiKhoanViewModel.SoDienThoai)</p>
-                    </div>
-                    <div>
+
                         <p>Email: @Html.Raw(Model.taiKhoanViewModel.Email)</p>
-                    </div>
-                    <div>
+
                         <p>ĐC: @Html.Raw(Model.taiKhoanViewModel.DiaChi)</p>
                     </div>
                 </div>
@@ -114,6 +112,14 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#baoCao").hide();
+        $("#lienhe").hide();
+
+        $("#nguoidang").mouseover(function () {
+            $("#lienhe").show('slow');
+        });
+        $("#nguoidang").mouseleave(function () {
+            $("#lienhe").hide('slow');
+        });
 
         $("#divContainer img").on({
             mouseover: function () {

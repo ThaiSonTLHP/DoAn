@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BatDongSanId.Areas.Client.Models.ViewModels.TinTucViewModel>
+
+@{
+    ViewData["Title"] = "Tin";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tin</h1>
+<hr />
+<p>
+    <a asp-action="VietBai">Viết tin mới</a>
+</p>
+<hr />
+<table class="table table-bordered">
+    <thead style="background-color:#000257;color:white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TieuDe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayDang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NguoiDang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoaiTinTuc)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TieuDe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NguoiDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiTinTuc)
+                </td>
+                <td>
+                    <a asp-action="ChiTiet" asp-route-id="@item.ID">Chi tiết</a> |
+                    <a asp-action="Sua" asp-route-id="@item.ID">Sửa</a> |
+                    <a asp-action="Xoa" asp-route-id="@item.ID" class="xoa" data="@item.ID">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -173,7 +173,6 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\n
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\Dm\Search.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\Dm\TinBan.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\Dm\TinChoThue.cshtml.g.cs
-C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\QuanLyTaiKhoan\ChiTietTaiKhoan.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\QuanLyTaiKhoan\TaiKhoan.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\Shared\Components\TimKiem\Default.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\Shared\Error.cshtml.g.cs
@@ -233,3 +232,5 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\n
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\DanhMuc\MucGia.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\DanhMuc\QuanHuyen.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\DanhMuc\TinhThanh.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\TaiKhoan\Edit.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\QuanLyTaiKhoan\DoiMatKhau.cshtml.g.cs

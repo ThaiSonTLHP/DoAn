@@ -7,26 +7,81 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Tin" method="get">
-            <select class="form-control" name="flag">
-                <option value="0">Tất cả</option>
-                <option value="1">Cần bán</option>
-                <option value="2">Cho thuê</option>
-                <option value="3">Cần mua</option>
-                <option value="4">Cần thuê</option>
-            </select>
-            <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+            <div class="row">
+                <div class="col-md-8">
+                    <select class="form-control" name="loaiTin">
+                        <option value="5">Tất cả</option>
+                        <option value="1">Cần bán</option>
+                        <option value="2">Cho thuê</option>
+                        <option value="3">Cần mua</option>
+                        <option value="4">Cần thuê</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+                </div>
+            </div>
         </form>
     </div>
     @*<div class="col-md-4">
-        <form asp-action="TaiKhoan" method="get">
-            <select class="form-control" name="flag">
-                <option value="1">Đã khóa</option>
-            </select>
-            <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+        <form asp-action="Tin" method="get">
+            <div class="row">
+                <div class="col-md-8">
+                    <select class="form-control" name="flag">
+                        <option value="0">Tất cả</option>
+                        <option value="1">Cần bán</option>
+                        <option value="2">Cho thuê</option>
+                        <option value="3">Cần mua</option>
+                        <option value="4">Cần thuê</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <div class="col-md-4">
+        <form asp-action="Tin" method="get">
+            <div class="row">
+                <div class="col-md-8">
+                    <select class="form-control" name="flag">
+                        <option value="0">Tất cả</option>
+                        <option value="1">Cần bán</option>
+                        <option value="2">Cho thuê</option>
+                        <option value="3">Cần mua</option>
+                        <option value="4">Cần thuê</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+                </div>
+            </div>
         </form>
     </div>*@
 </div>
 
+<hr />
+
+<form asp-action="Tin" method="get">
+    <div class="row">
+        <div class="col-md-4">
+            <select class="form-control" name="option">
+                <option value="1">Tìm theo ID</option>
+                <option value="2">Tìm theo ngày đăng</option>
+                <option value="3">Tìm theo người đăng</option>
+                <option value="4">Tìm theo mô tả</option>
+            </select>
+        </div>
+        <div class="col-md-4 form-group">
+            <input type="text" class="form-control" name="searchString" placeholder="Nhập thông tin tìm kiếm" />
+        </div>
+        <div class="col-md-4">
+            <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Tìm" />
+        </div>
+    </div>
+</form>
 <table class="table table-bordered">
     <thead style="background-color:#000257;color:white;">
         <tr>
