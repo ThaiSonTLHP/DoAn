@@ -3,7 +3,7 @@
     Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml"; }
 @using Microsoft.AspNetCore.Http;
 <div class="container card @*col-lg-10 h-75*@ @*justify-content-center*@ align-items-center" style="padding:0px;">
-    <div class="row card-header col-lg-12">Kết quả</div>
+    <div class="row card-header col-lg-12" style="background-color:#002d63; color:white;">Kết quả tìm kiếm</div>
     @if (Model.Count() > 0)
     {
 <div class="row card-body">

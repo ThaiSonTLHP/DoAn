@@ -23,6 +23,10 @@ namespace BatDongSanId.Models
         [Display(Name = "Ngày lên bảng tin")]
         public DateTime NgayLenBangTin { get; set; }
 
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Ngày xác nhận giao dịch")]
+        public DateTime NgayXacNhan { get; set; }
+
         [Display(Name = "Trạng thái giao dịch")]
         public Boolean TrangThaiGiaoDich { get; set; }
 
@@ -71,5 +75,8 @@ namespace BatDongSanId.Models
 
         [Display(Name = "Gói tin trước hết hạn")]
         public int HetHan { get; set; }
+
+        [Display(Name = "Lượt xem")]
+        public int LuotXem { get; set; }
     }
 }

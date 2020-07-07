@@ -54,69 +54,80 @@ namespace BatDongSanId.Areas.Client.Models.ViewComponents
                                                 TieuDe = t.MoTa.Substring(0, 80) + "...",
                                                 MoTa = t.MoTa
                                             }).OrderBy(m => m.NgayDang).ToListAsync();
-            //var listTinHot = await (from t in dbContext.TinBatDongSan
-            //                        join lt in dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
-            //                        join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
-            //                        join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
-            //                        join lbds in dbContext.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
-            //                        join tt in dbContext.TinhThanh on t.TinhThanh equals tt.ID
-            //                        join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
-            //                        join h in dbContext.Huong on t.Huong equals h.ID
-            //                        where gt.Ten == "Tin HOT"
-            //                        select new TinBDSViewModel()
-            //                        {
-            //                            ID = t.ID,
-            //                            LienHe = tk.SoDienThoai,
-            //                            NgayDang = t.NgayDang,
-            //                            LoaiTin = lt.Ten,
-            //                            NguoiDang = tk.Ten,
-            //                            LoaiBatDongSan = lbds.Ten,
-            //                            TinhThanh = tt.Ten,
-            //                            QuanHuyen = qh.Ten,
-            //                            Huong = h.Ten,
-            //                            DienTich = t.DienTich,
-            //                            Gia = t.Gia,
-            //                            XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
-            //                            TieuDe = t.MoTa.Substring(0, 80) + "...",
-            //                            MoTa = t.MoTa
-            //                        }).OrderBy(m => m.NgayDang).ToListAsync();
-            //var listTinThuong = await (from t in dbContext.TinBatDongSan
-            //                        join lt in dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
-            //                        join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
-            //                        join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
-            //                        join lbds in dbContext.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
-            //                        join tt in dbContext.TinhThanh on t.TinhThanh equals tt.ID
-            //                        join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
-            //                        join h in dbContext.Huong on t.Huong equals h.ID
-            //                        where gt.Ten == "Tin Thường"
-            //                        select new TinBDSViewModel()
-            //                        {
-            //                            ID = t.ID,
-            //                            LienHe = tk.SoDienThoai,
-            //                            NgayDang = t.NgayDang,
-            //                            LoaiTin = lt.Ten,
-            //                            NguoiDang = tk.Ten,
-            //                            LoaiBatDongSan = lbds.Ten,
-            //                            TinhThanh = tt.Ten,
-            //                            QuanHuyen = qh.Ten,
-            //                            Huong = h.Ten,
-            //                            DienTich = t.DienTich,
-            //                            Gia = t.Gia,
-            //                            XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
-            //                            TieuDe = t.MoTa.Substring(0, 80) + "...",
-            //                            MoTa = t.MoTa
-            //                        }).OrderBy(m => m.NgayDang).ToListAsync();
-            //listTinVip.Reverse();
-            //listTinHot.Reverse();
-            if (listTinVip.Count() > 2)
+            var listTinHot = await (from t in dbContext.TinBatDongSan
+                                    join lt in dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
+                                    join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
+                                    join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
+                                    join lbds in dbContext.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
+                                    join tt in dbContext.TinhThanh on t.TinhThanh equals tt.ID
+                                    join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
+                                    join h in dbContext.Huong on t.Huong equals h.ID
+                                    where gt.Ten == "Tin HOT"
+                                    select new TinBDSViewModel()
+                                    {
+                                        ID = t.ID,
+                                        LienHe = tk.SoDienThoai,
+                                        NgayDang = t.NgayDang,
+                                        LoaiTin = lt.Ten,
+                                        NguoiDang = tk.Ten,
+                                        LoaiBatDongSan = lbds.Ten,
+                                        TinhThanh = tt.Ten,
+                                        QuanHuyen = qh.Ten,
+                                        Huong = h.Ten,
+                                        DienTich = t.DienTich,
+                                        Gia = t.Gia,
+                                        XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
+                                        TieuDe = t.MoTa.Substring(0, 80) + "...",
+                                        MoTa = t.MoTa
+                                    }).OrderBy(m => m.NgayDang).ToListAsync();
+            var listTinThuong = await (from t in dbContext.TinBatDongSan
+                                       join lt in dbContext.LoaiTinBatDongSan on t.LoaiTin equals lt.ID
+                                       join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
+                                       join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
+                                       join lbds in dbContext.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
+                                       join tt in dbContext.TinhThanh on t.TinhThanh equals tt.ID
+                                       join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
+                                       join h in dbContext.Huong on t.Huong equals h.ID
+                                       where gt.Ten == "Tin thường"
+                                       select new TinBDSViewModel()
+                                       {
+                                           ID = t.ID,
+                                           LienHe = tk.SoDienThoai,
+                                           NgayDang = t.NgayDang,
+                                           LoaiTin = lt.Ten,
+                                           NguoiDang = tk.Ten,
+                                           LoaiBatDongSan = lbds.Ten,
+                                           TinhThanh = tt.Ten,
+                                           QuanHuyen = qh.Ten,
+                                           Huong = h.Ten,
+                                           DienTich = t.DienTich,
+                                           Gia = t.Gia,
+                                           XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
+                                           TieuDe = t.MoTa.Substring(0, 80) + "...",
+                                           MoTa = t.MoTa
+                                       }).OrderBy(m => m.NgayDang).ToListAsync();
+            listTinThuong.Reverse();
+            foreach(var tin in listTinVip)
             {
-                listTinVip.Reverse();
-                footer.TinBDSViewModel = listTinVip.GetRange(0, 2);
-                foreach (var tin in listTinVip)
-                {
-                    tin.HinhAnh = layDuLieu.LayHinhAnh(tin.ID, "Tin bất động sản");
-                }
+                listTin.Add(tin);
             }
+            foreach (var tin in listTinHot)
+            {
+                listTin.Add(tin);
+            }
+            foreach (var tin in listTinThuong)
+            {
+                listTin.Add(tin);
+            }
+
+            footer.TinBDSViewModel = listTin.GetRange(0, 2);
+            foreach (var tin in listTin)
+            {
+                tin.HinhAnh = layDuLieu.LayHinhAnh(tin.ID, "Tin bất động sản");
+            }
+
+            footer.Fanpage = await dbContext.CauHinh.FirstOrDefaultAsync(x => x.Ten == "Fanpage");
+
             //footer.GioiThieuViewModel.GioiThieu = Task<string>configuration["AppSetting: TinHOTCount"].ToString();
             return View(footer);
         }

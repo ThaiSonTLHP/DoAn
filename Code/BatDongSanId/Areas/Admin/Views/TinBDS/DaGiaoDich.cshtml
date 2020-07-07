@@ -4,6 +4,46 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+<h1>Thống kê</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DaGiaoDich" method="get">
+            <div class="row">
+                <div class="col-md-8">
+                    <select class="form-control" name="option">
+                        <option value="4">Tất cả</option>
+                        <option value="1">Hôm nay</option>
+                        <option value="2">Tháng qua</option>
+                        <option value="3">Năm qua</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+<h1>Thống kê theo khoảng thời gian</h1>
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="DaGiaoDich" method="get">
+            <div class="row">
+                <div class="col-md-4">
+                    <input class="form-control" type="date" lang="vi" name="min"/>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="date" lang="vi" name="max"/>
+                </div>
+                <div class="col-md-4">
+                    <input class="btn btn-primary" style="margin-top:0px;" type="submit" value="Lọc" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <table class="table table-bordered">
     <thead style="background-color:#000257;color:white;">
         <tr>
@@ -23,7 +63,7 @@
                 @Html.DisplayNameFor(model => model.NguoiDang)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TieuDe)
+                @Html.DisplayNameFor(model => model.NgayXacNhan)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PheDuyet)
@@ -51,7 +91,7 @@
                     @Html.DisplayFor(modelItem => item.NguoiDang)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TieuDe)
+                    @Html.DisplayFor(modelItem => item.NgayXacNhan)
                 </td>
                 @if(item.PheDuyet == true) {
                     <td>Đã duyệt</td>

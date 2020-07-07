@@ -9,10 +9,13 @@
         width: 100px;
         border: 1px solid grey;
     }
+    .lienHe{
+        font-size: 13pt;
+    }
 </style>
 
 <div class="container">
-    <h4>TinBDSViewModel</h4>
+    <h4>Thông tin chi tiết</h4>
     <hr />
     <div class="row">
         <div class="col-lg-6">
@@ -22,15 +25,15 @@
                 </div>
                 <div class="col-lg-7">
                     <div>
-                        <p id="nguoidang" style="font-size: 13pt;">Người đăng : @Html.Raw(Model.taiKhoanViewModel.Ten)</p>
+                        <p id="nguoidang" style="font-size: 14pt;">Người đăng : @Html.Raw(Model.taiKhoanViewModel.Ten)</p>
                     </div>
                     <hr />
                     <div id="lienhe">
-                        <p>SĐT: @Html.Raw(Model.taiKhoanViewModel.SoDienThoai)</p>
+                        <p style="font-size: 12pt;">SĐT: @Html.Raw(Model.taiKhoanViewModel.SoDienThoai)</p>
 
-                        <p>Email: @Html.Raw(Model.taiKhoanViewModel.Email)</p>
+                        <p style="font-size: 12pt;">Email: @Html.Raw(Model.taiKhoanViewModel.Email)</p>
 
-                        <p>ĐC: @Html.Raw(Model.taiKhoanViewModel.DiaChi)</p>
+                        <p style="font-size: 12pt;">ĐC: @Html.Raw(Model.taiKhoanViewModel.DiaChi)</p>
                     </div>
                 </div>
             </div>
@@ -43,7 +46,10 @@
                         <b class="flaticon-placeholder">@Html.Raw(Model.tinBDSViewModel.QuanHuyen) | @Html.Raw(Model.tinBDSViewModel.TinhThanh)</b>
                     </div>
                     <div style="padding-bottom: 10px;">
-                        <b>Diện tích: @Html.Raw(Model.tinBDSViewModel.DienTich) m2 | Hướng:@Html.Raw(Model.tinBDSViewModel.Huong)</b>
+                        <b>Diện tích: @Html.Raw(Model.tinBDSViewModel.DienTich) m2 | Hướng: @Html.Raw(Model.tinBDSViewModel.Huong)</b>
+                    </div>
+                    <div style="padding-bottom: 10px;">
+                        <b>Loại bất động sản: @Html.Raw(Model.tinBDSViewModel.LoaiBatDongSan)</b>
                     </div>
                     <div style="padding-bottom: 10px;">
                         <b>Hình thức giao dịch: @Html.Raw(Model.tinBDSViewModel.LoaiTin)</b>
@@ -88,6 +94,16 @@
             </div>*@
     </div>
 </div>
+<div class="row container card" style="margin-top: 30px;">
+    <div class="row card-header" style="background-color:#9f0000; color:white;">Tin liên quan</div>
+    <div class="row card-body" @*style="padding:0px;"*@>
+        @foreach (var tin in Model.tinLienQuan)
+        {
+<div class="col-md-12">
+    <p style="font-size: 12pt;"><a asp-action="ChiTietTinBDS" asp-route-id="@tin.ID">@tin.TieuDe (@tin.LuotXem lượt xem)</a></p>
+</div>}
+    </div>
+</div>
 <div class="row" style="margin-top: 30px;">
     <div class="col-lg-6" style="padding:0px;">
         <div id="fb-root"></div>
@@ -112,14 +128,14 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#baoCao").hide();
-        $("#lienhe").hide();
+        //$("#lienhe").hide();
 
-        $("#nguoidang").mouseover(function () {
-            $("#lienhe").show('slow');
-        });
-        $("#nguoidang").mouseleave(function () {
-            $("#lienhe").hide('slow');
-        });
+        //$("#nguoidang").mouseover(function () {
+        //    $("#lienhe").show('slow');
+        //});
+        //$("#nguoidang").mouseleave(function () {
+        //    $("#lienhe").hide('slow');
+        //});
 
         $("#divContainer img").on({
             mouseover: function () {

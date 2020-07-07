@@ -149,8 +149,6 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\n
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\BatDongSanId.RazorCoreGenerate.cache
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\Home\Index.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\Home\Privacy.cshtml.g.cs
-C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\QuanHuyen\Details.cshtml.g.cs
-C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\QuanHuyen\Index.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\Error.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -234,3 +232,15 @@ C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\n
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\DanhMuc\TinhThanh.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\TaiKhoan\Edit.cshtml.g.cs
 C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\QuanLyTaiKhoan\DoiMatKhau.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\CauHinh\Logo.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\CauHinh\Menu.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\CauHinh\ThongTin.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\Components\Menu\Default.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\TinTuc\Tin.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Admin\Views\TinTuc\VietBai.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\Dm\ChiTietTinTuc.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\Dm\TinHOT.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\Dm\TinThuong.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\Dm\TinTinhThanh.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\Dm\TinTuc.cshtml.g.cs
+C:\Users\ThaiSon\Desktop\DoAn_BatDongSanWeb\DoAn\Code\BatDongSanId\obj\Release\netcoreapp3.1\Razor\Areas\Client\Views\Dm\TinVIP.cshtml.g.cs

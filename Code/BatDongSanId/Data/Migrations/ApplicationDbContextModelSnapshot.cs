@@ -43,6 +43,30 @@ namespace BatDongSanId.Data.Migrations
                     b.ToTable("BaoCao");
                 });
 
+            modelBuilder.Entity("BatDongSanId.Models.CauHinh", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte[]>("Anh")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("DuLieuString")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ten")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TrangThai")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("CauHinh");
+                });
+
             modelBuilder.Entity("BatDongSanId.Models.GoiTin", b =>
                 {
                     b.Property<int>("ID")
@@ -318,6 +342,9 @@ namespace BatDongSanId.Data.Migrations
                     b.Property<int>("LoaiTin")
                         .HasColumnType("int");
 
+                    b.Property<int>("LuotXem")
+                        .HasColumnType("int");
+
                     b.Property<string>("MoTa")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -332,6 +359,9 @@ namespace BatDongSanId.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("NgayLenBangTin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NgayXacNhan")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("NguoiDang")
@@ -378,9 +408,6 @@ namespace BatDongSanId.Data.Migrations
 
                     b.Property<string>("NoiDung")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TestDB")
-                        .HasColumnType("int");
 
                     b.Property<string>("TieuDe")
                         .HasColumnType("nvarchar(max)");

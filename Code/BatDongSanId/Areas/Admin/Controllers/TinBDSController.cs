@@ -138,7 +138,7 @@ namespace BatDongSanId.Areas.Admin.Controllers
             return View(listChuaXacThuc);
         }
 
-        public IActionResult DaGiaoDich()
+        public IActionResult DaGiaoDich(int option = 0, DateTime min = default(DateTime), DateTime max = default(DateTime))
         {
             if (!checkUser.CheckAdmin(HttpContext.Session.GetInt32("userID")))
             {
@@ -146,16 +146,36 @@ namespace BatDongSanId.Areas.Admin.Controllers
             }
 
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
-            var listTin = layDuLieu.LayTinBDS();
+            var listTin = layDuLieu.LayTinGiaoDich();
             var listGiaoDich = new List<TinBDSViewModel>();
-            foreach (var tin in listTin)
+            if(option != 0)
             {
-                if (tin.DaBan == true)
+                //all
+                if(option == 4)
                 {
-                    listGiaoDich.Add(tin);
+                    
+                }
+                //date
+                if (option == 1)
+                {
+                    listTin = listTin.Where(t => t.NgayXacNhan.Date == DateTime.Now.Date).ToList();
+                }
+                //month
+                if (option == 2)
+                {
+                    listTin = listTin.Where(t => t.NgayXacNhan.Month == DateTime.Now.Month).ToList();
+                }
+                //year
+                if (option == 3)
+                {
+                    listTin = listTin.Where(t => t.NgayXacNhan.Year == DateTime.Now.Date.Year).ToList();
                 }
             }
-            return View(listGiaoDich);
+            if(min != default(DateTime) && max != default(DateTime))
+            {
+                listTin = listTin.Where(t => DateTime.Compare(t.NgayXacNhan, min) >= 0 && DateTime.Compare(t.NgayXacNhan, max) < 0).ToList();
+            }
+            return View(listTin);
         }
 
         public IActionResult PhanHoi()

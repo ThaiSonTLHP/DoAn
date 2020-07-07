@@ -13,5 +13,7 @@ namespace BatDongSanId.Areas.Client.Models.ListViewModels
         public TinBDSViewModel tinBDSViewModel { get; set; }
         public TaiKhoanViewModel taiKhoanViewModel { get; set; }
         public List<string> hinhAnhs { get; set; }
+
+        public List<TinBDSViewModel> tinLienQuan { get; set; }
     }
 }

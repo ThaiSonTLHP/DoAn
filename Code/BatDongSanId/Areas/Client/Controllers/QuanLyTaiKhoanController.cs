@@ -211,6 +211,7 @@ namespace BatDongSanId.Areas.Client.Controllers
         {
             var tin = dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == idTin);
             tin.TrangThaiGiaoDich = true;
+            tin.NgayXacNhan = DateTime.Now;
             dbContext.Update(tin);
             dbContext.SaveChanges();
         }

@@ -27,7 +27,7 @@ namespace BatDongSanId.Areas.Client.Controllers
             _dbContext = dbContext;
             this.configuration = configuration;
         }
-        public IActionResult Index(/*int? size = 3, int? page*/)
+        public IActionResult Index(/*int? size = 3, int? page*/int sapXepVip = 0)
         {
             //if (page == null) page = 1;
             //// 4.1 Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
@@ -35,22 +35,37 @@ namespace BatDongSanId.Areas.Client.Controllers
             //int pageNumber = (page ?? 1);
 
             LayDuLieu layDuLieu = new LayDuLieu(_dbContext, configuration);
-            layDuLieu.CapNhatTinVip();
-            layDuLieu.CapNhatTinHot();
+            //layDuLieu.CapNhatTinVip();
+            //layDuLieu.CapNhatTinHot();
             TrangChuListViewModel _trangChu = new TrangChuListViewModel();
-            var tinThuongViewModels = layDuLieu.LayTinBDS(2, "Tin thường", "All");
-            var tinHOTViewModels = layDuLieu.LayTinBDS(int.Parse(configuration["AppSetting:TinHOTCount"]), "Tin HOT", "All");
-            var tinVIPViewModels = layDuLieu.LayTinBDS(int.Parse(configuration["AppSetting:TinVIPCount"]), "Tin VIP", "All");
-            var nhaMoiGioiViewModels = layDuLieu.LayTaiKhoan(10, "Nhà môi giới");
-            var tinTucViewModels = layDuLieu.LayTinTuc(6);
 
+            var tinVip = layDuLieu.LayTinBDS(12, "Tin VIP", "All");
+            if(sapXepVip != 0)
+            {
+                if (sapXepVip == 1)
+                {
+                    tinVip = tinVip.OrderBy(t => t.GiaGoc).ToList();
+                }
+                if (sapXepVip == 2)
+                {
+                    tinVip = tinVip.OrderByDescending(t => t.GiaGoc).ToList();
+                }
+                if (sapXepVip == 3)
+                {
+                    tinVip = tinVip.OrderBy(t => t.DienTichGoc).ToList();
+                }
+                if (sapXepVip == 4)
+                {
+                    tinVip = tinVip.OrderByDescending(t => t.DienTichGoc).ToList();
+                }
+            }
 
-            _trangChu.TinThuongViewModels = tinThuongViewModels;
-            _trangChu.TinHOTViewModels = tinHOTViewModels;
-            _trangChu.TinVIPViewModels = tinVIPViewModels;
-            _trangChu.TaiKhoanViewModels = nhaMoiGioiViewModels;
-            _trangChu.TinTucViewModels = tinTucViewModels;
-
+            _trangChu.TinThuongViewModels = layDuLieu.LayTinBDS(6, "Tin thường", "All"); ;
+            _trangChu.TinHOTViewModels = layDuLieu.LayTinBDS(8, "Tin HOT", "All");
+            _trangChu.TinVIPViewModels = tinVip;
+            _trangChu.TaiKhoanViewModels = layDuLieu.LayTaiKhoan(10, "Nhà môi giới");
+            _trangChu.TinTucViewModels = layDuLieu.LayTinTuc(6);
+            _trangChu.TinBDSTinhThanhViewModels = layDuLieu.TongTinBDSByTinhThanh();
 
             //var testKey = configuration["AppSetting:TinBatDongSanTime"];
             return View(_trangChu);

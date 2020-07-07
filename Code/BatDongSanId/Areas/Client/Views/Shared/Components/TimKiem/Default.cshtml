@@ -34,37 +34,33 @@
         <div class="location">
             <p>Tỉnh/ Thành phố</p>
             <select class="form-control" name="TinhThanhOption">
+                <option value="">Tất cả</option>
                 @foreach (var item in Model.TinhThanhs)
-                {
-                    <option value="@item.ID">@Html.Raw(item.Ten)</option>
-                }
+                {<option value="@item.ID">@Html.Raw(item.Ten)</option>}
             </select>
         </div>
         <div class="search-type">
             <p>Loại tin</p>
             <select class="form-control" name="LoaiTinOption">
+                <option value=0>Tất cả</option>
                 @foreach (var item in Model.LoaiTinBatDongSans)
-                {
-                    <option value="@item.ID">@Html.Raw(item.Ten)</option>
-                }
+                {<option value="@item.ID">@Html.Raw(item.Ten)</option>}
             </select>
         </div>
         <div class="search-type">
             <p>Khoảng giá</p>
             <select class="form-control" name="MucGiaOption">
+                <option value=0>Tất cả</option>
                 @foreach (var item in Model.MucGias)
-                {
-                    <option value="@item.ID">@Html.Raw(item.Ten)</option>
-                }
+                {<option value="@item.ID">@Html.Raw(item.Ten)</option>}
             </select>
         </div>
         <div class="search-type">
             <p>Loại hình</p>
             <select class="form-control" name="LoaiBDSOption">
+                <option value=0>Tất cả</option>
                 @foreach (var item in Model.LoaiBatDongSans)
-                {
-                    <option value="@item.ID">@Html.Raw(item.Ten)</option>
-                }
+                {<option value="@item.ID">@Html.Raw(item.Ten)</option>}
             </select>
         </div>
         <div class="search-btn">

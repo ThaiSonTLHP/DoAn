@@ -29,5 +29,6 @@ namespace BatDongSanId.Data
         public DbSet<MucGia> MucGia { get; set; }
         public DbSet<LuuTinBatDongSan> LuuTinBatDongSan { get; set; }
         public DbSet<BaoCao> BaoCao { get; set; }
+        public DbSet<CauHinh> CauHinh { get; set; }
     }
 }

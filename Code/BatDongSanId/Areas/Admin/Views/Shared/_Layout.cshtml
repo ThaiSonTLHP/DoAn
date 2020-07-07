@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="utf-8">
@@ -26,126 +26,7 @@
     <header>
         <!-- Sidebar navigation -->
         <div id="slide-out" class="side-nav sn-bg-4 fixed">
-            <ul class="custom-scrollbar">
-                <!-- Logo -->
-                <li class="logo-sn waves-effect py-3">
-                    <div class="text-center">
-                        <a asp-controller="Home" asp-action="Index" class="pl-0"><img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"></a>
-                    </div>
-                    <hr />
-                </li>
-                <!--/. Logo -->
-                <!--Search Form-->
-                @*<li>
-                    <form class="search-form" role="search">
-                        <div class="md-form mt-0 waves-light">
-                            <input type="text" class="form-control py-2" placeholder="Tìm kiếm">
-                        </div>
-                    </form>
-                </li>*@
-                <!--/.Search Form-->
-                <!-- Side navigation links -->
-                <li>
-                    <ul class="collapsible collapsible-accordion">
-                        <li>
-                            <a class="collapsible-header waves-effect arrow-r">
-                                <i class="fas fa-user"></i>
-                                Tài khoản<i class="fas fa-angle-down rotate-icon"></i>
-                            </a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li>
-                                        <a asp-controller="TaiKhoan" asp-action="TaiKhoan" asp-route-loaiTK="5">Danh sách tài khoản</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="DanhMuc" asp-action="LoaiTaiKhoan">Loại tài khoản</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a class="collapsible-header waves-effect arrow-r"><i class="far fa-file-alt"></i>Tin bất động sản<i class="fas fa-angle-down rotate-icon"></i></a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li>
-                                        <a asp-controller="TinBDS" asp-action="Tin" asp-route-loaiTin="5" class="waves-effect">Tất cả</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="TinBDS" asp-action="ChoPheDuyet" class="waves-effect">Chưa duyệt</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="TinBDS" asp-action="ChoXacThuc" class="waves-effect">Chưa xác thực</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="TinBDS" asp-action="DaGiaoDich" class="waves-effect">Đã giao dịch</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="TinBDS" asp-action="PhanHoi" class="waves-effect">Phản hồi</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a class="collapsible-header waves-effect arrow-r"><i class="fas fa-edit"></i>Tin tức<i class="fas fa-angle-down rotate-icon"></i></a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li>
-                                        <a asp-controller="TinTuc" asp-action="Tin" class="waves-effect">Tin tức</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="TinTuc" asp-action="VietBai" class="waves-effect">Viết bài</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a class="collapsible-header waves-effect arrow-r"><i class="fas fa-server"></i> Danh mục<i class="fas fa-angle-down rotate-icon"></i></a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li>
-                                        <a asp-controller="DanhMuc" asp-action="LoaiTinBDS" class="waves-effect">Loại tin bất động sản</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="DanhMuc" asp-action="LoaiTinTuc" class="waves-effect">Loại tin tức</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="DanhMuc" asp-action="TinhThanh" class="waves-effect">Tỉnh thành</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="DanhMuc" asp-action="QuanHuyen" class="waves-effect">Quận huyện</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="DanhMuc" asp-action="MucGia" class="waves-effect">Mức giá</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="DanhMuc" asp-action="MucDienTich" class="waves-effect">Mức diện tích</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="DanhMuc" asp-action="LoaiBDS" class="waves-effect">Loại bất động sản</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="DanhMuc" asp-action="GoiTin" class="waves-effect">Gói tin</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="DanhMuc" asp-action="Huong" class="waves-effect">Hướng</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        @*<li>
-                            <a class="collapsible-header waves-effect arrow-r"><i class="fas fa-cog"></i> Cấu hình<i class="fas fa-angle-down rotate-icon"></i></a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li>
-                                        <a href="../components/buttons.html" class="waves-effect">Giới thiệu</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>*@
-                    </ul>
-                </li>
-                <!--/. Side navigation links -->
-            </ul>
+            @await Component.InvokeAsync("Menu")
             <div class="sidenav-bg mask-strong"></div>
         </div>
         <!--/. Sidebar navigation -->

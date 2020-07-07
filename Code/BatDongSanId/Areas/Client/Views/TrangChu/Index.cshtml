@@ -5,178 +5,200 @@
 @model BatDongSanId.Areas.Client.Models.ListViewModels.TrangChuListViewModel
 @using Microsoft.AspNetCore.Http;
 @{ ViewData["Title"] = "Trang chủ"; }
-<section class="hotel-rooms spad" style="padding-top:0px;">
-    <div class="container card" style="margin-bottom: 30px;">
-        <div class="row card-header" style="background-color:#9f0000; color:white;">Tin VIP</div>
-        <div class="row card-body">
-            @foreach (var tin in Model.TinVIPViewModels)
-            {
-                <div class="col-lg-6 col-xl-6">
-                    <div class=" room-items mystyle-tin-border">
-                        <div style="margin: 5px;">
-                            <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
-                        </div>
-                        
-                        <div class="row" style="margin:5px">
-                            <div class="room-img set-bg col-md-3" data-setbg="@Html.Raw(tin.HinhAnh)">
-                                <form>
-                                    <button id="@Html.Raw(tin.HinhAnh)" class="room-content border-0" style="background-color: transparent" data="@tin.ID">
-                                        <i class="flaticon-heart"></i>
-                                    </button>
-                                </form>
+<section class="row hotel-rooms spad" style="padding-top:0px;">
+    <div class="col-md-9" style="padding-right: 0px;">
+        <div class="container card" style="margin-bottom: 30px;">
+            <div class="row card-header" style="background-color:#9f0000; color:white;">
+                <div class="col-md-6">
+                    Tin VIP
+                </div>
+                <div class="col-md-6">
+                    <form asp-action="Index" method="get">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <select class="form-control" id="select" name="sapXepVip">
+                                    <option value="1">Giá tăng dần</option>
+                                    <option value="2">Giá giảm dần</option>
+                                    <option value="3">Diện tích tăng dần</option>
+                                    <option value="4">Diện tích giảm dần</option>
+                                </select>
                             </div>
-                            <div class="room-text col-md-9" style="padding-top:0px;padding-bottom:0px;">
-                                <div class="room-details" style="padding-bottom:0px;">
-                                    <div class="room-title">
-                                        <a href="#">
-                                            <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
-                                        </a>
-                                        <br />
-                                        <a href="#" class="large-width">
-                                            <i class="flaticon-timer"></i><span>@Html.Raw(tin.NgayDang)</span>
-                                        </a>
-                                    </div>
+                            <div class="col-md-4">
+                                <input type="submit" class="btn btn-primary" value="Sắp xếp" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row card-body" style="padding:0px;">
+                @foreach (var tin in Model.TinVIPViewModels)
+                {
+    <div class="col-lg-6 col-xl-6" style="padding:5px;">
+        <div class=" room-items mystyle-tin-border">
+            <div style="margin: 5px;">
+                <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:13pt;">@Html.Raw(tin.TieuDe)</a>
+            </div>
+
+            <div class="row" style="margin:5px">
+                <div class="room-img set-bg col-md-3" data-setbg="@Html.Raw(tin.HinhAnh)">
+                    <form>
+                        <button id="@Html.Raw(tin.HinhAnh)" class="room-content border-0" style="background-color: transparent" data="@tin.ID">
+                            <i class="flaticon-heart"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="room-text col-md-9" style="padding-top:0px;padding-bottom:0px;">
+                    <div class="room-details" style="padding-bottom:0px;">
+                        <div class="room-title" style="padding-right: 0px;">
+                            <a href="#">
+                                <i class="flaticon-placeholder"></i> <span style="font-size:11pt;">@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
+                            </a>
+                            <br />
+                            <a href="#" class="large-width">
+                                <i class="flaticon-timer"></i><span style="font-size:11pt;">@Html.Raw(tin.NgayDang)</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="room-features" style="padding-bottom:0px;margin-bottom:0px;">
+                        <div class="room-info" style="padding-right: 0px;">
+                            <div class="size" style="margin-right: 0px;">
+                                <p style="font-size:11pt;">DT: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong)</p>
+                                @if (Html.Raw(tin.XacThuc).ToString() == "Xác thực")
+                                {<p style="font-size:11pt;">Thông tin: Đã xác minh</p>}
+                            else
+                            {<p style="font-size:11pt;">Thông tin: Chưa xác minh</p>}
+                            </div>
+                            <br />
+                            <div class="size">
+                                <p style="font-size:11pt;">@tin.LoaiTin : @tin.Gia | Liên hệ: @tin.LienHe</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  }
+            </div>
+            <hr />
+            <div class="row" style="margin: 30px;">
+                <a asp-controller="Dm" asp-action="TinVIP">Xem thêm</a>
+            </div>
+        </div>
+
+        <div class="container card" style="margin-bottom: 30px;">
+            <div class="row card-header" style="background-color:#9f0000; color:white;">Tin thường</div>
+            <div class="row card-body" style="padding:0px;">
+                @foreach (var tin in Model.TinThuongViewModels)
+                {
+        <div class="col-lg-6 col-xl-6" style="padding:5px;">
+            <div class=" room-items mystyle-tin-border">
+                <div style="margin: 5px;">
+                    <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:13pt;">@Html.Raw(tin.TieuDe)</a>
+                </div>
+
+                <div class="row" style="margin:5px">
+                    <div class="room-img set-bg col-md-3" data-setbg="@Html.Raw(tin.HinhAnh)">
+                        <form>
+                            <button id="@Html.Raw(tin.HinhAnh)" class="room-content border-0" style="background-color: transparent" data="@tin.ID">
+                                <i class="flaticon-heart"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="room-text col-md-9" style="padding-top:0px;padding-bottom:0px;">
+                        <div class="room-details" style="padding-bottom:0px;">
+                            <div class="room-title" style="padding-right: 0px;">
+                                <a href="#">
+                                    <i class="flaticon-placeholder"></i> <span style="font-size:11pt;">@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
+                                </a>
+                                <br />
+                                <a href="#" class="large-width">
+                                    <i class="flaticon-timer"></i><span style="font-size:11pt;">@Html.Raw(tin.NgayDang)</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="room-features" style="padding-bottom:0px;margin-bottom:0px;">
+                            <div class="room-info" style="padding-right: 0px;">
+                                <div class="size" style="margin-right: 0px;">
+                                    <p style="font-size:11pt;">DT: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong)</p>
+                                    @if (Html.Raw(tin.XacThuc).ToString() == "Xác thực")
+                                    {<p style="font-size:11pt;">Thông tin: Đã xác minh</p>}
+                                    else
+                                    {<p style="font-size:11pt;">Thông tin: Chưa xác minh</p>}
                                 </div>
-                                <div class="room-features" style="padding-bottom:0px;margin-bottom:0px;">
-                                    <div class="room-info">
-                                        <div class="size">
-                                            @if (Html.Raw(tin.XacThuc).ToString() == "Xác thực")
-                                            {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Xác thực</p>}
-                                            else
-                                            {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Chưa xác thực</p>}
-                                        </div>
-                                        <br />
-                                        <div class="size">
-                                            <p>@Html.Raw(tin.LoaiTin) : @Html.Raw(tin.Gia)</p>
-                                        </div>
-                                        <div class="beds">
-                                            <p>Liên hệ: @Html.Raw(tin.LienHe)</p>
-                                        </div>
-                                    </div>
+                                <br />
+                                <div class="size">
+                                    <p style="font-size:11pt;">@tin.LoaiTin : @tin.Gia | Liên hệ: @tin.LienHe</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            }
-            <div class="row" style="padding-left: 30px;">
+            </div>
+        </div>  }
+            </div>
+            <hr />
+            <div class="row" style="margin: 30px;">
                 <a asp-controller="Dm" asp-action="TinVIP">Xem thêm</a>
             </div>
         </div>
     </div>
 
-    <div class="container card" style="margin-bottom: 30px;">
-        <div class="row card-header" style="background-color:#00789f; color:white;">Tin HOT</div>
-        <div class="row card-body">
-            @foreach (var tin in Model.TinHOTViewModels)
-            {
-        <div class="col-lg-6 col-xl-6">
-            <div class=" room-items mystyle-tin-boder">
-                <div style="margin: 5px;">
-                    <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
-                </div>
+    <div class="col-md-3" style="margin-left:0px;">
+        <div class="container card" style="margin-bottom: 30px;">
+            <div class="row card-header" style="background-color:#9f0000; color:white;">Được quan tâm</div>
+            <div class="row card-body" style="padding:0px;">
+                @foreach (var tin in Model.TinHOTViewModels)
+                {
+            <div class="col-md-12">
+                <div class=" room-items mystyle-tin-border" style="margin-top: 5px;">
+                    <div style="margin: 5px; margin-bottom:0px;">
+                        <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:11pt;">@Html.Raw(tin.TieuDe)</a>
+                    </div>
+                    <div style="margin-left: 5px;">
+                        <i style="font-size:9pt;">(@Html.Raw(tin.LuotXem) lượt xem)</i>
+                    </div>
 
-                <div class="row" style="margin:5px">
-                    <div class="room-img set-bg col-md-3" data-setbg="@Html.Raw(tin.HinhAnh)">
-                        <form>
-                            <button id="@Html.Raw(tin.HinhAnh)" class="room-content border-0" style="background-color: transparent" data="@tin.ID">
-                                <i class="flaticon-heart"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="room-text col-md-9" style="padding-top:0px;padding-bottom:0px;">
-                        <div class="room-details" style="padding-bottom:0px;">
-                            <div class="room-title">
-                                <a href="#">
-                                    <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
-                                </a>
-                                <br />
-                                <a href="#" class="large-width">
-                                    <i class="flaticon-timer"></i><span>@Html.Raw(tin.NgayDang)</span>
-                                </a>
-                            </div>
+                    <div class="row" style="margin:5px">
+                        <div class="room-img set-bg col-md-12" data-setbg="@Html.Raw(tin.HinhAnh)">
+                            <form>
+                                <button id="@Html.Raw(tin.HinhAnh)" class="room-content border-0" style="background-color: transparent" data="@tin.ID">
+                                    <i class="flaticon-heart"></i>
+                                </button>
+                            </form>
                         </div>
-                        <div class="room-features" style="padding-bottom:0px;margin-bottom:0px;">
-                            <div class="room-info">
-                                <div class="size">
-                                    @if (Html.Raw(tin.XacThuc).ToString() == "Xác thực")
-                                    {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Xác thực</p>}
-                                else
-                                {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Chưa xác thực</p>}
+                        <div class="room-text col-md-12" style="padding:0px;">
+                            <div class="room-details" style="padding-bottom:0px;">
+                                <div class="room-title">
+                                    <a href="#">
+                                        <i class="flaticon-placeholder"></i> <span style="font-size:11pt;">@Html.Raw(tin.TinhThanh)</span>
+                                    </a>
                                 </div>
-                                <br />
-                                <div class="size">
-                                    <p>@Html.Raw(tin.LoaiTin) : @Html.Raw(tin.Gia)</p>
-                                </div>
-                                <div class="beds">
-                                    <p>Liên hệ: @Html.Raw(tin.LienHe)</p>
+                            </div>
+                            <div class="room-features" style="padding-bottom:0px;padding-top:0px;margin-bottom:0px;">
+                                <div class="room-info" style="padding-right: 0px;">
+                                    <div class="size">
+                                        <p style="font-size:11pt;">@tin.LoaiTin : @tin.Gia | @tin.LienHe</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>            }
-            <div class="row" style="padding-left: 30px;">
-                <a asp-controller="Dm" asp-action="TinHOT">Xem thêm</a>
+            </div>}
+                <div class="col-md-12">
+                    <p><a asp-controller="Dm" asp-action="TinHOT">Xem thêm</a></p>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="container card" style="margin-bottom: 30px;">
-        <div class="row card-header">Tin khác</div>
-        <div class="row card-body">
-            @foreach (var tin in Model.TinThuongViewModels)
-            {
-        <div class="col-lg-6 col-xl-6">
-            <div class=" room-items mystyle-tin-boder">
-                <div style="margin: 5px;">
-                    <a asp-controller="Dm" asp-action="ChiTietTinBDS" asp-route-id="@Html.Raw(tin.ID)" style="font-size:14px">@Html.Raw(tin.TieuDe)</a>
-                </div>
-
-                <div class="row" style="margin:5px">
-                    <div class="room-img set-bg col-md-3" data-setbg="@Html.Raw(tin.HinhAnh)">
-                        <form>
-                            <button id="@Html.Raw(tin.HinhAnh)" class="room-content border-0" style="background-color: transparent" data="@tin.ID">
-                                <i class="flaticon-heart"></i>
-                            </button>
-                        </form>
+        <div class="container card" style="margin-bottom: 30px;">
+            <div class="row card-header" style="background-color:#9f0000; color:white;">Theo tỉnh thành</div>
+            <div class="row card-body" @*style="padding:0px;"*@>
+                @foreach (var tt in Model.TinBDSTinhThanhViewModels)
+                {
+                    <div class="col-md-12">
+                        <p><a asp-controller="" asp-action="">@tt.Ten (@tt.Tong)</a></p>
                     </div>
-                    <div class="room-text col-md-9" style="padding-top:0px;padding-bottom:0px;">
-                        <div class="room-details" style="padding-bottom:0px;">
-                            <div class="room-title">
-                                <a href="#">
-                                    <i class="flaticon-placeholder"></i> <span>@Html.Raw(tin.QuanHuyen) | @Html.Raw(tin.TinhThanh)</span>
-                                </a>
-                                <br />
-                                <a href="#" class="large-width">
-                                    <i class="flaticon-timer"></i><span>@Html.Raw(tin.NgayDang)</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="room-features" style="padding-bottom:0px;margin-bottom:0px;">
-                            <div class="room-info">
-                                <div class="size">
-                                    @if (Html.Raw(tin.XacThuc).ToString() == "Xác thực")
-                                    {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Xác thực</p>}
-                                else
-                                {<p>Diện tích: @Html.Raw(tin.DienTich) m2 | Hướng:@Html.Raw(tin.Huong) | Chưa xác thực</p>}
-                                </div>
-                                <br />
-                                <div class="size">
-                                    <p>@Html.Raw(tin.LoaiTin) : @Html.Raw(tin.Gia)</p>
-                                </div>
-                                <div class="beds">
-                                    <p>Liên hệ: @Html.Raw(tin.LienHe)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>            }
-            <div class="row" style="padding-left: 30px;">
-                <a asp-controller="Dm" asp-action="TinThuong">Xem thêm</a>
+                }
             </div>
         </div>
     </div>

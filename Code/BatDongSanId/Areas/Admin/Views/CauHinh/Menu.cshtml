@@ -1,0 +1,441 @@
+﻿@model BatDongSanId.Areas.Admin.Models.ViewModel.MenuViewModel
+@{
+    ViewData["Title"] = "Menu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cấu hình menu</h1>
+<hr />
+<table class="table table-bordered">
+    <thead style="background-color:#000257;color:white;">
+        <tr>
+            <th>
+                Tên
+            </th>
+            <th>
+                Xuất hiện
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.DanhSachTaiKhoan.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.DanhSachTaiKhoan.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.DanhSachTaiKhoan.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.DanhSachTaiKhoan.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.DanhSachTaiKhoan.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.LoaiTaiKhoan.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.LoaiTaiKhoan.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.LoaiTaiKhoan.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.LoaiTaiKhoan.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.LoaiTaiKhoan.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.TatCa.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.TatCa.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.TatCa.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.TatCa.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.TatCa.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.ChuaDuyet.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.ChuaDuyet.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.ChuaDuyet.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.ChuaDuyet.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.ChuaDuyet.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.ChuaXacThuc.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.ChuaXacThuc.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.ChuaXacThuc.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.ChuaXacThuc.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.ChuaXacThuc.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.DaGiaoDich.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.DaGiaoDich.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.DaGiaoDich.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.DaGiaoDich.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.DaGiaoDich.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.PhanHoi.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.PhanHoi.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.PhanHoi.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.PhanHoi.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.PhanHoi.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.SubTinTuc.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.SubTinTuc.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.SubTinTuc.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.SubTinTuc.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.SubTinTuc.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.VietBai.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.VietBai.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.VietBai.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.VietBai.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.VietBai.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.LoaiTinBDS.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.LoaiTinBDS.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.LoaiTinBDS.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.LoaiTinBDS.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.LoaiTinBDS.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.LoaiTinTuc.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.LoaiTinTuc.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.LoaiTinTuc.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.LoaiTinTuc.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.LoaiTinTuc.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.TinhThanh.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.TinhThanh.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.TinhThanh.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.TinhThanh.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.TinhThanh.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.QuanHuyen.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.QuanHuyen.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.QuanHuyen.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.QuanHuyen.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.QuanHuyen.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.MucGia.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.MucGia.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.MucGia.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.MucGia.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.MucGia.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.MucDienTich.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.MucDienTich.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.MucDienTich.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.MucDienTich.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.MucDienTich.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.LoaiBatDongSan.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.LoaiBatDongSan.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.LoaiBatDongSan.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.LoaiBatDongSan.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.LoaiBatDongSan.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.GoiTin.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.GoiTin.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.GoiTin.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.GoiTin.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.GoiTin.ID">Không</a>
+                </td>
+            </tr>
+        }
+        @if (Model.Huong.TrangThai == true)
+        {
+            <tr>
+                <td>
+                    @Model.Huong.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.Huong.ID">Có</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Model.Huong.DuLieuString
+                </td>
+                <td>
+                    <a asp-action="" data="@Model.Huong.ID">Không</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("a").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            //var btn = $("button.room-content");
+            var id = $(this).attr("data");
+            //var text = "";
+            $.ajax({
+                url: '@Url.Action("CapNhatMenu", "CauHinh")',
+                data: { 'id': id },
+                type: "post",
+                success: function (result) {
+                    location.reload();
+                }
+            });
+            //$(this).text(text);
+            return;
+        });
+    })
+</script>

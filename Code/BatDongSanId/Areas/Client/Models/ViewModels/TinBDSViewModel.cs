@@ -65,5 +65,17 @@ namespace BatDongSanId.Areas.Client.Models.ViewModels
         public int NguoiDangID { get; set; }
 
         public int HetHan { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Ngày xác nhận")]
+        public DateTime NgayXacNhan { get; set; }
+
+        public int LuotXem { get; set; }
+
+        public string TinhThanhID { get; set; }
+
+        public double GiaGoc { get; set; }
+
+        public double DienTichGoc { get; set; }
     }
 }

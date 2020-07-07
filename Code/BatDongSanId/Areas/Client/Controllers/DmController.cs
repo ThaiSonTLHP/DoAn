@@ -31,75 +31,147 @@ namespace BatDongSanId.Areas.Client.Controllers
 
         public IActionResult TinBan(int? page)
         {
+            TrangChuListViewModel trangChuListViewModel = new TrangChuListViewModel();
+
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             if (page == null) page = 1;
-            int pageSize = 10;
+            int pageSize = 15;
             int pageNumber = (page ?? 1);
-            return View(layDuLieu.LayTinBDS(0, "All", "Cần bán").ToPagedList(pageNumber, pageSize));
+
+            trangChuListViewModel.TinPagedList = layDuLieu.LayTinBDS(0, "All", "Cần bán").ToPagedList(pageNumber, pageSize);
+            trangChuListViewModel.TinVIPViewModels = layDuLieu.LayTinBDS(8, "Tin VIP", "All");
+            trangChuListViewModel.TinBDSTinhThanhViewModels = layDuLieu.TongTinBDSByTinhThanh();
+            return View(trangChuListViewModel);
         }
 
         public IActionResult TinChoThue(int? page)
         {
+            TrangChuListViewModel trangChuListViewModel = new TrangChuListViewModel();
+
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             if (page == null) page = 1;
-            int pageSize = 10;
+            int pageSize = 15;
             int pageNumber = (page ?? 1);
-            return View(layDuLieu.LayTinBDS(0, "All", "Cho thuê").ToPagedList(pageNumber, pageSize));
+
+            trangChuListViewModel.TinPagedList = layDuLieu.LayTinBDS(0, "All", "Cho thuê").ToPagedList(pageNumber, pageSize);
+            trangChuListViewModel.TinVIPViewModels = layDuLieu.LayTinBDS(8, "Tin VIP", "All");
+            trangChuListViewModel.TinBDSTinhThanhViewModels = layDuLieu.TongTinBDSByTinhThanh();
+            return View(trangChuListViewModel);
         }
 
         public IActionResult TinMua(int? page)
         {
+            TrangChuListViewModel trangChuListViewModel = new TrangChuListViewModel();
+
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             if (page == null) page = 1;
-            int pageSize = 10;
+            int pageSize = 15;
             int pageNumber = (page ?? 1);
-            return View(layDuLieu.LayTinBDS(0, "All", "Cần mua").ToPagedList(pageNumber, pageSize));
+
+            trangChuListViewModel.TinPagedList = layDuLieu.LayTinBDS(0, "All", "Cần mua").ToPagedList(pageNumber, pageSize);
+            trangChuListViewModel.TinVIPViewModels = layDuLieu.LayTinBDS(8, "Tin VIP", "All");
+            trangChuListViewModel.TinBDSTinhThanhViewModels = layDuLieu.TongTinBDSByTinhThanh();
+            return View(trangChuListViewModel);
         }
 
         public IActionResult TinThue(int? page)
         {
+            TrangChuListViewModel trangChuListViewModel = new TrangChuListViewModel();
+
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             if (page == null) page = 1;
-            int pageSize = 10;
+            int pageSize = 15;
             int pageNumber = (page ?? 1);
-            return View(layDuLieu.LayTinBDS(0, "All", "Cần thuê").ToPagedList(pageNumber, pageSize));
+
+            trangChuListViewModel.TinPagedList = layDuLieu.LayTinBDS(0, "All", "Cần thuê").ToPagedList(pageNumber, pageSize);
+            trangChuListViewModel.TinVIPViewModels = layDuLieu.LayTinBDS(8, "Tin VIP", "All");
+            trangChuListViewModel.TinBDSTinhThanhViewModels = layDuLieu.TongTinBDSByTinhThanh();
+            return View(trangChuListViewModel);
         }
 
         public IActionResult TinVIP(int? page)
         {
+            TrangChuListViewModel trangChuListViewModel = new TrangChuListViewModel();
+
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             if (page == null) page = 1;
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            return View(layDuLieu.LayTinBDS(0, "Tin VIP", "All").ToPagedList(pageNumber, pageSize));
+
+            trangChuListViewModel.TinPagedList = layDuLieu.LayTinBDS(0, "Tin VIP", "All").ToPagedList(pageNumber, pageSize);
+            trangChuListViewModel.TinHOTViewModels = layDuLieu.LayTinBDS(8, "Tin HOT", "All");
+            trangChuListViewModel.TinBDSTinhThanhViewModels = layDuLieu.TongTinBDSByTinhThanh();
+            return View(trangChuListViewModel);
         }
 
         public IActionResult TinHOT(int? page)
         {
+            TrangChuListViewModel trangChuListViewModel = new TrangChuListViewModel();
+
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             if (page == null) page = 1;
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            return View(layDuLieu.LayTinBDS(0, "Tin HOT", "All").ToPagedList(pageNumber, pageSize));
+
+            trangChuListViewModel.TinPagedList = layDuLieu.LayTinBDS(0, "Tin HOT", "All").ToPagedList(pageNumber, pageSize);
+            trangChuListViewModel.TinVIPViewModels = layDuLieu.LayTinBDS(8, "Tin VIP", "All");
+            trangChuListViewModel.TinBDSTinhThanhViewModels = layDuLieu.TongTinBDSByTinhThanh();
+            return View(trangChuListViewModel);
         }
 
         public IActionResult TinThuong(int? page)
         {
+            TrangChuListViewModel trangChuListViewModel = new TrangChuListViewModel();
+
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             if (page == null) page = 1;
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            return View(layDuLieu.LayTinBDS(0, "Tin thường", "All").ToPagedList(pageNumber, pageSize));
+
+            trangChuListViewModel.TinPagedList = layDuLieu.LayTinBDS(0, "Tin thường", "All").ToPagedList(pageNumber, pageSize);
+            trangChuListViewModel.TinVIPViewModels = layDuLieu.LayTinBDS(8, "Tin VIP", "All");
+            trangChuListViewModel.TinBDSTinhThanhViewModels = layDuLieu.TongTinBDSByTinhThanh();
+            return View(trangChuListViewModel);
+        }
+
+        public IActionResult TinTinhThanh(int? page, string id)
+        {
+            TrangChuListViewModel trangChuListViewModel = new TrangChuListViewModel();
+
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            if (page == null) page = 1;
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var tinhThanh = dbContext.TinhThanh.Find(id);
+            var listTin = layDuLieu.LayTinBDSByTinhThanh(id);
+            pageSize = listTin.Count();
+            //listTin = listTin.GetRange(0, listTin.Count() < 8 ? listTin.Count() : 8);
+            trangChuListViewModel.TinPagedList = listTin.ToPagedList(pageNumber, pageSize);
+            trangChuListViewModel.TinVIPViewModels = layDuLieu.LayTinBDS(8, "Tin VIP", "All");
+            trangChuListViewModel.TinBDSTinhThanhViewModels = layDuLieu.TongTinBDSByTinhThanh();
+            trangChuListViewModel.TinhThanh = tinhThanh.Ten;
+            return View(trangChuListViewModel);
         }
 
         public IActionResult ChiTietTinBDS(int id)
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            var tin = dbContext.TinBatDongSan.FirstOrDefault(t => t.ID == id);
+            tin.LuotXem++;
+            dbContext.Update(tin);
+            dbContext.SaveChanges();
             //HttpContext.Session.SetInt32("ChiTietTinFlag", id);
             return View(layDuLieu.ChiTietBDS(id));
         }
 
         public IActionResult NhaMoiGioi()
+        {
+            LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
+            return View();
+        }
+
+        public IActionResult ChiTietNhaMoiGioi()
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
             return View();
@@ -114,59 +186,66 @@ namespace BatDongSanId.Areas.Client.Controllers
             return View(layDuLieu.LayTinTuc(0).ToPagedList(pageNumber, pageSize));
         }
 
-        public IActionResult ChiTietNhaMoiGioi()
+        public IActionResult ChiTietTinTuc(int id)
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
-            return View();
+            return View(layDuLieu.LayTinTucId(id));
         }
 
-        public IActionResult Search(string TinhThanhOption, int LoaiTinOption, int MucGiaOption, int LoaiBDSOption)
+        public IActionResult Search(int? page, string TinhThanhOption = "", int LoaiTinOption = 0, int MucGiaOption = 0, int LoaiBDSOption = 0)
         {
             LayDuLieu layDuLieu = new LayDuLieu(dbContext, configuration);
-            var listTinBDS = (from t in dbContext.TinBatDongSan
-                              join tk in dbContext.TaiKhoan on t.NguoiDang equals tk.ID
-                              join lt in dbContext.LoaiTinBatDongSan on t.LoaiBatDongSan equals lt.ID
-                              join nd in dbContext.TaiKhoan on t.NguoiDang equals nd.ID
-                              join gt in dbContext.GoiTin on t.GoiTin equals gt.ID
-                              join lbds in dbContext.LoaiBatDongSan on t.LoaiBatDongSan equals lbds.ID
-                              join tt in dbContext.TinhThanh on t.TinhThanh equals tt.ID
-                              join qh in dbContext.QuanHuyen on t.QuanHuyen equals qh.ID
-                              join h in dbContext.Huong on t.Huong equals h.ID
-                              where t.LoaiTin == LoaiTinOption 
-                              && t.TinhThanh == TinhThanhOption
-                              && t.MucGia == MucGiaOption
-                              && t.LoaiBatDongSan == LoaiBDSOption
-                              select new TinBDSViewModel()
-                              {
-                                  ID = t.ID,
-                                  LienHe = tk.SoDienThoai,
-                                  NgayDang = t.NgayDang,
-                                  LoaiTin = lt.Ten,
-                                  GoiTin = gt.Ten,
-                                  PheDuyet = t.TrangThaiDuyet,
-                                  NguoiDang = tk.Ten,
-                                  LoaiBatDongSan = lbds.Ten,
-                                  TinhThanh = tt.Ten,
-                                  QuanHuyen = qh.Ten,
-                                  Huong = h.Ten,
-                                  DienTich = t.DienTich,
-                                  Gia = t.Gia,
-                                  XacThuc = t.TrangThaiXacNhan == true ? "Xác thực" : "Chưa xác thực",
-                                  XacThucBool = t.TrangThaiXacNhan,
-                                  TieuDe = t.MoTa.Substring(0, 100) + "...",
-                                  DaBan = t.TrangThaiGiaoDich,
-                                  MoTa = t.MoTa
-                              }).ToList();
-            if (listTinBDS.Count() > 0)
+            TrangChuListViewModel trangChuListViewModel = new TrangChuListViewModel();
+            if (page == null) page = 1;
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var listTin = dbContext.TinBatDongSan.ToList();
+
+            if (TinhThanhOption != null)
             {
-                foreach (TinBDSViewModel tin in listTinBDS)
-                {
-                    tin.Gia = layDuLieu.GiaTien(tin.Gia);
-                    tin.HinhAnh = layDuLieu.LayHinhAnh(tin.ID, "Tin bất động sản");
-                }
+                listTin = listTin.Where(t => t.TinhThanh == TinhThanhOption).ToList();
             }
-            return View(listTinBDS);
+            if (LoaiTinOption != 0)
+            {
+                listTin = listTin.Where(t => t.LoaiTin == LoaiTinOption).ToList();
+            }
+            if (MucGiaOption != 0)
+            {
+                listTin = listTin.Where(t => t.MucGia == MucGiaOption).ToList();
+            }
+            if (LoaiBDSOption != 0)
+            {
+                listTin = listTin.Where(t => t.LoaiBatDongSan == LoaiBDSOption).ToList();
+            }
+
+            var listTinBDS = new List<TinBDSViewModel>();
+            foreach(var tin in listTin)
+            {
+                listTinBDS.Add(layDuLieu.LayTinBDS(tin.ID));
+            }
+
+            pageSize = listTinBDS.Count();
+            //listTin = listTin.GetRange(0, listTin.Count() < 8 ? listTin.Count() : 8);
+
+
+            var giaTang = listTinBDS.OrderBy(t => t.GiaGoc).ToList();
+            var giaGiam = listTinBDS.OrderByDescending(t => t.GiaGoc).ToList();
+
+            var dienTichTang = listTinBDS.OrderBy(t => t.DienTichGoc).ToList();
+            var dienTichGiam = listTinBDS.OrderByDescending(t => t.DienTichGoc).ToList();
+
+
+            //trangChuListViewModel.GiaTang = giaTang.ToPagedList(pageNumber, pageSize);
+            //trangChuListViewModel.GiaGiam = giaGiam.ToPagedList(pageNumber, pageSize);
+            //trangChuListViewModel.DienTichTang = dienTichTang.ToPagedList(pageNumber, pageSize);
+            trangChuListViewModel.TinPagedList = listTinBDS.ToPagedList(pageNumber, pageSize);
+
+            trangChuListViewModel.TinVIPViewModels = layDuLieu.LayTinBDS(8, "Tin VIP", "All");
+            trangChuListViewModel.TinBDSTinhThanhViewModels = layDuLieu.TongTinBDSByTinhThanh();
+            return View(trangChuListViewModel);
         }
+
 
         public IActionResult TimKiemNangCao()
         {

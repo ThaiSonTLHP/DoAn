@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "ThemSlide";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Thêm slide</h1>
+<hr />
+<div class="row h-75 justify-content-center align-items-center">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Logo" method="post" enctype="multipart/form-data" id="form1" runat="server">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="imgInp" name="file1" onchange="readURL(this);" />
+                        <label class="custom-file-label">Chọn ảnh (1920 x 633)</label>
+                    </div>
+                    <div style="margin-top:10px;margin-bottom:10px;">
+                        <img style="max-width:100%;" id="blah" src="#" alt="&emsp;Slide của bạn" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Xác nhận" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+</script>
+
